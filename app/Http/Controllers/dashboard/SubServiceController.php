@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\dashboard;
 
 use App\Model\Sub_service;
 use App\Model\Service;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\SubServiceRequest;
 

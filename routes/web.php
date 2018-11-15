@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//services routes
+Route::resource('/', 'dashboard\ServiceController');
+Route::resource('/services', 'dashboard\ServiceController');
+
+//sub_services routes
+Route::group(['prefix' => 'services'], function(){
+    Route::resource('/{service}/sub_services', 'dashboard\SubServiceController');
+});
+
+Route::get('/sub_services', 'dashboard\SubServiceController@getAllSubServices');
