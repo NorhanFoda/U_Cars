@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Model\Service;
+use App\Model\Color;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +17,6 @@ class Sub_service extends Model
     }
 
     public function colors(){
-        return $this->hasMany(Colors::class);
+        return $this->belongsToMany(Color::class);
     }
 }

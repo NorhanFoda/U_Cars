@@ -18,7 +18,7 @@ class SubServiceController extends Controller
      */
     public function index(Service $service)
     {
-        return $service->sub_services;
+        return view('sub_services.index')->with('sub_services', $service->sub_services);
     }
 
     /**
@@ -28,7 +28,7 @@ class SubServiceController extends Controller
      */
     public function create(Service $service)
     {
-        return 'create view';
+        return view('sub_services.create')->with('service', $service);
     }
 
     /**
@@ -42,6 +42,7 @@ class SubServiceController extends Controller
         $sub_service = new Sub_service;
         $sub_service->name = $request->name;
 
+        //Handle image uploading
         // if($request->hasFile('image')){
         //     $filenameWithExt = $request->file('image')->getClientOriginalName();
         //     $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -80,7 +81,7 @@ class SubServiceController extends Controller
      */
     public function show(Service $service,Sub_service $sub_service)
     {
-        return $sub_service;
+        return view('sub_services.show')->with('sub_service', $sub_service);
     }
 
     /**
@@ -89,9 +90,9 @@ class SubServiceController extends Controller
      * @param  \App\Model\Sub_service  $sub_service
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sub_service $sub_service)
+    public function edit(Service $service, Sub_service $sub_service)
     {
-        return 'edit view';
+        return view('sub_services.edit')->with('sub_service', $sub_service);
     }
 
     /**
@@ -105,6 +106,7 @@ class SubServiceController extends Controller
     {
         $sub_service->name = $request->name;
 
+        //Handle image uploading
         // if($request->hasFile('image')){
         //     $filenameWithExt = $request->file('image')->getClientOriginalName();
         //     $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -145,10 +147,10 @@ class SubServiceController extends Controller
     {
         $sub_service->delete();
 
-        return response(null, Response::HTTP_NO_CONTENT);
+        return redirect('sub_services.index')->with('success', 'Sub_service Deleted');
     } 
     
     public function getAllSubServices(){
-        return Sub_service::all();
+        return view('sub_services.index')->with('sub_services', Sub_service::all());
     }
 }

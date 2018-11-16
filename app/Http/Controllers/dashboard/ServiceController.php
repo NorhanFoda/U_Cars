@@ -17,7 +17,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return Service::all();
+        return view('services.index')->with('services',Service::all());
     }
 
     /**
@@ -27,7 +27,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return 'create view';
+        return view('services.create');
     }
 
     /**
@@ -41,6 +41,7 @@ class ServiceController extends Controller
         $service = new Service;
         $service->name = $request->name;
 
+        //Handle image uploading
         // if($request->hasFile('image')){
         //     $filenameWithExt = $request->file('image')->getClientOriginalName();
         //     $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -66,7 +67,7 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        return $service;
+        return view('services.show')->with('service', $service);
     }
 
     /**
@@ -77,7 +78,7 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        return 'edit view';
+        return view('services.edit')->with('service', $service);
     }
 
     /**
@@ -91,6 +92,7 @@ class ServiceController extends Controller
     {
         $service->name = $request->name;
 
+        //Handle image uploading
         // if($request->hasFile('image')){
         //     $filenameWithExt = $request->file('image')->getClientOriginalName();
         //     $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -118,6 +120,6 @@ class ServiceController extends Controller
     {
         $service->delete();
 
-        return response(null, Response::HTTP_NO_CONTENT);
+        return redirect('services.index')->with('success', 'Service Deleted');
     }
 }

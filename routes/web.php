@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 //services routes
 Route::resource('/', 'dashboard\ServiceController');
 Route::resource('/services', 'dashboard\ServiceController');
@@ -24,3 +25,11 @@ Route::group(['prefix' => 'services'], function(){
 });
 
 Route::get('/sub_services', 'dashboard\SubServiceController@getAllSubServices');
+
+//colors routes
+Route::group(['prefix' => 'sub_services'], function(){
+    Route::resource('/{sub_service}/colors', 'dashboard\ColorController');
+});
+
+Route::get('/colors', 'dashboard\ColorController@getAllColors');
+

@@ -4,6 +4,8 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Model\Sub_service;
+
 class Color extends Model
 {
     //
@@ -12,7 +14,7 @@ class Color extends Model
     protected $fillable = ['name'];
 
     public function sub_services(){
-        return $this->hasMany(Sub_service::class);
+        return $this->belongsToMany(Sub_service::class);
     }
 
 }

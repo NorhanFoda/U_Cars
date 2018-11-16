@@ -13,7 +13,7 @@ class CreateColorsSubServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('color-sub_services', function (Blueprint $table) {
+        Schema::create('color_sub_services', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('subservice_id')->unsigned()->index();
             $table->foreign('subservice_id')->references('id')->on('sub_services')->onDelete('cascade');
@@ -30,6 +30,6 @@ class CreateColorsSubServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('color-sub_services');
+        Schema::dropIfExists('color_sub_services');
     }
 }

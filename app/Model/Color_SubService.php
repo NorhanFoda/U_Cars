@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Model;
+use App\Model\Color;
+use App\Model\Sub_service;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Color_SubService extends Model
 {
-  protected $table = 'color-sub_services';
+  protected $table = 'color_sub_services';
 
 protected $fillable = [
     'subservice_id',
