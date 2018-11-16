@@ -14,4 +14,8 @@ class Sub_service extends Model
     public function service(){
         return $this->belongsTo(Service::class);
     }
+
+    public function colors(){
+        return $this->hasMany(Colors::class);
+    }
 }
