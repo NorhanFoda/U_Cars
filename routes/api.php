@@ -17,13 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//services routes
-Route::resource('/', 'ServiceController');
-Route::resource('/services', 'ServiceController');
-
-//sub_services routes
-Route::group(['prefix' => 'services'], function(){
-    Route::resource('/{service}/sub_services', 'SubServiceController');
-});
-
-Route::get('/sub_services', 'SubServiceController@getAllSubServices');
+Route::get('services', 'API\SubServicesController@get_services');
