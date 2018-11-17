@@ -1,0 +1,1 @@
+show class {{ $class->name }}
