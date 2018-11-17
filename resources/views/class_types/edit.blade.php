@@ -1,0 +1,1 @@
+edit class type {{ $type->name }}
