@@ -23,8 +23,8 @@ class SubServicesController extends Controller
 
       //get all subservices of specific service
 
-      public function get_SubServices($id){
-        $sub_services = Sub_service::where('service_id',$id)->get();
+      public function get_SubServices($service_id){
+        $sub_services = Sub_service::where('service_id',$service_id)->get();
         if(count($sub_services)<=0){
            return response()->json( ['code' => 404,'message' => 'not found','data'=>[]]);
         }else{
