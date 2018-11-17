@@ -33,3 +33,9 @@ Route::group(['prefix' => 'sub_services'], function(){
 
 Route::get('/colors', 'dashboard\ColorController@getAllColors');
 
+//images routes
+Route::group(['prefix' => 'colors'], function(){
+    Route::resource('/{color}/images', 'dashboard\ImageController');
+});
+
+Route::get('/images', 'dashboard\ImageController@getAllImages');

@@ -1,0 +1,1 @@
+create image for color {{ $color->name }}

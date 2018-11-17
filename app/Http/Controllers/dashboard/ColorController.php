@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Color;
 use App\Model\Sub_service;
 use App\Model\Color_SubService;
+use App\Http\Requests\ColorRequest;
 
 class ColorController extends Controller
 {
@@ -36,9 +37,14 @@ class ColorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Sub_service $sub_service, ColorRequest $request)
     {
-        
+        $color = new Color;
+        $color->name = $request->name;
+        $sub_service->colors()->attach($color->id);
+        $color->save();
+
+        return redirect('colors.index')->with('succedd', 'New Color Added');
     }
 
     /**
@@ -47,9 +53,9 @@ class ColorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Sub_service $sub_service, Color $color)
     {
-        //
+        return view('colors.show')->with('color', $color);
     }
 
     /**
@@ -58,9 +64,9 @@ class ColorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Sub_service $sub_service, Color $color)
     {
-        //
+        return view('colors.edit')->with('color', $color);
     }
 
     /**
@@ -70,9 +76,11 @@ class ColorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Sub_service $sub_service, ColorRequest $request, Color $color)
     {
-        //
+        $color->update($request->all());
+
+        return redirect('colors.index')->with('success', 'Color Updated');
     }
 
     /**
@@ -81,9 +89,11 @@ class ColorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Sub_service $sub_service, Color $color)
     {
-        //
+        $color->delete();
+
+        return redirect('colors.index')->with('success', 'Color Deleted');
     }
 
     public function getAllColors(){
