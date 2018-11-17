@@ -13,15 +13,19 @@ class SubServicesController extends Controller
       // get all Services
       public function get_services(){
           $services = Service::all();
+          if(count($services)>0){
           return response()->json(['code' => 200,'message' => 'success','data' => $services]);
-      }
+        }else{
+          return response()->json(['code' => 404,'message' => 'not found','data' => []]);
+
+        }
+        }
 
       //get all subservices of specific service
 
       public function get_SubServices($id){
-        $sub_services = Sub_service::where('service_id',$id)->find($id);
-      //  dd($sub_services);
-        if(empty($sub_services)){
+        $sub_services = Sub_service::where('service_id',$id)->get();
+        if(count($sub_services)<=0){
            return response()->json( ['code' => 404,'message' => 'not found','data'=>[]]);
         }else{
         	return response()->json(['code' => 200,'message' => 'success','data' => $sub_services]);
