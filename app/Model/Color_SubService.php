@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Color_SubService extends Model
 {
-  protected $table = 'color_sub_services';
+  protected $table = 'color_sub_service';
 
 protected $fillable = [
-    'subservice_id',
+    'sub_service_id',
     'color_id'
 ];
 

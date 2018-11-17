@@ -20,4 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('services', 'API\SubServicesController@get_services');
 //get subservices
 Route::get('services/{id}', 'API\SubServicesController@get_SubServices');
+//get colors
 
+Route::get('colors/{id}', 'API\ColorsController@get_colors');
