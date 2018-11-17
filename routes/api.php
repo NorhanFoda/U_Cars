@@ -23,4 +23,6 @@ Route::get('services/{id}', 'API\SubServicesController@get_SubServices');
 //get colors
 Route::get('colors/{id}', 'API\ColorsController@get_colors');
 //get images
-Route::get('images/{id}', 'API\ColorsController@get_images');
+Route::get('colors/images/{id}', 'API\ColorsController@get_images');
+
+Route::get('image/{id}', 'API\ColorsController@get_image');

@@ -30,4 +30,13 @@ class ColorsController extends Controller
                  return response()->json(['code' => 200,'message' => 'success','data' => $images]);
               }
         }
+        // select one image
+        public function get_image($image_id){
+              $image = Image::where('id',$image_id)->get();
+              if(count($image)<=0){
+                 return response()->json( ['code' => 404,'message' => 'not found','data'=>[]]);
+              }else{
+                 return response()->json(['code' => 200,'message' => 'success','data' => $image]);
+              }
+        }
 }
