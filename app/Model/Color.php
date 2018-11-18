@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Model\Sub_service;
 use App\Model\Image;
+use App\Model\Client_Request;
 
 class Color extends Model
 {
@@ -20,6 +21,10 @@ class Color extends Model
 
     public function images(){
         return $this->hasMany(Image::class);
+    }
+
+    public function client_requests(){
+        return $this->hasMany(Client_Request::class);
     }
 
 }
