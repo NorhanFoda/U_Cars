@@ -12,6 +12,8 @@ use App\Model\Client;
 
 class Client_Request extends Model
 {
+  protected $table = 'client_requests';
+
   protected $fillable = ['sub_service_id', 'color_id', 'image_id','client_id','price',
   'discount','discount_request','class_id','free_service_id'];
 

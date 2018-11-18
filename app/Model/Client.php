@@ -7,6 +7,8 @@ use App\Model\Client_Request;
 
 class Client extends Model
 {
+  protected $table = 'clients';
+
   protected $fillable = ['name', 'phone', 'car_type','car_color','car_no','email'];
 
   public function client_requests(){

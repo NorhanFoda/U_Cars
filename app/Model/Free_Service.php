@@ -9,6 +9,8 @@ use App\Model\Client_Request;
 
 class Free_Service extends Model
 {
+  protected $table = 'free_services';
+
      protected $fillable = ['name'];
 
       public function sub_services(){
