@@ -1,0 +1,56 @@
+.page-content
+{
+    height: 100%;
+}
+
+.navigation > li > a
+{
+    font-size: 18px;
+    padding-left: 96px;
+}
+
+table   thead  th
+{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+}
+i
+{
+    
+    padding-left: 11px;
+}
+
+  tbody  tr td .btn
+{
+    font-size: 14px;
+}
+
+
+.service
+{
+    height: 96px;
+    margin-top: 52px;
+}
+
+.service button
+{
+    font-size: 29px;
+    border-radius: 8px;
+    padding: 7px 16px;
+}
+
+.service h1
+{
+    overflow: initial;
+    float: left;
+    font-size: 54px;
+    margin-left: 124px;
+    margin-top: 0;
+}
+
+
+.group-buttons
+{
+    margin-top: 19px;
+}
