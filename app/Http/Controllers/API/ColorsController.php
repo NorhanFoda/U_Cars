@@ -21,6 +21,19 @@ class ColorsController extends Controller
               }
         }
 
+
+        public function Select_color(Request $request){
+              $color = Color_SubService::with(['color','subservice'])->->whereColumn([
+                  ['sub_service_id', '=', $request->sub_service_id],
+                  ['color_id', '=', $request->color_id]
+              ])->get();
+              if(count($color)<=0){
+                 return response()->json( ['code' => 404,'message' => 'not found','data'=>[]]);
+              }else{
+                 return response()->json(['code' => 200,'message' => 'success','data' => $color]);
+              }
+        }
+
           // get all images belong to specific color
         public function get_images($color_id){
               $images = Image::where('color_id',$color_id)->get();

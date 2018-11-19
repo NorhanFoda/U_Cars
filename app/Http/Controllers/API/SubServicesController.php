@@ -32,4 +32,15 @@ class SubServicesController extends Controller
         }
     }
 
+    // get subService
+
+    public function get_Services($subService_id){
+      $sub_service = Sub_service::where('id',$subService_id)->get();
+      if(count($sub_service)<=0){
+         return response()->json( ['code' => 404,'message' => 'not found','data'=>[]]);
+      }else{
+        return response()->json(['code' => 200,'message' => 'success','data' => $sub_service]);
+      }
+  }
+
 }
