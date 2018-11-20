@@ -48,8 +48,6 @@
 		<!-- Main navbar -->
 		@include('inc.navbar')
 		<!-- /main navbar -->
-
-		@include('inc.messages')
 		
 		<!-- Page container -->
 		<div class="page-container">
@@ -70,7 +68,7 @@
 				</div>
 				<!-- /main sidebar -->
 				
-
+				@include('inc.messages')
 				@yield('content')
 
 		<!-- Footer -->

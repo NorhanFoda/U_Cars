@@ -2,7 +2,7 @@
 @if(count($errors) > 0)
 @foreach($errors->all() as $error)
     <div class="alert alert-danger">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <h4> يوجد خطأ فى ادخال البيانات  </h4><br><br>
         <ul>
              @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -14,12 +14,12 @@
 
 @if(session('success'))
 <div class="alert alert-success">
-    {{session('success')}}
+    <h4>{{session('success')}}</h4>
 </div>
 @endif
 
 @if(session('error'))
 <div class="alert alert-danger">
-    {{session('error')}}
+    <h4>{{session('error')}}</h4>
 </div>
 @endif
