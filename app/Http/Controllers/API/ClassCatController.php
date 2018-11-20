@@ -21,7 +21,7 @@ class ClassCatController extends Controller
           }
       }
 
-      public function getClass($class_id){
+      public function select_Class($class_id){
           $class = Class_type::where('class_cat_id', $class_id)->get();
           if(count($class) >0 ){
             return response()->json(['code' => 200,'message' => 'success','data' => $class]);
