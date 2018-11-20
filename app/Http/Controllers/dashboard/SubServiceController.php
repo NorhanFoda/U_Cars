@@ -145,9 +145,9 @@ class SubServiceController extends Controller
      */
     public function destroy(Service $service, Sub_service $sub_service)
     {
-        $sub_service->delete();
+        //$sub_service->delete();
 
-        return redirect('sub_services.index')->with('success', 'Sub_service Deleted');
+        return redirect('/sub_services')->with('success', 'تم مسح قسم الخدمه بنجاح');
     } 
     
     public function getAllSubServices(){

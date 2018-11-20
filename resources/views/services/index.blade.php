@@ -4,15 +4,18 @@
 
     <div class="service">
         <div class="container">
-            <a href="{{route('services.create')}}" class="btn  btn-warning">اضافة خدمة</a>
-            <h1>الخدمات</h1>
+            <a 
+                href="{{route('services.create')}}" 
+                class="btn  btn-warning"
+                style="float:left;">اضافة خدمة</a>
+            <h1 style="float:right;">الخدمات</h1>
         </div>
     </div>
     
     <div class="table-responsive">
         <div class="container">
             @if(count($services) > 0)
-                <table class="table text-nowrap">
+                <table class="table table-striped">
                     <thead class=" text-primary">
                         <th>
                             اسم الخدمه
@@ -31,11 +34,13 @@
                                     <h4>{{ $service->name }}</h4>
                                 </td>
                                 <td>
-                                    {{ $service->image }}
-                                    {{-- <img src="https://via.placeholder.com/100" alt=""> --}}
+                                    <img class="card-img-top" 
+                                        src="/storage/images/{{$service['image']}}" 
+                                        alt="{{ $service->name }}"
+                                        style="max-height:20%;">
                                 </td>
                                 <td>
-                                    <a  href="{{route('services.show', $service->id)}}" class="btn btn-info"><i class="fas fa-map-marker-exclamation"></i>معاينه</a>
+                                    {{-- <a  href="{{route('services.show', $service->id)}}" class="btn btn-info"><i class="fas fa-map-marker-exclamation"></i>معاينه</a> --}}
                                     <a  href="/services/{{$service->id}}/sub_services" class="btn btn-warning"><i class="fas fa-users"></i>عرض اقسام الخدمه</a>
                                     <a  href="{{route('services.create')}}" class="btn  btn-primary"><i class="fas fa-plus"></i>اضافة قسم</a>
                                     <a  href="{{route('services.edit', $service->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i>تعديل</a>
@@ -53,14 +58,12 @@
                         @endforeach
                     </tbody>
                 </table>
+            @else
+                <h1>لا يوجد خدمات مضافه</h1>
             @endif
-                    {{-- <div class="group-buttons">
-                    <button type="button" class="btn btn-default">Previous</button>
-                    <button type="button" class="btn btn-default">1</button>
-                    <button type="button" class="btn btn-default">2</button>
-                    <button type="button" class="btn btn-default">3</button>
-                    <button type="button" class="btn btn-default">Next</button>
-                    </div> --}}
+            </div>
+            <div class="bg-light">
+                {{$services->links()}}
             </div>
         </div>
     </div>

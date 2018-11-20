@@ -17,7 +17,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return view('services.index')->with('services',Service::all());
+        return view('services.index')->with('services',Service::paginate(5));
     }
 
     /**
@@ -42,21 +42,21 @@ class ServiceController extends Controller
         $service->name = $request->name;
 
         //Handle image uploading
-        // if($request->hasFile('image')){
-        //     $filenameWithExt = $request->file('image')->getClientOriginalName();
-        //     $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        //     $ext = $request->file('image')->getClientOriginalExtension();
-        //     $fileNameToStore = $filename.'_'.time().'.'.$ext;
-        //     $path = $request->file('image')->storeAs('public/images', $fileNameToStore);
-        // }else{
-        //     $fileNameToStore = 'noimage.jpg';
-        // }
-        // $service->image = $fileNameToStore;
+        if($request->hasFile('image')){
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $request->file('image')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$ext;
+            $path = $request->file('image')->storeAs('public/images', $fileNameToStore);
+        }else{
+            $fileNameToStore = 'noimage.jpg';
+        }
+        $service->image = $fileNameToStore;
         
-        $service->image = $request->image;
+        // $service->image = $request->image;
         $service->save();
 
-        return response(['data' => $service], Response::HTTP_CREATED);
+        return redirect()->route('services.index')->with('success', 'تم اضاقة الخدمه بنجاح');
     }
 
     /**
@@ -93,21 +93,21 @@ class ServiceController extends Controller
         $service->name = $request->name;
 
         //Handle image uploading
-        // if($request->hasFile('image')){
-        //     $filenameWithExt = $request->file('image')->getClientOriginalName();
-        //     $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        //     $ext = $request->file('image')->getClientOriginalExtension();
-        //     $fileNameToStore = $filename.'_'.time().'.'.$ext;
-        //     $path = $request->file('image')->storeAs('public/images', $fileNameToStore);
-        // }else{
-        //     $fileNameToStore = 'noimage.jpg';
-        // }
-        // $service->image = $fileNameToStore;
+        if($request->hasFile('image')){
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $request->file('image')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$ext;
+            $path = $request->file('image')->storeAs('public/images', $fileNameToStore);
+        }else{
+            $fileNameToStore = 'noimage.jpg';
+        }
+        $service->image = $fileNameToStore;
         
-        $service->image = $request->image;
+        // $service->image = $request->image;
         $service->save();
 
-        return response(['data' => $service], Response::HTTP_CREATED);
+        return redirect()->route('services.index')->with('success', 'تم تعديل الخدمه بنجاح');
     }
 
     /**
@@ -120,6 +120,6 @@ class ServiceController extends Controller
     {
         $service->delete();
 
-        return redirect('services.index')->with('success', 'Service Deleted');
+        return redirect()->route('services.index')->with('success', 'تم مسح الخدمه بنجاح');
     }
 }
