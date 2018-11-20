@@ -60,12 +60,6 @@ class SubServicesController extends Controller
 
       $add_order = Client_Request::create($order_data);
 
-      // $sub_service = Sub_service::where('id',$subService_id)->get();
-      // if(count($sub_service)<=0){
-      //    return response()->json( ['code' => 404,'message' => 'not found','data'=>[]]);
-      // }else{
-      //   return response()->json(['code' => 200,'message' => 'success','data' => $sub_service]);
-      // }
     }
 
 
