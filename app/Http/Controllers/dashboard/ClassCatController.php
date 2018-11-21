@@ -18,7 +18,7 @@ class ClassCatController extends Controller
      */
     public function index()
     {
-        return view('classes.index')->with('classes', Class_cat::all());
+        return view('classes.index')->with('classes', Class_cat::paginate(5));
     }
 
     /**

@@ -26,7 +26,11 @@
                 </li> --}}
                 <li>
                     <a href="/requests">طلبات العملاء</a>
-                </li><!-- /page kits -->
+                </li>
+                <li>
+                    <a href="/discount_requests">طلبات الخصم</a>
+                </li>
+                <!-- /page kits -->
 
         </ul>
     </div>

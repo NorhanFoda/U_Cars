@@ -23,21 +23,14 @@ class ClientRequestController extends Controller
      */
     public function index()
     {
-        $requests = Client_Request::all();
+        $requests = Client_Request::paginate(5);
         $data = array();
         if(count($requests) > 0){
             foreach($requests as $request){
                 $dataItem = new \stdClass();
                 $dataItem->requestNo = $request->id;
                 $dataItem->client = Client::find($request->client_id);
-                $dataItem->image = Image::find($request->image_id);
-                // $dataItem->sub_service = Sub_service::find($request->sub_service_id);
-                // $dataItem->color = Color::find($request->color_id);
-                // $dataItem->class = Class_cat::find($request->class_id);
-                // $dataItem->class_type = Class_type::where(['class_cat_id'=> $request->class_id, 'sub_service_id' => $request->sub_service_id])->get();
-                // $dataItem->free_service = Free_service::find($request->free_service_id);
-                // $dataItem->price = $request->price;
-                // $dataItem->discount_request = $request->discount_request;
+                $dataItem->sub_service = Sub_service::find($request->sub_service_id);
                 array_push($data, $dataItem);
             }
         }
@@ -102,7 +95,7 @@ class ClientRequestController extends Controller
     {
         $request->delete();
 
-        return redirect('requests.index')->with('success', 'request deleted');
+        return redirect()->route('requests.index')->with('success', 'تم مسح الطلب بنجاح');
     }
 
     public function getRequestByNo(Client_Request $request){
@@ -115,7 +108,9 @@ class ClientRequestController extends Controller
         if(count($discount_requests) > 0){
             foreach($discount_requests as $request){
                 $dataItem = new \stdClass();
+                $dataItem->requestNo = $request->id;
                 $dataItem->client = Client::find($request->client_id);
+                $dataItem->sub_service = Sub_service::find($request->sub_service_id);
                 $dataItem->requests_count = count(Client::find($request->client_id)->client_requests);
                 array_push($data, $dataItem);
             }

@@ -3,6 +3,7 @@
 			<!-- Main content -->
             <div class="service">
                 <div class="container">
+                    <h1 style="float:right;">اقسام الخدمات</h1>
                     @if(Route::getFacadeRoot()->current()->uri() !== 'sub_services')
                         @if(count($sub_services) > 0)
                             <h2 style="float:right;">عرض اقسام الخدمات لخدمة ( {{ $sub_services[0]->service->name }} )</h2>
