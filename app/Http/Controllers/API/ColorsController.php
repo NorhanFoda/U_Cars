@@ -23,10 +23,10 @@ class ColorsController extends Controller
 
 
         public function Select_color(Request $request){
-              $color = Color_SubService::with(['color','subservice'])->->whereColumn([
-                  ['sub_service_id', '=', $request->sub_service_id],
-                  ['color_id', '=', $request->color_id]
-              ])->get();
+              $color = Color_SubService::with(['color','subservice'])
+              ->where('sub_service_id', $request->sub_service_id)
+              ->where('color_id', '=', $request->color_id)
+              ->get();
               if(count($color)<=0){
                  return response()->json( ['code' => 404,'message' => 'not found','data'=>[]]);
               }else{

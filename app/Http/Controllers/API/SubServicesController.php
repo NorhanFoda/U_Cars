@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Model\Service;
 use App\Model\Sub_service;
 use App\Model\Client_Request;
+use App\Model\Image;
+use App\Model\Class_type;
+
 
 
 class SubServicesController extends Controller
@@ -35,7 +38,7 @@ class SubServicesController extends Controller
 
     // get subService
 
-    public function get_Services($subService_id){
+    public function get_SubService($subService_id){
       $sub_service = Sub_service::where('id',$subService_id)->get();
       if(count($sub_service)<=0){
          return response()->json( ['code' => 404,'message' => 'not found','data'=>[]]);
@@ -44,21 +47,55 @@ class SubServicesController extends Controller
       }
   }
 
-    public function addToCart(Request $request){
+    public function addToCart(Request $request,$subservice_id){
       $input = $request->all();
-      $order_data = [
-          'sub_service_id'   => $input['subservice_id'],
+      $order1 = [
+          'sub_service_id'   => $subservice_id,
           'color_id' => $request->has('color_id') ? $input['color_id'] : null,
           'image_id'    => $request->has('image_id') ? $input['image_id'] : null,
           'class_id'   => $request->has('class_id') ? $input['class_id'] : null,
           'free_service_id' => $request->has('freeservice_id') ? $input['freeservice_id'] : null,
-          'client_id'    => $request->has('client_id') ? $input['client_id'] : null,
-          'price'     => $request->has('price') ? $input['price'] : null,
-          'discount_request'    => $request->has('discount_request') ? $input['discount_request'] : null,
-          'discount'   => $request->has('discount') ? $input['discount'] : null
+          'client_id'    => $request->has('client_id') ? $input['client_id'] : null
       ];
 
+
+        if($request->has('classtype_id')){
+
+        $class = Class_type::where('id', $input['classtype_id'])->get();
+        $price=$class[0]->price;
+        $discount=$class[0]->discount;
+        $order2=[
+          'price'     => $price,
+          'discount_request'    => $request->has('discount_request') ? $input['discount_request'] : 0,
+          'discount'   => $discount,
+          'classtype_id' => $request->classtype_id ];
+
+
+      }else {
+        $image = Image::where('id',$input['image_id'])->get();
+
+        if(count($image)>0){
+          $order2=[
+            'price'     => $price,
+            'discount_request'    => $request->has('discount_request') ? $input['discount_request'] : 0,
+            'discount'   => $request->has('discount') ? $input['discount'] : null,
+            'classtype_id' => null];
+
+        }else{
+          $order2=[
+            'price'     => 0,
+            'discount_request'    => $request->has('discount_request') ? $input['discount_request'] : 0,
+            'discount'   => $request->has('discount') ? $input['discount'] : null,
+            'classtype_id' => null];
+        }
+
+
+      }
+
+      $order_data = array_merge($order1,$order2 );
       $add_order = Client_Request::create($order_data);
+
+
 
     }
 

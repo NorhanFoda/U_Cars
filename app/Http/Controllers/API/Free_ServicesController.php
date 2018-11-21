@@ -11,7 +11,7 @@ use App\Model\FreeService_SubService;
 class Free_ServicesController extends Controller
 {
       public function get_freeservices($subService_id){
-            $free_Services = FreeService_SubService::with(['freeservice','subservice'])->where('sub_service_id',$id)->get();
+            $free_Services = FreeService_SubService::with(['freeservice','subservice'])->where('sub_service_id',$subService_id)->get();
             if(count($free_Services)<=0){
                return response()->json( ['code' => 404,'message' => 'not found','data'=>[]]);
             }else{
@@ -20,10 +20,11 @@ class Free_ServicesController extends Controller
       }
 
       public function Select_freeservice(Request $request){
-            $free_Service = FreeService_SubService::with(['freeservice','subservice'])->->whereColumn([
-                ['sub_service_id', '=', $request->sub_service_id],
-                ['free_service_id', '=', $request->free_service_id]
-            ])->get();
+
+            $free_Service = FreeService_SubService::with(['freeservice','subservice'])->where(
+                'sub_service_id', $request->sub_service_id)
+                ->where('free_service_id', $request->free_service_id)
+                ->get();
             if(count($free_Service)<=0){
                return response()->json( ['code' => 404,'message' => 'not found','data'=>[]]);
             }else{
