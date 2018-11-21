@@ -18,7 +18,7 @@ class SubServiceController extends Controller
      */
     public function index(Service $service)
     {
-        return view('sub_services.index')->with('sub_services', $service->sub_services);
+        return view('sub_services.index')->with('sub_services', $service->sub_services()->paginate(5));
     }
 
     /**
@@ -151,6 +151,6 @@ class SubServiceController extends Controller
     } 
     
     public function getAllSubServices(){
-        return view('sub_services.index')->with('sub_services', Sub_service::all());
+        return view('sub_services.index')->with('sub_services', Sub_service::paginate(5));
     }
 }

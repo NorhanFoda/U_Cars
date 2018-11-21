@@ -41,7 +41,9 @@
                                         style="max-height:20%;">
                                 </td>
                                 <td>
+                                    <a  href="/sub_services/{{$sub_service->id}}/colors" class="btn btn-warning"><i class="fas fa-users"></i>عرض الوان الخدمه</a>
                                     <a  href="{{route('services.show', [$sub_service->service_id, $sub_service->id])}}" class="btn btn-info"><i class="fas fa-map-marker-exclamation"></i>معاينه</a>
+                                    <a  href="{{route('colors.create', $sub_service->id)}}" class="btn btn-primary"><i class="fas fa-map-marker-exclamation"></i>اضافة لون</a>
                                     <a  href="{{route('sub_services.edit', [$sub_service->service_id, $sub_service->id])}}" class="btn btn-warning"><i class="fas fa-edit"></i>تعديل</a>
 
                                     <form action="{{route('sub_services.destroy', [$sub_service->service_id, $sub_service->id]) }}" 
@@ -59,34 +61,14 @@
                 </table>
             @else
                 <h1>لا يوجد اقسام خدمات مضافه</h1>
-                <p>اذهب الى الخدمات لاضافة اقسام جديده</p>
-                <a href="/services" class="btn btn-warning">اذهب الى الخدمات</a>
+                <a href="{{ route('sub_services.create', Request()->service->id) }}" class="btn btn-warning">اضافة قسم خدمه</a>
             @endif
             </div>
-            {{-- <div class="bg-light">
-                {{$sub_service->links()}}
-            </div> --}}
+            <div class="bg-light">
+                {{$sub_services->links()}}
+            </div>
         </div>
     </div>
     <!-- /marketing campaigns -->
                 
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{{-- @if(count($sub_services) > 0)
-    @foreach($sub_services as $sub_service)
-        {{ $sub_service->name }}
-    @endforeach
-@endif --}}

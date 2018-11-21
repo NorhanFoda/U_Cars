@@ -18,7 +18,7 @@ class ColorController extends Controller
      */
     public function index(Sub_service $sub_service)
     {
-        return view('colors.index')->with('colors', $sub_service->colors);
+        return view('colors.index')->with('colors', $sub_service->colors()->paginate(5));
     }
 
     /**
@@ -93,10 +93,10 @@ class ColorController extends Controller
     {
         $color->delete();
 
-        return redirect('colors.index')->with('success', 'Color Deleted');
+        return redirect('/colors')->with('success', 'تم مسح اللون بنجاح');
     }
 
     public function getAllColors(){
-        return view('colors.index')->with('colors', Color::all());
+        return view('colors.index')->with('colors', Color::paginate(5));
     }
 }
