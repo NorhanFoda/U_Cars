@@ -42,7 +42,7 @@
                                 <td>
                                     {{-- <a  href="{{route('services.show', $service->id)}}" class="btn btn-info"><i class="fas fa-map-marker-exclamation"></i>معاينه</a> --}}
                                     <a  href="/services/{{$service->id}}/sub_services" class="btn btn-warning"><i class="fas fa-users"></i>عرض اقسام الخدمه</a>
-                                    <a  href="{{route('services.create')}}" class="btn  btn-primary"><i class="fas fa-plus"></i>اضافة قسم</a>
+                                    <a  href="{{route('sub_services.create', $service->id)}}" class="btn  btn-primary"><i class="fas fa-plus"></i>اضافة قسم</a>
                                     <a  href="{{route('services.edit', $service->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i>تعديل</a>
 
                                     <form action="{{route('services.destroy', $service->id) }}" 
@@ -60,6 +60,7 @@
                 </table>
             @else
                 <h1>لا يوجد خدمات مضافه</h1>
+                <a href="{{ route('service.create') }}" class="btn btn-warning">اضافة خدمه</a>
             @endif
             </div>
             <div class="bg-light">
