@@ -40,3 +40,6 @@ Route::get('subservice/{id}/freeservices', 'API\Free_ServicesController@get_free
 
 Route::post('freeservice', 'API\Free_ServicesController@Select_freeservice');
 Route::post('subservice/{id}/request', 'API\SubServicesController@addToCart');
+
+
+

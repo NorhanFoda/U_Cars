@@ -54,6 +54,7 @@ Route::group(['prefix' => 'classes'], function(){
 
 //post class type for specific subservice
 Route::post('/sub_services/{sub_service}/classes/{class}/class_types', 'dashboard\ClassTypeController@postClassTypeForSubservice');
+
 //post class type
 Route::post('/classes/{class}/class_types', 'dashboard\ClassTypeController@postClassTypeForClass');
 

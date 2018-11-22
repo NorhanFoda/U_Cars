@@ -39,8 +39,10 @@ class ClassTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function postClassTypeForSubservice($sub_service_id, $class_cat_id, Class_typeRequest $request)
     {
+        return 'you are here';
         $class_type = new Class_type;
         $class_type->name = $request->name;
         $class_type->sub_service_id = $sub_service_id;

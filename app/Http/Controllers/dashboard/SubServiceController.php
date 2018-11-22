@@ -4,6 +4,9 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Model\Sub_service;
 use App\Model\Service;
+use App\Model\Color;
+use App\Model\Class_cat;
+use App\Model\Class_type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +31,14 @@ class SubServiceController extends Controller
      */
     public function create(Service $service)
     {
-        return view('sub_services.create')->with('service', $service);
+        $data = [
+            'service' => $service,
+            'colors' => Color::all(),
+            'classes' => Class_cat::all(),
+            'types' => Class_type::all()
+        ];
+
+        return view('sub_services.create')->with($data);
     }
 
     /**
@@ -43,34 +53,64 @@ class SubServiceController extends Controller
         $sub_service->name = $request->name;
 
         //Handle image uploading
-        // if($request->hasFile('image')){
-        //     $filenameWithExt = $request->file('image')->getClientOriginalName();
-        //     $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        //     $ext = $request->file('image')->getClientOriginalExtension();
-        //     $fileNameToStore = $filename.'_'.time().'.'.$ext;
-        //     $path = $request->file('image')->storeAs('public/images', $fileNameToStore);
-        // }else{
-        //     $fileNameToStore = 'noimage.jpg';
-        // }
-        // $service->image = $fileNameToStore;
+        if($request->hasFile('image')){
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $request->file('image')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$ext;
+            $path = $request->file('image')->storeAs('public/images', $fileNameToStore);
+        }else{
+            $fileNameToStore = 'noimage.jpg';
+        }
+        $sub_service->image = $fileNameToStore;
 
-        $sub_service->image = $request->image;
+        // $sub_service->image = $request->image;
         $sub_service->details = $request->details;
         $sub_service->guarantee = $request->guarantee;
         $sub_service->free_removal = $request->free_removal;
         $sub_service->notes = $request->notes;
         $sub_service->service_id = $service->id;
         $sub_service->requirements = $request->requirements;
-        if($request->free_polishing == null){
-            $sub_service->free_polishing = '0';
+        if($request->free_polishing === 'on'){
+            $sub_service->free_polishing = '1';
         }
         else{
-            $sub_service->free_polishing = '1';
+            $sub_service->free_polishing = '0';
         }
 
         $sub_service->save();
 
-        return response(['data' => $sub_service], Response::HTTP_CREATED);
+        if($request->colors !== null){
+            foreach($request->colors as $color){
+                $sub_service->colors()->attach(Color::find($color));
+            }
+        }
+
+        if($request->classes !== null){
+            foreach($request->classes as $class){
+                $type_names = Class_type::where('class_cat_id', $class)->get(); 
+                foreach($type_names as $type_name){
+                    $type = new Class_type;
+                    $type->class_cat_id = $class;
+                    $type->sub_service_id = $sub_service->id;
+                    $type->name = $type_name->name;
+                    $price = "price".$type_name->id;
+                    $discount = "discount".$type_name->id;
+                    $type->price = $request->$price;
+                    $type->discount = $request->$discount;
+                    $type->save();
+                }
+            }
+        }
+        // $data = [
+        //     'sub_service' => $sub_service,
+        //     'service' => $service,
+        //     'classes' => Class_cat::all(),
+        //     'types' => Class_type::all()
+        // ];
+        // return view('sub_services.selectClasses')->with($data);
+        return 'done';
+        // return redirect('/sub_services'.'/'.$sub_service->id.'/'.'classes'.'/'.Class_cat::find(2)->id.'/'.'class_types')->with($data);
     }
 
     /**
