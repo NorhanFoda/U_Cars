@@ -39,4 +39,6 @@ Route::post('class', 'API\ClassCatController@select_Class');
 Route::get('subservice/{id}/freeservices', 'API\Free_ServicesController@get_freeservices');
 
 Route::post('freeservice', 'API\Free_ServicesController@Select_freeservice');
-Route::post('subservice/{id}/request', 'API\SubServicesController@addToCart');
+Route::post('subservice/{id}/request', 'API\ClientRequestController@addToCart');
+Route::post('request/{id}/addclient', 'API\ClientController@addClient');
+Route::post('request/{id}/discountrequest', 'API\ClientRequestController@discountRequest');
