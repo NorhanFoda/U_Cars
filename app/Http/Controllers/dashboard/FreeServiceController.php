@@ -16,7 +16,7 @@ class FreeServiceController extends Controller
      */
     public function index()
     {
-        return view('free_services.index')->with('free_services', Free_service::all());
+        return view('free_services.index')->with('free_services', Free_service::paginate(5));
     }
 
     /**
@@ -88,6 +88,6 @@ class FreeServiceController extends Controller
     {
         $free_service->delete();
 
-        return redirect('free_services.index')->with('success', 'Free Service Deleted');
+        return redirect()->route('free_services.index')->with('success', 'تم مسح الخدمه المجانيه بنجاح');
     }
 }

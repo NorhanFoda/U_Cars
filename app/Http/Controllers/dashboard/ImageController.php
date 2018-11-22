@@ -17,7 +17,7 @@ class ImageController extends Controller
      */
     public function index(Color $color)
     {
-        return view('images.index')->with('images', $color->images);
+        return view('images.index')->with('images', $color->images()->paginate(5));
     }
 
     /**
@@ -93,10 +93,10 @@ class ImageController extends Controller
     {
         $image->delete();
 
-        return redirect('images.index')->with('success', 'Image Deleted');
+        return redirect('/images')->with('success', 'تم مسح الصوره بنجاح');
     }
 
     public function getAllImages(){
-        return view('images.index')->with('images', Image::all());
+        return view('images.index')->with('images', Image::paginate(5));
     }
 }
