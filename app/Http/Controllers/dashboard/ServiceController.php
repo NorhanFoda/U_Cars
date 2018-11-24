@@ -88,7 +88,7 @@ class ServiceController extends Controller
      * @param  \App\Model\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(ServiceRequest $request, Service $service)
+    public function update(Request $request, Service $service)
     {
         $service->name = $request->name;
 

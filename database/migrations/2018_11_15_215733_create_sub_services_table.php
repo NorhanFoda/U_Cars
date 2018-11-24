@@ -20,7 +20,7 @@ class CreateSubServicesTable extends Migration
             $table->string('name');
             $table->string('image');
             $table->text('details')->nullable();
-            $table->integer('guarantee')->nullable();
+            $table->string('guarantee')->nullable();
             $table->text('free_removal')->nullable();
             $table->text('notes')->nullable();
             $table->text('requirements')->nullable();

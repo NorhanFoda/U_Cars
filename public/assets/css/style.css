@@ -1,3 +1,5 @@
+
+
 .page-content
 {
     height: 100%;
@@ -49,8 +51,507 @@ i
     margin-top: 0;
 }
 
+.services h1
+{
+    font-size: 52px;
+    margin-right: 57px;
+}
 
+.Services-text 
+{
+    text-align: center;
+    margin-right: 88px;
+    margin-top: 68px;
+}
+
+.Services-text label
+{
+    font-size: 26px;
+    display: block;
+}
+
+.Services-text input::placeholder
+{
+    font-size: 24px;
+}
+
+
+.Services-text2
+{
+    text-align: center;
+    margin-top: 33px;
+    margin-bottom: -12px;
+}
+
+.Services-text2 label
+{
+    font-size: 24px;
+    margin-left: 223px;
+
+}
+
+.Services-text2 input
+{
+    margin-right: 383px;
+}
+
+.Services-text3 textarea
+{ 
+    margin-right: 317px;
+    width: 43%;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 85px;
+    font-size: 20px;
+    margin-bottom: -12px;
+}
+
+.Services-text3 label
+{
+
+    top: 34px;
+    position: absolute;
+    left: 421px;
+    font-size: 32px;
+    margin-left: 114px;
+}
+
+
+.Services-checkbox
+{
+    margin-top: 26px;
+}
+
+.Services-checkbox input
+{
+    margin-right: 315px;
+}
+
+
+.Services-checkbox label
+{
+    
+    font-size: 25px;
+}
+
+.colors
+{
+    margin-top: 45px;
+    margin-right: 59px;
+}
+
+.colors h2
+{
+    margin-bottom: 34px;
+    font-size: 30px;    
+}
+.colors label
+{
+    font-size: 24px;
+}
+
+.categorie
+{
+    width: 100%;
+    margin-top: 42px;
+    padding-right: 62px;
+}
+
+
+.categorie h2
+{
+    text-align: center;
+    margin-left: 114px;
+    font-size: 38px;
+}
+
+.categorie .service
+{
+    font-size: 31px;
+    margin-top: 29px;
+    margin-bottom: 21px;
+}
+
+.categorie .service div
+{
+    margin-bottom: 12px;
+}
+
+.categorie .service .second input
+{
+    margin-right: 172px;
+}
+
+.categorie .part
+{
+    font-size: 31px;
+    margin-top: 29px;
+    margin-bottom: 21px;
+}
+
+.categorie input[type="checkbox"] 
+{
+    margin-top: 42px;
+}
+
+.categorie .part .second input
+{
+    margin-right: 172px;
+
+}
+
+.categorie .part .seconds input
+{
+    margin-right: 172px;
+
+}
+
+.categorie button
+{
+    margin-right: 348px;
+    margin-top: 42px;
+    padding: 6px 15px;
+    font-size: 26px;
+    border-radius: 12px;
+}
+input
+{
+    width: 279px;
+    padding: 8px 0;
+    margin-top: 5px;
+    border-radius: 9px;
+    font-size: 18px;
+    
+}
+.form-control
+{
+    width: 349px;
+    font-size: 24px;
+}
+
+
+.Services-text input
+{
+    margin-right: 298px;
+}
+
+.Services-text button
+{
+    padding: 4px 13px;
+    font-size: 17px;
+    margin-top: 13px;
+}
+
+.Services-text .save
+{
+    margin-top: 17px;
+    margin-right: 360px;
+}
+
+
+.Services-text .save button
+{
+    font-size: 27px;
+    border-radius: 19px;
+    padding: 5px 39px;
+}
 .group-buttons
 {
     margin-top: 19px;
+}
+
+.servicesColors
+{
+    margin-top: 74px;
+    background-color: white;
+    padding-bottom: 229px;
+    margin-right: 37px;
+    margin-left: 51px;
+}
+
+.servicesColors h1 {
+    padding: 40px;
+    padding-bottom: 0;
+    font-size: 46px;
+    text-align: start;
+}
+
+input[type="radio"], input[type="checkbox"]
+{
+    width: 29px;
+}
+.categories {
+    padding-left: 0;
+    margin-right: 550px;
+    margin-top: -42px;
+}
+
+.size
+{
+    font-size: 21px;
+}
+
+.categories .colors .color {
+    font-size: 27px;
+    border-radius: 13px;
+    padding: 3px 16px;
+}
+
+
+
+.categories form label {
+    margin-bottom: 7px;
+    font-weight: 400;
+    padding-left: 14px;
+    font-size: 21px;
+}
+hr {
+    margin-top: -6px;
+    margin-bottom: 20px;
+    border: 0;
+    width: 129px;
+    border-top: 1px solid black;
+    margin-left: 505px;
+}
+
+.categories h2
+{
+    font-size: 52px;
+    margin-top: 26px;
+    margin-right: 137px;
+    margin-bottom: 32px;
+}
+.grade .row
+{
+    width: 84%;
+}
+
+.grade {
+    padding-left: 0;
+    margin-right: 205px;
+}
+
+.grade form{
+    margin-left: 51px;
+}
+
+.grade form label {
+    margin-bottom: 7px;
+    font-weight: 400;
+    padding-left: 0;
+    font-size: 21px;
+}
+.grade h2 {
+    font-size: 36px;
+    margin-top: 154px;
+    margin-bottom: -61px;
+    margin-right: 221px;
+}
+.grade .row
+{
+    width: 84%;
+}
+
+
+.others {
+    padding-left: 0;
+    margin-right: 149px;
+    margin-top: 37px;
+}
+
+
+.others label
+{
+    font-size: 24px;
+    margin-top: 24px;
+}
+
+.others .check
+{
+    width: 13.666667%;
+    margin-top: 40px;
+}
+.others .check input
+{   margin-left: 8px;
+    width: 15px;
+    display: inline;
+    float: right;
+    margin-top: 0;
+}
+.others .check label
+{
+    margin-top:0;
+    float: left;
+}
+
+.others  button
+{
+    padding: 8px 22px;
+    font-size: 28px;
+    border-radius: 25px;
+    margin-right: 283px;
+    margin-top: 59px;
+}
+.col-md-6 {
+    width: 50%;
+    font-size: 25px;
+}
+a
+{
+    color: white;
+}
+
+a:hover
+{
+    color: white;
+}
+.btn-warning a:hover
+{
+    color: white;
+}
+
+.size
+{
+    display: none;    
+}
+
+.sizes
+{
+    display: block;
+}
+
+
+  .grade form
+  {
+    text-align: center;
+    margin-left: 0;
+    margin-top: 101px;
+  }
+
+  .grade form input
+  {
+    padding-right: 23px;
+    font-size: 19px;
+  }
+
+  .grade form h1
+  {
+    font-size: 46px;
+    text-align: center;
+    width: 93%;
+    margin-top: -95px;
+}
+
+.select-text 
+{
+    text-align: center;
+    margin-top: 53px;
+    margin-right: 99px;
+}
+
+.select-text select
+{
+    margin-bottom: 21px;
+    padding-top: 0;
+    margin-right: 234px;
+}
+
+
+.select-text input
+{
+    margin-right: 253px;
+    margin-bottom: 16px;
+    margin-top: 25px;
+}
+
+.select-text button
+{
+    padding: 4px 13px;
+    font-size: 17px;
+    margin-top: 13px;
+}
+
+
+.select-text .save button
+{
+    padding: 1px 51px;
+    font-size: 39px;
+    margin-top: 77px;
+
+}
+
+
+
+.categories-text 
+{
+    text-align: center;
+    margin-top: 53px;
+    margin-right: 99px;
+}
+
+.categories-text select
+{
+    margin-bottom: 21px;
+    padding-top: 0;
+    margin-right: 234px;
+}
+
+
+.categories-text input
+{
+    margin-right: 253px;
+    margin-bottom: 16px;
+    margin-top: 25px;
+}
+
+
+
+.categories-text  button
+{
+    padding: 0;
+    font-size: 16px;
+    margin-top: 0;
+
+}
+
+
+.categories-text  button i
+{
+    padding: 3px;
+}
+
+
+.categories-text span
+{
+    font-size: 21px;
+    margin-right: 7px;
+}
+
+
+.categories-text .save button
+{
+    font-size: 27px;
+    border-radius: 19px;
+    padding: 5px 39px;
+    margin-top: 28px;
+}
+
+
+.search label
+{
+    font-size: 17px;
+}
+
+.Services-text .saves {
+    margin-top: 17px;
+    margin-right: 166px;
+}
+
+
+.Services-text .saves button
+{
+    padding: 5px 39px;  
+    font-size: 27px;
+    margin-top: 13px;
+
 }

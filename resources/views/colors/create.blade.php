@@ -1,1 +1,20 @@
-add color to sub service {{ $sub_service->name }}
+@extends('layouts.app')
+@section('content')
+    <div class="container">
+        <form action="{{route('colors.store')}}" method="POST">
+            @csrf
+            <div class="row">
+                <div class="col-md-8 services">
+                    <h1>اضافة لون</h1>
+                </div>
+                <div class="col-md-8 Services-text"> 
+                    <input placeholder="اللون" type="text" name="name"  class="form-control">
+                    <div class="save">
+                        <button type="submit" class="btn btn-info">حفظ </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+@endsection
