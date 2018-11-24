@@ -27,11 +27,16 @@ Route::group(['prefix' => 'services'], function(){
 Route::get('/sub_services', 'dashboard\SubServiceController@getAllSubServices');
 
 //colors routes
+Route::resource('/colors', 'dashboard\ColorController');
+//get color of subservice
 Route::group(['prefix' => 'sub_services'], function(){
-    Route::resource('/{sub_service}/colors', 'dashboard\ColorController');
+    Route::get('/{sub_service}/colors', 'dashboard\ColorController@getSubServiceColors');
 });
+// Route::group(['prefix' => 'sub_services'], function(){
+//     Route::resource('/{sub_service}/colors', 'dashboard\ColorController');
+// });
 
-Route::get('/colors', 'dashboard\ColorController@getAllColors');
+// Route::get('/colors', 'dashboard\ColorController@getAllColors');
 
 //images routes
 Route::group(['prefix' => 'colors'], function(){

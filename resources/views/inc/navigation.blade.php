@@ -21,6 +21,9 @@
                 <li>
                     <a href="/classes">الفئات</a>
                 </li>
+                <li>
+                    <a href="/clients">العملاء</a>
+                </li>
                 {{-- <li>
                     <a href="/class_types">انواع الفئات</a>
                 </li> --}}

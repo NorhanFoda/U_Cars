@@ -14,7 +14,6 @@
                             <input type="text" name="name" class="form-control" placeholder="ادخل اسم الخدمه" id="serviceName">
                         </div>
                         <div class="form-group">
-                            <label for="image"><h4>تحميل صوره للخدمه</h4></label>
                             <input type="file" class="form-control-file" id="image" name="image">
                         </div>
                         <button type="submit" class="btn btn-warning" style="float:left;">حفظ</button>

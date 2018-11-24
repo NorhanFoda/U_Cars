@@ -80,12 +80,14 @@ class SubServiceController extends Controller
 
         $sub_service->save();
 
+        //add colors
         if($request->colors !== null){
             foreach($request->colors as $color){
                 $sub_service->colors()->attach(Color::find($color));
             }
         }
 
+        //add class_types
         if($request->classes !== null){
             foreach($request->classes as $class){
                 $type_names = Class_type::where('class_cat_id', $class)->get(); 
@@ -102,15 +104,8 @@ class SubServiceController extends Controller
                 }
             }
         }
-        // $data = [
-        //     'sub_service' => $sub_service,
-        //     'service' => $service,
-        //     'classes' => Class_cat::all(),
-        //     'types' => Class_type::all()
-        // ];
-        // return view('sub_services.selectClasses')->with($data);
-        return 'done';
-        // return redirect('/sub_services'.'/'.$sub_service->id.'/'.'classes'.'/'.Class_cat::find(2)->id.'/'.'class_types')->with($data);
+
+        return redirect()->route('services.index')->with('success', 'تمت اضافة قسم للخدمه بنجاح');
     }
 
     /**
@@ -132,7 +127,17 @@ class SubServiceController extends Controller
      */
     public function edit(Service $service, Sub_service $sub_service)
     {
-        return view('sub_services.edit')->with('sub_service', $sub_service);
+        $sub_services_classes = Class_type::where('sub_service_id', $sub_service->id)->get();
+        $data = [
+            'service' => $service,
+            'colors' => Color::all(),
+            'classes' => Class_cat::all(),
+            'types' => Class_type::all(),
+            'sub_service' => $sub_service,
+            'sub_services_classes' => $sub_services_classes,
+            // 'sub_services_colors' => $sub_service->colors
+        ];
+        return view('sub_services.edit')->with($data);
     }
 
     /**
@@ -142,23 +147,24 @@ class SubServiceController extends Controller
      * @param  \App\Model\Sub_service  $sub_service
      * @return \Illuminate\Http\Response
      */
-    public function update(Service $service, SubServiceRequest $request, Sub_service $sub_service)
+    public function update(Service $service, Request $request, Sub_service $sub_service)
     {
         $sub_service->name = $request->name;
 
-        //Handle image uploading
-        // if($request->hasFile('image')){
-        //     $filenameWithExt = $request->file('image')->getClientOriginalName();
-        //     $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        //     $ext = $request->file('image')->getClientOriginalExtension();
-        //     $fileNameToStore = $filename.'_'.time().'.'.$ext;
-        //     $path = $request->file('image')->storeAs('public/images', $fileNameToStore);
-        // }else{
-        //     $fileNameToStore = 'noimage.jpg';
-        // }
-        // $service->image = $fileNameToStore;
+        // Handle image uploading
+        if($request->hasFile('image')){
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $request->file('image')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$ext;
+            $path = $request->file('image')->storeAs('public/images', $fileNameToStore);
+        }else{
+            $fileNameToStore = 'noimage.jpg';
+        }
+        $service->image = $fileNameToStore;
 
-        $sub_service->image = $request->image;
+        // $sub_service->image = $request->image;
+
         $sub_service->details = $request->details;
         $sub_service->guarantee = $request->guarantee;
         $sub_service->free_removal = $request->free_removal;
@@ -174,7 +180,47 @@ class SubServiceController extends Controller
 
         $sub_service->save();
 
-        return response(['data' => $sub_service], Response::HTTP_CREATED);
+        //delete old colors
+        if(count($sub_service->colors) > 0){
+            foreach($sub_service->colors as $color){
+                $sub_service->colors()->detach($color);
+            }
+        }
+        
+        //delete old class_types
+        $classes = Class_type::where('sub_service_id', $sub_service->id)->get();
+        if(count($classes) > 0){
+            foreach($classes as $class){
+                $class->delete();
+            }
+        }
+
+        //add new colors
+        if($request->colors !== null){
+            foreach($request->colors as $color){
+                $sub_service->colors()->attach(Color::find($color));
+            }
+        }
+
+        //add new class_types
+        if($request->classes !== null){
+            foreach($request->classes as $class){
+                $type_names = Class_type::where('class_cat_id', $class)->get(); 
+                foreach($type_names as $type_name){
+                    $type = new Class_type;
+                    $type->class_cat_id = $class;
+                    $type->sub_service_id = $sub_service->id;
+                    $type->name = $type_name->name;
+                    $price = "price".$type_name->id;
+                    $discount = "discount".$type_name->id;
+                    $type->price = $request->$price;
+                    $type->discount = $request->$discount;
+                    $type->save();
+                }
+            }
+        }
+
+        return redirect('/sub_services')->with('success', 'تم تعديل قسم الخدمه بنجاح');
     }
 
     /**

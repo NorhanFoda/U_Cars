@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Color;
 use App\Model\Sub_service;
 use App\Model\Color_SubService;
+use App\Model\Image;
 use App\Http\Requests\ColorRequest;
 
 class ColorController extends Controller
@@ -16,9 +17,9 @@ class ColorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Sub_service $sub_service)
+    public function index()
     {
-        return view('colors.index')->with('colors', $sub_service->colors()->paginate(5));
+        return view('colors.index')->with('colors', Color::paginate(5));
     }
 
     /**
@@ -26,9 +27,9 @@ class ColorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Sub_service $sub_service)
+    public function create()
     {
-        return view('colors.create')->with('sub_service', $sub_service);
+        return view('colors.create');
     }
 
     /**
@@ -37,14 +38,14 @@ class ColorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Sub_service $sub_service, ColorRequest $request)
+    public function store(ColorRequest $request)
     {
         $color = new Color;
         $color->name = $request->name;
-        $sub_service->colors()->attach($color->id);
+
         $color->save();
 
-        return redirect('colors.index')->with('succedd', 'New Color Added');
+        return redirect('/sub_services')->with('success', 'تمت اضافة لون للخدمه بنجاح');
     }
 
     /**
@@ -53,7 +54,7 @@ class ColorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Sub_service $sub_service, Color $color)
+    public function show(Color $color)
     {
         return view('colors.show')->with('color', $color);
     }
@@ -64,7 +65,7 @@ class ColorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sub_service $sub_service, Color $color)
+    public function edit(Color $color)
     {
         return view('colors.edit')->with('color', $color);
     }
@@ -76,11 +77,11 @@ class ColorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Sub_service $sub_service, ColorRequest $request, Color $color)
+    public function update(ColorRequest $request, Color $color)
     {
         $color->update($request->all());
 
-        return redirect('colors.index')->with('success', 'Color Updated');
+        return redirect()->route('colors.index')->with('success', 'تم تعديل اللون بنجاح');
     }
 
     /**
@@ -89,14 +90,14 @@ class ColorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sub_service $sub_service, Color $color)
+    public function destroy(Color $color)
     {
         $color->delete();
 
         return redirect('/colors')->with('success', 'تم مسح اللون بنجاح');
     }
 
-    public function getAllColors(){
-        return view('colors.index')->with('colors', Color::paginate(5));
+    public function getSubServiceColors($sub_service){
+        return view('colors.index')->with('colors', Sub_service::find($sub_service)->colors()->paginate(5));
     }
 }
