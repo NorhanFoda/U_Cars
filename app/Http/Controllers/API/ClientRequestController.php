@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Client;
 use App\Model\Client_Request;
+use App\Model\Free_Service;
+use App\Model\Class_type;
+
 
 class ClientRequestController extends Controller
 {
@@ -54,9 +57,10 @@ class ClientRequestController extends Controller
 
     $order_data = array_merge($order1,$order2 );
     $add_order = Client_Request::create($order_data);
-
     if($add_order){
-      return response()->json(['code' => 200,'message' => 'success','data' => $order_data]);
+      $order=Client_Request::with(['color','image','sub_service','free_service','class_type','client'])
+      ->where('id', $add_order->id)->get();
+      return response()->json(['code' => 200,'message' => 'success','data' => $order]);
 
 
     }else{
@@ -81,11 +85,27 @@ class ClientRequestController extends Controller
         return response()->json(['code' => 404,'message' => 'faild ','data' => []]);
 
       }
-
-
-
-
-
     }
+
+    public function get_orders(){
+        $services = Client_Request::with(['color','image','sub_service','free_service','class_type','client'])->get();
+        if(count($services)>0){
+        return response()->json(['code' => 200,'message' => 'success','data' => $services]);
+      }else{
+        return response()->json(['code' => 404,'message' => 'not found','data' => []]);
+
+      }
+      }
+
+    public function delete_order($order_id){
+        $order = Client_Request::where('id',$order_id)->find($order_id);
+        if(empty($order)){
+            return response()->json(['code' => 404,'message' => 'not found','data' => []]);
+        }else{
+          $order->delete();
+          return response()->json(['code' => 200,'message' => 'success','data' => []]);
+
+        }
+  }
 
 }

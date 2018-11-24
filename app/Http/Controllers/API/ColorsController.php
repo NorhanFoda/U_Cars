@@ -13,7 +13,9 @@ class ColorsController extends Controller
 {
           //get subservice colors
         public function get_colors($id){
-              $colors = Color_SubService::with(['color','subservice'])->where('sub_service_id',$id)->get();
+
+          $colors= Color::with('sub_services')->whereId($id)
+                 ->get();
               if(count($colors)<=0){
                  return response()->json( ['code' => 404,'message' => 'not found','data'=>[]]);
               }else{

@@ -27,4 +27,12 @@ public function subservice(){
 public function color(){
     return $this->belongsTo(Color::class);
 }
+
+public function getColorIdAttribute($value){
+        return intval($this->attributes['color_id']);
+    }
+
+    public function getSubserviceIdAttribute($value){
+        return intval($this->attributes['sub_service_id']);
+    }
 }

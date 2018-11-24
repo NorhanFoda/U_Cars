@@ -31,4 +31,6 @@ class Sub_service extends Model
     public function client_requests(){
         return $this->hasMany(Client_Request::class);
     }
+
+    
 }

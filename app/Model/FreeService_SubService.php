@@ -27,4 +27,12 @@ class FreeService_SubService extends Model
         public function freeservice(){
             return $this->belongsTo(Free_Service::class);
         }
+
+        public function getSubserviceIdAttribute($value){
+            return intval($this->attributes['sub_service_id']);
+        }
+
+        public function getFreeserviceIdAttribute($value){
+            return intval($this->attributes['free_service_id']);
+      }
 }
