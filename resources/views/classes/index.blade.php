@@ -56,7 +56,6 @@
                 </table>
             @else
                 <h1>لا توجد فئات مضافه</h1>
-                <a href="{{ route('classes.create') }}" class="btn btn-warning">اضافة فئه</a>
             @endif
             </div>
             <div class="bg-light">
@@ -67,10 +66,3 @@
     <!-- /marketing campaigns -->
                 
 @endsection
-
-
-{{-- @if(count($classes) > 0)
-    @foreach($classes as $class)
-        {{ $class->name }}
-    @endforeach
-@endif --}}

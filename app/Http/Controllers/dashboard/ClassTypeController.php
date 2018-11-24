@@ -18,9 +18,12 @@ class ClassTypeController extends Controller
      */
     public function index($class_cat_id)
     {
-        $class_types = Class_type::where('class_cat_id', $class_cat_id)->get();
+        $data = [
+            'class_types' => Class_type::where('class_cat_id', $class_cat_id)->where('sub_service_id', null)->paginate(5),
+            'class_cat' => Class_cat::find($class_cat_id)
+        ];
         
-        return view('class_types.index')->with('types', $class_types);
+        return view('class_types.index')->with($data);
     }
 
     /**
@@ -52,13 +55,13 @@ class ClassTypeController extends Controller
         return redirect('class_types.index')->with('success', 'Type created');
     }
 
-    public function postClassTypeForClass($class_cat_id, Class_typeRequest $request){
+    public function store($class_cat_id, Class_typeRequest $request){
         $class_type = new Class_type;
         $class_type->name = $request->name;
         $class_type->class_cat_id = $class_cat_id;
         $class_type->save();
 
-        return redirect('class_types.index')->with('success', 'Type created');
+        return redirect('/classes')->with('success', 'تمت اضافة النوع بنجاح');
     }
     /**
      * Display the specified resource.
@@ -79,7 +82,11 @@ class ClassTypeController extends Controller
      */
     public function edit($class_cat_id, $class_type_id)
     {
-        return view('class_types.edit')->with('type', Class_type::find($class_type_id));
+        $data = [
+            'class' => Class_cat::find($class_cat_id),
+            'type' => Class_type::find($class_type_id)
+        ];
+        return view('class_types.edit')->with($data);
     }
 
     /**
@@ -97,12 +104,12 @@ class ClassTypeController extends Controller
         return redirect('class_types.index')->with('success', 'Type Updated');
     }
 
-    public function updateClassTypeForClass($class_cat_id, Class_typeRequest $request, $class_type_id){
+    public function update($class_cat_id, Class_typeRequest $request, $class_type_id){
 
         $class_type = Class_type::find($class_type_id);
         $class_type->update($request->all());
 
-        return redirect('class_types.index')->with('success', 'Type Updated');
+        return redirect('/classes')->with('success', 'تم تعديل النوع بنجاح');
     }
 
     /**
@@ -114,8 +121,7 @@ class ClassTypeController extends Controller
     public function destroy($class_cat_id, $class_type_id)
     {
         Class_type::find($class_type_id)->delete();
-
-        return redirect('class_types.index')->with('success', 'Type Deleted');
+        return redirect('/classes')->with('success', 'تم مسح النوع بنجاح');
     }
 
     public function deleteClassTypeForService($sub_service_id, $class_cat_id, $class_type_id){

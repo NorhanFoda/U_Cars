@@ -233,7 +233,7 @@ class SubServiceController extends Controller
     {
         //$sub_service->delete();
 
-        return redirect('/sub_services')->with('success', 'تم مسح قسم الخدمه بنجاح');
+        return redirect('/services')->with('success', 'تم مسح قسم الخدمه بنجاح');
     } 
     
     public function getAllSubServices(){

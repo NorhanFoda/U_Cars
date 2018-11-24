@@ -42,7 +42,6 @@ Route::group(['prefix' => 'sub_services'], function(){
 Route::group(['prefix' => 'colors'], function(){
     Route::resource('/{color}/images', 'dashboard\ImageController');
 });
-
 Route::get('/images', 'dashboard\ImageController@getAllImages');
 
 //classes routes
@@ -61,21 +60,21 @@ Route::group(['prefix' => 'classes'], function(){
 Route::post('/sub_services/{sub_service}/classes/{class}/class_types', 'dashboard\ClassTypeController@postClassTypeForSubservice');
 
 //post class type
-Route::post('/classes/{class}/class_types', 'dashboard\ClassTypeController@postClassTypeForClass');
+// Route::post('/classes/{class}/class_types', 'dashboard\ClassTypeController@postClassTypeForClass');
 
 //edit class Type for specific subservice
 Route::put('/sub_services/{sub_service}/classes/{class}/class_types', 'dashboard\ClassTypeController@updateClassTypeForSubservice');
 //edit class type
-Route::put('/classes/{class}/class_types/{class_type}', 'dashboard\ClassTypeController@updateClassTypeForClass');
+// Route::put('/classes/{class}/class_types/{class_type}', 'dashboard\ClassTypeController@updateClassTypeForClass');
 //delete class type of specific service
 Route::delete('/sub_services/{sub_service}/classes/{class}/class_types/{class_type}', 'dashboard\ClassTypeController@deleteClassTypeForService');
 
 //clients routes
-Route::get('/clients', 'dashboard\ClientController@getClients');
-Route::group(['prefix' => 'clients'], function(){
-    Route::get('/{client}/requests', 'dashboard\ClientController@getClientRequests');
-});
-Route::get('/clients/search/{phone}', 'dashboard\ClientController@getClientByPhone');
+// Route::get('/clients', 'dashboard\ClientController@getClients');
+// Route::group(['prefix' => 'clients'], function(){
+//     Route::get('/{client}/requests', 'dashboard\ClientController@getClientRequests');
+// });
+// Route::get('/clients/search/{phone}', 'dashboard\ClientController@getClientByPhone');
 
 //free_services routes
 Route::resource('/free_services', 'dashboard\FreeServiceController');

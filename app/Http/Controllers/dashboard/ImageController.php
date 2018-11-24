@@ -30,22 +30,38 @@ class ImageController extends Controller
         return view('images.create')->with('color', $color);
     }
 
+    public function addImage(){
+        return view('images.addImage')->with('colors', Color::all());
+    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Color $color, ImageRequest $request)
+    public function store(Color $color , ImageRequest $request)
     {
         $image = new Image;
-        $image->name = $request->name;
         $image->price = $request->price;
         $image->code = $request->code;
         $image->color_id = $color->id;
+
+        //Handle image uploading
+        if($request->hasFile('name')){
+            $filenameWithExt = $request->file('name')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $request->file('name')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$ext;
+            $path = $request->file('name')->storeAs('public/images', $fileNameToStore);
+        }else{
+            $fileNameToStore = 'noimage.jpg';
+        }
+        $image->name = $fileNameToStore;
+
         $image->save();
 
-        return redirect('images.index')->with('success', 'Image Added');
+        return redirect('/colors')->with('success', 'تمت اضافة الصوره بنجاح');
     }
 
     /**
@@ -67,7 +83,11 @@ class ImageController extends Controller
      */
     public function edit(Color $color, Image $image)
     {
-        return view('images.edit')->with('image', $image);
+        $data = [
+            'image' => $image,
+            'color' => $color
+        ];
+        return view('images.edit')->with($data);
     }
 
     /**
@@ -77,10 +97,28 @@ class ImageController extends Controller
      * @param  \App\Model\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function update(Color $color, ImageRequest $request, Image $image)
+    public function update(Color $color, Request $request, Image $image)
     {
-        $image->update($request->all());
-        return $image;
+        $image = Image::find($image->id);
+        $image->price = $request->price;
+        $image->code = $request->code;
+        $image->color_id = $color->id;
+
+        //Handle image uploading
+        if($request->hasFile('name')){
+            $filenameWithExt = $request->file('name')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $request->file('name')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$ext;
+            $path = $request->file('name')->storeAs('public/images', $fileNameToStore);
+        }else{
+            $fileNameToStore = 'noimage.jpg';
+        }
+        $image->name = $fileNameToStore;
+
+        $image->save();
+        
+        return redirect('/images')->with('success', 'تم تعديل الصوره بنجاح');
     }
 
     /**

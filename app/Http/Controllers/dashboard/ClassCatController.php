@@ -43,7 +43,7 @@ class ClassCatController extends Controller
         $class->name = $request->name;
         $class->save();
 
-        return redirect('classes.index')->with('success', 'Class Added');
+        return redirect()->route('classes.index')->with('success', 'تمت اضافة الفئه بنجاح');
     }
 
     /**
@@ -78,9 +78,10 @@ class ClassCatController extends Controller
     public function update(Class_catRequest $request, $class_cat_id)
     {
         $class = Class_cat::find($class_cat_id);
+
         $class->update($request->all());
 
-        return redirect('classes.index')->with('success', 'Class Updated');
+        return redirect()->route('classes.index')->with('success', 'تم تعديل لافئه بنجاح');
     }
 
     /**
@@ -93,7 +94,7 @@ class ClassCatController extends Controller
     {
         Class_cat::find($class_cat_id)->delete();
 
-        return redirect('classes.index')->with('ssuccess', 'Class Deleted');
+        return redirect()->route('classes.index')->with('ssuccess', 'تم مسح الفئه بنجاح');
     }
 
     public function getSubServiceClasses(Sub_service $sub_service){

@@ -43,9 +43,10 @@ class FreeServiceController extends Controller
 
         $free_service = new Free_service;
         $free_service->name = $request->name;
+
         $free_service->save();
-        return $free_service;
-        return redirect('free_services.index')->with('success', 'New Free Service Added');
+
+        return redirect()->route('free_services.index')->with('success', 'تمت اضافة الخدمه الاضافيه بنجاح');
     }
 
     /**
@@ -74,7 +75,7 @@ class FreeServiceController extends Controller
         
         $free_service->update($request->all());
 
-        return redirect('free_services.index')->with('success', 'Free Service Updated');
+        return redirect()->route('free_services.index')->with('success', 'تم تعديل الخدمه الاضافيه بنجاح');
         
     }
 

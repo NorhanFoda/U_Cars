@@ -5,6 +5,9 @@
     <div class="service">
         <div class="container">
             <h1 style="float:right;">الصور</h1>
+            {{-- @if(Route::getFacadeRoot()->current()->uri() === 'images')
+                <a href="/images/create" class="btn btn-warning" style="float:left;">اضافة صوره</a>
+            @endif --}}
         </div>
     </div>
     
@@ -17,10 +20,10 @@
                             الصوره
                         </th>
                         <th>
-                            الكود
+                            اللون
                         </th>
                         <th>
-                            اللون
+                            الكود
                         </th>
                         <th>
                             السعر
@@ -33,13 +36,16 @@
                         @foreach($images as $image)
                             <tr>
                                 <td>
-                                    <h4>{{ $image->name }}</h4>
-                                </td>
-                                <td>
-                                    <h4>{{ $image->code }}</h4>
+                                    <img class="card-img-top" 
+                                    src="/storage/images/{{$image['name']}}" 
+                                    alt="{{ $image->code }}"
+                                    style="max-height:20%;">
                                 </td>
                                 <td>
                                     <h4>{{ $image->color->name }}</h4>
+                                </td>
+                                <td>
+                                    <h4>{{ $image->code }}</h4>
                                 </td>
                                 <td>
                                     <h4>{{ $image->price }}</h4>
@@ -61,6 +67,7 @@
                 </table>
             @else
                 <h1>لا يوجد صور مضافه</h1>
+                <a href="{{ route('images.create', Request()->color->id) }}" class="btn btn-warning">اضافة صوره</a>
             @endif
             </div>
             <div class="bg-light">

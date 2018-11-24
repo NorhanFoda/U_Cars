@@ -16,7 +16,7 @@
                         <div class="form-group">
                             <input type="file" class="form-control-file" id="image" name="image">
                         </div>
-                        <button type="submit" class="btn btn-warning" style="float:left;">حفظ</button>
+                        <button type="submit" class="btn btn-warning">حفظ</button>
                     </div>
                 </div>
             </form>
