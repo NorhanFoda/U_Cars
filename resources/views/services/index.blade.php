@@ -60,7 +60,6 @@
                 </table>
             @else
                 <h1>لا يوجد خدمات مضافه</h1>
-                <a href="{{ route('service.create') }}" class="btn btn-warning">اضافة خدمه</a>
             @endif
             </div>
             <div class="bg-light">

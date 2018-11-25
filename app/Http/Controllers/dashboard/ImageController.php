@@ -30,8 +30,31 @@ class ImageController extends Controller
         return view('images.create')->with('color', $color);
     }
 
-    public function addImage(){
-        return view('images.addImage')->with('colors', Color::all());
+    public function AddImages(){
+        return view('images.addImages')->with('colors', Color::all());
+    }
+
+    public function SaveAddedImages(){
+        $image = new Image;
+        $image->price = $request->price;
+        $image->code = $request->code;
+        $image->color_id = $request->selectedColor;
+
+        //Handle image uploading
+        if($request->hasFile('name')){
+            $filenameWithExt = $request->file('name')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $request->file('name')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$ext;
+            $path = $request->file('name')->storeAs('public/images', $fileNameToStore);
+        }else{
+            $fileNameToStore = 'noimage.jpg';
+        }
+        $image->name = $fileNameToStore;
+
+        $image->save();
+
+        return redirect()->back()->with('success', 'تمت اضافة الصوره بنجاح');
     }
 
     /**

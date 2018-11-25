@@ -25,13 +25,15 @@ class ClientController extends Controller
         $data = array();
         if(count($requests) > 0){
             foreach($requests as $request){
+                //return $request;
                 $dataItem = new \stdClass();
                 $dataItem->client = Client::find($request->client_id);
                 $dataItem->image = Image::find($request->image_id);
                 $dataItem->sub_service = Sub_service::find($request->sub_service_id);
                 $dataItem->color = Color::find($request->color_id);
-                $dataItem->class = Class_cat::find($request->class_id);
-                $dataItem->class_type = Class_type::where(['class_cat_id'=> $request->class_id, 'sub_service_id' => $request->sub_service_id])->get();
+                $dataItem->class_type = Class_type::find($request->classtype_id);
+                $dataItem->class = Class_cat::where('id', $dataItem->class_type->class_cat_id)->get();
+                $dataItem->requestNo = $request->id;
                 $dataItem->free_service = Free_service::find($request->free_service_id);
                 $dataItem->price = $request->price;
                 $dataItem->discount_request = $request->discount_request;
@@ -41,8 +43,8 @@ class ClientController extends Controller
         return view('clients.requests')->with('data', $data);
     }
 
-    public function getClientByPhone($phone){
-        return view('clients.index')->with('clients', Client::where('phone', $phone)->get());
+    public function getClientByPhone(Request $request){
+        return view('clients.index')->with('clients', Client::where('phone', $request->phone)->get());
     }
 
 }

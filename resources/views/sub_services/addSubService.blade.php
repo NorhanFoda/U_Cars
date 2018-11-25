@@ -6,12 +6,29 @@
     <div class="row">
         <div class="servicesColors">
             <div class="add">
-                <form action="{{ route('sub_services.store', $service->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="/sub_services/save" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-8 services">
                             <h1>اضافة قسم الخدمه</h1>
                             <hr>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 services">
+                                <label>اختر الخدمه</label>
+                            </div>
+                            @if(count($services) > 0)
+                                <div class="col-md-8 select-text"> 
+                                    <select class="form-control" name="selectedService">
+                                        @foreach($services as $service)
+                                            <option value="{{$service->id}}">{{$service->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @else
+                                <h2>لا يوجد خدمات مضافة </h2>
+                                <a href="{{route('services.create')}}" class="btn btn-warning">اضف خدمه</a>
+                            @endif
                         </div>
                         <div class="col-md-8 Services-text"> 
                             <label>اسم قسم الخدمه</label>
@@ -54,7 +71,7 @@
                             </div>
                         @else
                             <h2>لا يوجد الوان مضافه لهذه الخدمه</h2>
-                            <a href="/colors/add" class="btn btn-warning">اضف الالوان</a>
+                            <a href="/colors/add" class="btn btn-warning">اضف الوان</a>
                         @endif
                         @if(count($classes) > 0)
                             <div class="col-md-12 categorie">

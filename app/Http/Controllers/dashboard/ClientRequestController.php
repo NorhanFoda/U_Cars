@@ -78,11 +78,15 @@ class ClientRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client_Request $client_request)
+    public function update(Request $request, $client_request_id)
     {
+        $client_request = Client_Request::find($client_request_id);
         $client_request->discount = $request->discount;
+        $client_request->price = $request->price;
 
-        return redirect('requests.index')->with('success', 'Request Updated with discount added');
+        $client_request->save();
+
+        return redirect()->route('requests.index')->with('success', 'تمت تعديل الطلب بنجاح');
     }
 
     /**
@@ -98,7 +102,8 @@ class ClientRequestController extends Controller
         return redirect()->route('requests.index')->with('success', 'تم مسح الطلب بنجاح');
     }
 
-    public function getRequestByNo(Client_Request $request){
+    public function getRequestByNo(Request $request){
+        return $request->requestNo;
         return view('requests.index')->with('data', Client_Request::where('id', $request->id)->get());
     }
 

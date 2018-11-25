@@ -36,6 +36,20 @@ class ClassTypeController extends Controller
         return view('class_types.create')->with('class', Class_cat::find($class_cat_id));
     }
 
+    public function AddType(){
+        return view('class_types.addType')->with('classes', Class_cat::all());
+    }
+
+    public function SaveAddedType(Class_typeRequest $request){
+        $class_type = new Class_type;
+        $class_type->name = $request->name;
+        $class_type->class_cat_id = $request->selectedClass;
+        $class_type->save();
+
+        return redirect('/classes')->with('success', 'تمت اضافة النوع بنجاح');
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *

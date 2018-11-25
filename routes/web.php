@@ -25,28 +25,33 @@ Route::group(['prefix' => 'services'], function(){
 });
 
 Route::get('/sub_services', 'dashboard\SubServiceController@getAllSubServices');
+Route::get('/sub_services/add', 'dashboard\SubServiceController@AddSubServices');
+Route::post('//sub_services/save', 'dashboard\SubServiceController@SaveAddedSubServices');
 
 //colors routes
-Route::resource('/colors', 'dashboard\ColorController');
-//get color of subservice
-Route::group(['prefix' => 'sub_services'], function(){
-    Route::get('/{sub_service}/colors', 'dashboard\ColorController@getSubServiceColors');
-});
+// Route::resource('/colors', 'dashboard\ColorController');
+// //get color of subservice
 // Route::group(['prefix' => 'sub_services'], function(){
-//     Route::resource('/{sub_service}/colors', 'dashboard\ColorController');
+//     Route::get('/{sub_service}/colors', 'dashboard\ColorController@getSubServiceColors');
 // });
+Route::group(['prefix' => 'sub_services'], function(){
+    Route::resource('/{sub_service}/colors', 'dashboard\ColorController');
+});
 
-// Route::get('/colors', 'dashboard\ColorController@getAllColors');
+Route::get('/colors', 'dashboard\ColorController@getAllColors');
+Route::get('/colors/add', 'dashboard\ColorController@AddColors');
+Route::post('/colors/save', 'dashboard\ColorController@SaveAddedColors');
 
 //images routes
 Route::group(['prefix' => 'colors'], function(){
     Route::resource('/{color}/images', 'dashboard\ImageController');
 });
 Route::get('/images', 'dashboard\ImageController@getAllImages');
+Route::get('/images/add', 'dashboard\ImageController@AddImages');
+Route::post('/images/save', 'dashboard\ImageController@SaveAddedImages');
 
 //classes routes
 Route::resource('/classes', 'dashboard\ClassCatController');
-
 Route::group(['prefix' => 'sub_services'], function(){
     Route::get('/{sub_service}/classes', 'dashboard\ClassCatController@getSubServiceClasses');
 }); 
@@ -55,6 +60,8 @@ Route::group(['prefix' => 'sub_services'], function(){
 Route::group(['prefix' => 'classes'], function(){
    Route::resource('/{class}/class_types', 'dashboard\ClassTypeController');
 });
+Route::get('/classe_types/add', 'dashboard\ClassTypeController@AddType');
+Route::post('/classe_types/save', 'dashboard\ClassTypeController@SaveAddedType');
 
 //post class type for specific subservice
 Route::post('/sub_services/{sub_service}/classes/{class}/class_types', 'dashboard\ClassTypeController@postClassTypeForSubservice');
@@ -70,18 +77,18 @@ Route::put('/sub_services/{sub_service}/classes/{class}/class_types', 'dashboard
 Route::delete('/sub_services/{sub_service}/classes/{class}/class_types/{class_type}', 'dashboard\ClassTypeController@deleteClassTypeForService');
 
 //clients routes
-// Route::get('/clients', 'dashboard\ClientController@getClients');
-// Route::group(['prefix' => 'clients'], function(){
-//     Route::get('/{client}/requests', 'dashboard\ClientController@getClientRequests');
-// });
-// Route::get('/clients/search/{phone}', 'dashboard\ClientController@getClientByPhone');
+Route::get('/clients', 'dashboard\ClientController@getClients');
+Route::group(['prefix' => 'clients'], function(){
+    Route::get('/{client}/requests', 'dashboard\ClientController@getClientRequests');
+});
+Route::post('/clients/search', 'dashboard\ClientController@getClientByPhone');
 
 //free_services routes
 Route::resource('/free_services', 'dashboard\FreeServiceController');
 
 //requests routes
 Route::resource('/requests', 'dashboard\ClientRequestController');
-Route::get('/requests/search/{request}', 'dashboard\ClientRequestController@getRequestByNo');
+Route::post('/requests/search', 'dashboard\ClientRequestController@getRequestByNo');
 
 //discount requests routes
 Route::get('/discount_requests', 'dashboard\ClientRequestController@getDiscounRequests');

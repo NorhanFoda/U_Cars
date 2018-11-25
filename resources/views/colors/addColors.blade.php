@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <form action="{{route('colors.store', $sub_service->id)}}" method="POST">
+        <form action="/colors/save" method="POST">
             @csrf
             <div class="row">
                 <div class="col-md-8 services">

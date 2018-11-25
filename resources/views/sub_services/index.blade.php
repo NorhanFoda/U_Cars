@@ -61,7 +61,7 @@
                 </table>
             @else
                 <h1>لا يوجد اقسام خدمات مضافه</h1>
-                <a href="{{ route('sub_services.create', Request()->service->id) }}" class="btn btn-warning">اضافة قسم خدمه</a>
+                <a href="/sub_services/add" class="btn btn-warning">اضافة قسم خدمه</a>
             @endif
             </div>
             <div class="bg-light">
