@@ -3,6 +3,10 @@
     <div class="service">
         <div class="container">
             <h1 style="float:right;">الالوان</h1>
+            <a style="float:left;"
+                href="/colors/add" 
+                class="btn  btn-warning">اضافة لون
+            </a>
         </div>
     </div>
 
@@ -27,14 +31,16 @@
                                 <td>
                                     <a  href="/colors/{{$color->id}}/images" class="btn btn-warning"><i class="fas fa-users"></i>عرض الصور</a>
                                     <a  href="{{route('images.create', $color->id)}}" class="btn  btn-primary"><i class="fas fa-plus"></i>اضافة صوره</a>
-                                    <a  href="{{route('colors.edit', $color->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i>تعديل</a>
-                                    <form action="{{route('colors.destroy', $color->id) }}" 
-                                        method="POST" 
-                                        style="display:inline-block;">
-                                    @csrf
-                                    @method('DELETE')
-                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
-                                    </form>
+                                    @if(Route::getFacadeRoot()->current()->uri() === '/colors')
+                                        <a  href="{{route('colors.edit', [$sub_service->id, $color->id])}}" class="btn btn-warning"><i class="fas fa-edit"></i>تعديل</a>
+                                        <form action="{{route('colors.destroy', [$sub_service->id, $color->id]) }}" 
+                                            method="POST" 
+                                            style="display:inline-block;">
+                                        @csrf
+                                        @method('DELETE')
+                                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -42,14 +48,12 @@
                 </table>
             @else
                 <h1>لا يوجد الوان مضافه</h1>
-                {{-- <a 
-                    href="{{route('colors.create', Request()->sub_service->id)}}" 
-                    class="btn  btn-warning">اضافة لون
-                </a> --}}
-                <a 
-                    href="{{route('colors.create')}}" 
-                    class="btn  btn-warning">اضافة لون
-                </a>
+                @if(Request()->sub_service)
+                    <a 
+                        href="{{route('colors.create', Request()->sub_service->id)}}" 
+                        class="btn  btn-warning">اضافة لون
+                    </a>
+                @endif
             @endif
         </div>
         <div class="bg-light">

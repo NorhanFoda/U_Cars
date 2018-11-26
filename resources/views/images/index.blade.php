@@ -67,7 +67,11 @@
                 </table>
             @else
                 <h1>لا يوجد صور مضافه</h1>
-                <a href="{{ route('images.create', Request()->color->id) }}" class="btn btn-warning">اضافة صوره</a>
+                @if(Request()->color)
+                    <a href="{{ route('images.create', Request()->color->id) }}" class="btn btn-warning">اضافة صوره</a>
+                @else
+                    <a href="/images/add" class="btn btn-warning">اضافة صوره</a>
+                @endif
             @endif
             </div>
             <div class="bg-light">
