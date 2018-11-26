@@ -4,10 +4,10 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Sub_service;
 use App\Model\Color;
 use App\Model\Color_SubService;
 use App\Model\Image;
+use App\Model\Sub_service;
 
 class ColorsController extends Controller
 {
@@ -54,5 +54,18 @@ class ColorsController extends Controller
                  return response()->json(['code' => 200,'message' => 'success','data' => $image]);
               }
         }
+
+
+            //search image  by code
+        public function search_image(Request $request){
+                $code=$request->code;
+                $image = Image::with(['color','subservice','subservice.service'])->where('code',$code)->get();
+                if(count($image) > 0){
+                  return response()->json( ['code' => 200,'message' => 'success','data'=>$image]);
+                }else{
+                  return response()->json( ['code' => 404,'message' => 'not found','data'=>[]]);
+
+                }
+           }
 
 }

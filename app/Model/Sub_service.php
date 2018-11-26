@@ -32,8 +32,12 @@ class Sub_service extends Model
         return $this->hasMany(Client_Request::class);
     }
 
-    public function images(){
+    public function image(){
         return $this->hasMany(Image::class);
+    }
+
+    public function getServiceAttribute($value){
+          return intval($this->attributes['service_id']);
     }
 
 

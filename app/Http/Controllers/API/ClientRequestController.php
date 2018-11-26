@@ -58,7 +58,7 @@ class ClientRequestController extends Controller
     $order_data = array_merge($order1,$order2 );
     $add_order = Client_Request::create($order_data);
     if($add_order){
-      $order=Client_Request::with(['color','image','sub_service','free_service','class_type','client'])
+      $order=Client_Request::with(['color','image','sub_service','free_service','class_type','client','sub_service.service'])
       ->where('id', $add_order->id)->get();
       return response()->json(['code' => 200,'message' => 'success','data' => $order]);
 
@@ -122,14 +122,5 @@ class ClientRequestController extends Controller
     }
 
 
-    //search image  by code
-   public function search_image(Request $request){
-        $code=$request->code;
-        $image = Image::where('code',$code)->get();
-        if(count($image) > 0){
-          $data=Client_Request::where('image_id', $image->id)->get();
-
-        }
-   }
 
 }

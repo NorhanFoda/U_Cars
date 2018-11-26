@@ -4,7 +4,7 @@ namespace App\Model;
 
 use App\Model\Color;
 use App\Model\Client_Request;
-use App\Model\sub_service;
+use App\Model\Sub_service;
 
 
 use Illuminate\Database\Eloquent\Model;
@@ -17,11 +17,21 @@ class Image extends Model
         return $this->belongsTo(Color::class);
     }
 
-    public function sub_service(){
+    public function subservice(){
         return $this->belongsTo(Sub_service::class);
     }
 
     public function client_requests(){
         return $this->hasMany(Client_Request::class);
     }
+
+    public function getColorIdAttribute($value){
+       return intval($this->attributes['color_id']);
+    }
+
+    public function getSubserviceIdAttribute($value){
+          return intval($this->attributes['sub_service_id']);
+      }
+
+
 }

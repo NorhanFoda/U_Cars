@@ -50,4 +50,8 @@ Route::get('requests', 'API\ClientRequestController@get_orders');
 
 Route::delete('request/{id}','API\ClientRequestController@delete_order');
 
-Route::put('request/{id}/image','API\ClientRequestController@change_image');    
+Route::put('request/{id}/image','API\ClientRequestController@change_image');
+
+Route::post('image','API\ColorsController@search_image');
+
+Route::put('client/{id}/edit', 'API\ClientController@updateClient');
