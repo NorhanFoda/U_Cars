@@ -47,7 +47,7 @@
                 </table>
             @else
                 <h1>لا يوجد خدمات اضافيه مجانيه مضافه</h1>
-                <a href="{{ route('free_services.create') }}" class="btn btn-warning">اضافة خدمه مجانيه</a>
+                {{-- <a href="{{ route('free_services.create') }}" class="btn btn-warning">اضافة خدمه مجانيه</a> --}}
             @endif
             </div>
             <div class="bg-light">

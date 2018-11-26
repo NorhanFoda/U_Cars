@@ -3,7 +3,7 @@
     @if(count($data) > 0)
         <div class="service">
             <div class="container">
-                <h1>طلبات العميل/ {{$data[0]->client->name}}</h1>
+                <h1 style="float:right;">طلبات العميل/ {{$data[0]->client->name}}</h1>
                 <form action="/requests/search" method="POST">
                     @csrf
                     <label>
@@ -43,7 +43,7 @@
                         @foreach($data as $item)
                             <tr>
                                 <td>
-                                    {{$item->client->phone}}
+                                    {{$item->requestNo}}
                                 </td>
                                 <td>
                                     {{$item->sub_service->service->name}} - {{$item->sub_service->name}}

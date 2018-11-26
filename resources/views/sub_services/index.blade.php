@@ -3,6 +3,10 @@
 			<!-- Main content -->
             <div class="service">
                 <div class="container">
+                    <a 
+                        href="/sub_services/add" 
+                        class="btn btn-warning"
+                        style="float:left;">اضافة قسم خدمه</a>
                     @if(Route::getFacadeRoot()->current()->uri() !== 'sub_services')
                         @if(count($sub_services) > 0)
                             <h2 style="float:right;">عرض اقسام الخدمات لخدمة ( {{ $sub_services[0]->service->name }} )</h2>
@@ -42,7 +46,7 @@
                                 </td>
                                 <td>
                                     <a  href="/sub_services/{{$sub_service->id}}/colors" class="btn btn-warning"><i class="fas fa-users"></i>عرض الوان الخدمه</a>
-                                    <a  href="{{route('services.show', [$sub_service->service_id, $sub_service->id])}}" class="btn btn-info"><i class="fas fa-map-marker-exclamation"></i>معاينه</a>
+                                    <a  href="{{route('sub_services.show', [$sub_service->service_id, $sub_service->id])}}" class="btn btn-info"><i class="fas fa-map-marker-exclamation"></i>معاينه</a>
                                     <a  href="{{route('colors.create', $sub_service->id)}}" class="btn btn-primary"><i class="fas fa-map-marker-exclamation"></i>اضافة لون</a>
                                     <a  href="{{route('sub_services.edit', [$sub_service->service_id, $sub_service->id])}}" class="btn btn-warning"><i class="fas fa-edit"></i>تعديل</a>
 
@@ -61,7 +65,6 @@
                 </table>
             @else
                 <h1>لا يوجد اقسام خدمات مضافه</h1>
-                <a href="/sub_services/add" class="btn btn-warning">اضافة قسم خدمه</a>
             @endif
             </div>
             <div class="bg-light">

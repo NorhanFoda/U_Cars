@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Client_Request;
 use App\Model\Client;
 use App\Model\Sub_service;
+use App\Model\Service;
 use App\Model\Color;
 use App\Model\Image;
 use App\Model\Class_cat;
@@ -50,11 +51,13 @@ class ClientRequestController extends Controller
         $dataItem->client = Client::find($request->client_id);
         $dataItem->image = Image::find($request->image_id);
         $dataItem->sub_service = Sub_service::find($request->sub_service_id);
+        $dataItem->service = Service::find($dataItem->sub_service->service_id);
         $dataItem->color = Color::find($request->color_id);
         $dataItem->class = Class_cat::find($request->class_id);
         $dataItem->class_type = Class_type::where(['class_cat_id'=> $request->class_id, 'sub_service_id' => $request->sub_service_id])->get();
         $dataItem->free_service = Free_service::find($request->free_service_id);
         $dataItem->price = $request->price;
+        $dataItem->discount = $request->discount;
         $dataItem->discount_request = $request->discount_request;
 
         return view('requests.show')->with('data', $dataItem);
@@ -103,8 +106,18 @@ class ClientRequestController extends Controller
     }
 
     public function getRequestByNo(Request $request){
-        return $request->requestNo;
-        return view('requests.index')->with('data', Client_Request::where('id', $request->id)->get());
+        $client_request = Client_Request::where('id', $request->requestNo)->get();
+        $data = array();
+        if(count($client_request) > 0){
+            foreach($client_request as $client_req){
+                $dataItem = new \stdClass();
+                $dataItem->requestNo = $client_req->id;
+                $dataItem->client = Client::find($client_req->client_id);
+                $dataItem->sub_service = Sub_service::find($client_req->sub_service_id);
+                array_push($data, $dataItem);
+            }
+        }
+        return view('requests.index')->with('data', $data);
     }
 
     public function getDiscounRequests(){

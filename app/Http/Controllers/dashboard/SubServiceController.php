@@ -189,7 +189,23 @@ class SubServiceController extends Controller
      */
     public function show(Service $service,Sub_service $sub_service)
     {
-        return view('sub_services.show')->with('sub_service', $sub_service);
+        $types = Class_type::where('sub_service_id', $sub_service->id)->get();
+        // return $types;
+        $classes = array();
+        if(count($types) > 0){
+            foreach ($types as $type) {
+                array_push($classes, Class_cat::find($type->class_cat_id));
+            }
+        }
+
+        $data = [
+            'service' => $service,
+            'sub_service' => $sub_service,
+            'colors' => $sub_service->colors,
+            'types' => $types,
+            'classes' => array_unique($classes)
+        ];
+        return view('sub_services.show')->with($data);
     }
 
     /**
