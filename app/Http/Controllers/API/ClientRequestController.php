@@ -106,6 +106,30 @@ class ClientRequestController extends Controller
           return response()->json(['code' => 200,'message' => 'success','data' => []]);
 
         }
-  }
+    }
+
+
+   public function change_image($request_id,Request $request){
+
+          $check_request=Client_Request::where('id',$request_id)->find($request_id);
+          if(empty($check_request)){
+               return response()->json(['code' => 404,'message' => 'not found','data' => []]);
+          }else{
+               $image=Client_Request::where('id', $request_id)->update(array('image_id' => $request->image_id));
+               return response()->json(['code' => 200,'message' => 'success','data' => $image]);
+
+          }
+    }
+
+
+    //search image  by code
+   public function search_image(Request $request){
+        $code=$request->code;
+        $image = Image::where('code',$code)->get();
+        if(count($image) > 0){
+          $data=Client_Request::where('image_id', $image->id)->get();
+
+        }
+   }
 
 }

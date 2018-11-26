@@ -32,5 +32,9 @@ class Sub_service extends Model
         return $this->hasMany(Client_Request::class);
     }
 
-    
+    public function images(){
+        return $this->hasMany(Image::class);
+    }
+
+
 }

@@ -54,4 +54,5 @@ class ColorsController extends Controller
                  return response()->json(['code' => 200,'message' => 'success','data' => $image]);
               }
         }
+
 }

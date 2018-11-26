@@ -48,4 +48,6 @@ Route::post('request/{id}/discountrequest', 'API\ClientRequestController@discoun
 
 Route::get('requests', 'API\ClientRequestController@get_orders');
 
-Route::delete('request/{id}','API\ClientRequestController@delete_order');    
+Route::delete('request/{id}','API\ClientRequestController@delete_order');
+
+Route::put('request/{id}/image','API\ClientRequestController@change_image');    
