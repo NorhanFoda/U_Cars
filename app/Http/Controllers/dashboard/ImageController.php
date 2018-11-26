@@ -4,6 +4,7 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Model\Image;
 use App\Model\Color;
+use App\Model\Sub_service;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageRequest;
@@ -27,14 +28,22 @@ class ImageController extends Controller
      */
     public function create(Color $color)
     {
-        return view('images.create')->with('color', $color);
+        $data = [
+            'color' => $color,
+            'sub_services' => Sub_service::all()
+        ];
+        return view('images.create')->with($data);
     }
 
     public function AddImages(){
-        return view('images.addImages')->with('colors', Color::all());
+        $data = [
+            'colors' => Color::all(),
+            'sub_services' => Sub_service::all()
+        ];
+        return view('images.addImages')->with($data);
     }
 
-    public function SaveAddedImages(){
+    public function SaveAddedImages(ImageRequest $request){
         $image = new Image;
         $image->price = $request->price;
         $image->code = $request->code;
@@ -51,6 +60,7 @@ class ImageController extends Controller
             $fileNameToStore = 'noimage.jpg';
         }
         $image->name = $fileNameToStore;
+        $image->sub_service_id = $request->selectedSubService;
 
         $image->save();
 
@@ -69,6 +79,7 @@ class ImageController extends Controller
         $image->price = $request->price;
         $image->code = $request->code;
         $image->color_id = $color->id;
+        $image->sub_service_id = $request->selectedSubService;
 
         //Handle image uploading
         if($request->hasFile('name')){

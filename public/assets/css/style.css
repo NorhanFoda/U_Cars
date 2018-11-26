@@ -554,4 +554,198 @@ a:hover
     font-size: 27px;
     margin-top: 13px;
 
+} 
+
+.preview
+{
+    margin-bottom: 51px;
+}
+
+
+.preview h1
+{
+    font-size: 41px;
+    margin-top: 35px;
+    margin-bottom: 6px;
+}
+
+.preview hr {
+    top: 1px;
+    margin-bottom: 20px;
+    border: 0;
+    margin-top: 3px;
+    margin-right: 0;
+    width: 147px;
+    border-top: 1px solid black;
+    float: right;
+}
+
+
+.Preview-requests h2
+{
+    margin-right: 16px;
+    font-size: 32px;
+}
+
+
+.Preview-requests div
+{
+    margin-bottom: 10px ;
+}
+
+
+.Preview-requests button
+{
+    margin-right: 435px;
+    margin-top: 51px;
+    font-size: 27px;
+    padding: 3px 26px;
+    border-radius: 21px;
+}
+
+
+.previews h1
+{
+    font-size: 41px;
+    margin-top: 35px;
+    margin-bottom: 6px;
+}
+
+.previews hr {
+    top: 1px;
+    margin-bottom: 20px;
+    border: 0;
+    margin-top: 3px;
+    margin-right: 0;
+    width: 79px;
+    border-top: 1px solid black;
+    float: right;
+}
+
+
+
+.previews .photo
+{
+    margin-left: 8px;
+    margin-bottom: 105px;
+}
+
+.previews .photo img
+{
+    margin-right: 398px;
+}
+
+.previews-photo th
+{
+    font-size: 30px;
+}
+
+.previews-photo td
+{
+    font-size: 23px;
+}
+
+.previews-photo .group-buttons 
+{
+    text-align: center;
+    margin-left: 176px;
+    margin-top: 74px;
+}
+
+.previews-photo .group-buttons button
+{
+    font-size: 22px;
+    border-radius: 11px;
+    padding: 5px 18px;
+    margin-right: 13px;
+}
+
+
+/*jgjgh*/
+
+.previewservice h1
+{
+    font-size: 41px;
+    margin-top: 35px;
+    margin-bottom: 6px;
+}
+
+.previewservice hr {
+    top: 1px;
+    margin-bottom: 20px;
+    border: 0;
+    margin-top: 3px;
+    margin-right: 0;
+    width: 79px;
+    border-top: 1px solid black;
+    float: right;
+}
+
+
+
+.previewservice .photo
+{
+    margin-left: 8px;
+    margin-bottom: 105px;
+}
+
+.previewservice h2 
+{
+    font-size: 40px;
+    margin-bottom: 38px;
+}
+
+.previewservice .photo img
+{
+    margin-right: 162px;
+}
+.previewservice .color
+{
+    margin-bottom: 16px;
+}
+
+
+.previews-service h2
+{
+    margin-right: 61px;
+    font-size: 42px;
+    margin-top: 92px;
+}
+
+
+.previews-service div
+{
+    margin-bottom: 55px;
+}
+
+
+.previews-service div button
+{
+    font-size: 22px;
+    border-radius: 11px;
+    padding: 5px 18px;
+    margin-right: 13px;
+}
+
+.previews-service div th
+{
+    font-size: 29px;
+}
+
+
+.previews-service div td
+{
+    font-size: 20px;
+}
+.previews-service div .group-buttons
+{
+    margin-right: 372px;
+    margin-top: 67px;
+}
+
+
+.tables td
+{
+    font-size: 24px;
+    width: 222px;
 }

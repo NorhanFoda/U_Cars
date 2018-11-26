@@ -5,6 +5,15 @@
     <div class="service">
         <div class="container">
             <h1 style="float:right;">طلبات العملاء</h1>
+            <form action="/requests/search" method="POST">
+                @csrf
+                <label>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i>بحث برقم الطلب
+                    </button>
+                </label>
+                <input type="text" name="requestNo" class="form-control" placeholder="ادخل رقم الطلب">
+            </form>
         </div>
     </div>
     

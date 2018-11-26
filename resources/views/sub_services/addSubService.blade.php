@@ -87,12 +87,12 @@
                                 @endif
                                 @foreach($classes as $class)
                                     <div>
+                                        <div class="col-md-12">
+                                            <input type="checkbox" name="classes[]" value="{{$class->id}}" > <label for="">{{$class->name}}</label>
+                                        </div>
                                         @if(count($types) > 0)
                                             @foreach($types as $type)
                                                 @if($type->class_cat_id === $class->id && $type->sub_service_id === null)
-                                                    <div class="col-md-12">
-                                                        <input type="checkbox" name="classes[]" value="{{$class->id}}" > <label for="">{{$class->name}}</label>
-                                                    </div>
                                                     <div class="col-md-12 service">
                                                         <div>{{ $type->name }}</div>
                                                         <div class="col-md-3">

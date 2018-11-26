@@ -7,6 +7,21 @@
                 <div class="col-md-8 services">
                     <h1>اضافة صور</h1>
                 </div>
+                <div class="col-md-8 services">
+                    <h3>اختر قسم الخدمه</h3>
+                </div>
+                @if(count($sub_services) > 0)
+                    <div class="col-md-8 select-text"> 
+                        <select class="form-control" name="selectedSubService">
+                            @foreach($sub_services as $sub_service)
+                                <option value="{{$sub_service->id}}">{{$sub_service->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @else
+                    <h2>لا يوجد اقسام خدمات مضافة </h2>
+                    <a href="/sub_services/add" class="btn btn-warning">اضف قسم خدمه</a>
+                @endif
                 <div class="col-md-8 Services-text"> 
                     <div class="form-group">
                         <label for="code"><h2>الكود</h2></label>
