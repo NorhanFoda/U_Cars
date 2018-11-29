@@ -41,7 +41,7 @@
                                 </td>
                                 <td>
                                     {{-- <a  href="{{route('services.show', $service->id)}}" class="btn btn-info"><i class="fas fa-map-marker-exclamation"></i>معاينه</a> --}}
-                                    <a  href="/services/{{$service->id}}/sub_services" class="btn btn-warning"><i class="fas fa-users"></i>عرض اقسام الخدمه</a>
+                                    <a  href="/public/services/{{$service->id}}/sub_services" class="btn btn-warning"><i class="fas fa-users"></i>عرض اقسام الخدمه</a>
                                     <a  href="{{route('sub_services.create', $service->id)}}" class="btn  btn-primary"><i class="fas fa-plus"></i>اضافة قسم</a>
                                     <a  href="{{route('services.edit', $service->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i>تعديل</a>
 

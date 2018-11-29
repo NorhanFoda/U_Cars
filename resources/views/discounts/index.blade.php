@@ -39,7 +39,7 @@
                                     <h4>{{ $item->client->name }}</h4>
                                 </td>
                                 <td>
-                                    <h4>{{ $item->sub_service->service->name }}</h4>
+                                    <h4>{{ $item->service->name }}</h4>
                                 </td>
                                 <td>
                                     <h4>{{ $item->requests_count }}</h4>

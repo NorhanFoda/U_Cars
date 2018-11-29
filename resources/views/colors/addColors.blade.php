@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <form action="/colors/save" method="POST">
+        <form action="/public/colors/save" method="POST">
             @csrf
             <div class="row">
                 <div class="col-md-8 services">

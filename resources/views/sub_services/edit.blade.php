@@ -7,12 +7,12 @@
     <div class="row">
         <div class="servicesColors">
             <div class="add">
-                <form action="{{ route('sub_services.update', [$sub_service->service->id, $sub_service->id]) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('sub_services.update', [$service->id, $sub_service->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="row">
                         <div class="col-md-8 services">
-                            <h1>تعديل قسم {{$sub_service->name}} فى خدمة ({{$sub_service->service->name}})</h1>
+                            <h1>تعديل قسم {{$sub_service->name}} فى خدمة ({{$service->name}})</h1>
                             <hr>
                         </div>
                         <div class="col-md-8 Services-text"> 

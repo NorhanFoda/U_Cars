@@ -31,13 +31,13 @@
                                     <h4>{{ $class->name }}</h4>
                                 </td>
                                 <td>
-                                    <a  href="/classes/{{$class->id}}/class_types" class="btn btn-warning"><i class="fas fa-users"></i>عرض انواع الفئه</a>
+                                    <a  href="/public/classes/{{$class->id}}/class_types" class="btn btn-warning"><i class="fas fa-users"></i>عرض انواع الفئه</a>
                                     <form 
                                         action="ClassTypeController@postClassTypeForClass" 
                                         method="POST"
                                         style="display:inline-block;">
                                     @csrf
-                                        <a  href="classes/{{$class->id}}/class_types/create" class="btn  btn-primary"><i class="fas fa-plus"></i>اضافة نوع للفئه</a>
+                                        <a  href="/public/classes/{{$class->id}}/class_types/create" class="btn  btn-primary"><i class="fas fa-plus"></i>اضافة نوع للفئه</a>
                                     </form>
                                     <a  href="{{route('classes.edit', $class->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i>تعديل</a>
 

@@ -64,7 +64,7 @@ class ImageController extends Controller
 
         $image->save();
 
-        return redirect()->back()->with('success', 'تمت اضافة الصوره بنجاح');
+        return redirect('/public/images')->with('success', 'تمت اضافة الصوره بنجاح');
     }
 
     /**
@@ -95,7 +95,7 @@ class ImageController extends Controller
 
         $image->save();
 
-        return redirect('/colors')->with('success', 'تمت اضافة الصوره بنجاح');
+        return redirect('/public/colors')->with('success', 'تمت اضافة الصوره بنجاح');
     }
 
     /**
@@ -152,7 +152,7 @@ class ImageController extends Controller
 
         $image->save();
         
-        return redirect('/images')->with('success', 'تم تعديل الصوره بنجاح');
+        return redirect('/public/images')->with('success', 'تم تعديل الصوره بنجاح');
     }
 
     /**
@@ -165,7 +165,7 @@ class ImageController extends Controller
     {
         $image->delete();
 
-        return redirect('/images')->with('success', 'تم مسح الصوره بنجاح');
+        return redirect('/public/images')->with('success', 'تم مسح الصوره بنجاح');
     }
 
     public function getAllImages(){

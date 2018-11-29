@@ -24,7 +24,9 @@ class Class_typeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:class_types'
+            'name' => 'required|unique:class_types',
+            'price' => 'integer',
+            'discount' => 'integer'
         ];
     }
 }

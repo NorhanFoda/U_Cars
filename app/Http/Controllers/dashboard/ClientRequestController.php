@@ -15,6 +15,8 @@ use App\Model\Class_cat;
 use App\Model\Class_type;
 use App\Model\Free_service;
 
+use App\Http\Requests\ClientReqRequest;
+
 class ClientRequestController extends Controller
 {
     /**
@@ -32,10 +34,22 @@ class ClientRequestController extends Controller
                 $dataItem->requestNo = $request->id;
                 $dataItem->client = Client::find($request->client_id);
                 $dataItem->sub_service = Sub_service::find($request->sub_service_id);
+                $dataItem->service = Service::find($dataItem->sub_service->service);
                 array_push($data, $dataItem);
             }
+            $data2 = [
+                'data' => $data,
+                'clientName' => Client::find($request->client_id)->name
+            ];
         }
-        return view('requests.index')->with('data', $data);
+        else{
+            $data2 = [
+                'data' => $data,
+                'clientName' => null
+            ];
+        }
+        // return view('requests.index')->with('data', $data);
+        return view('requests.index')->with($data2);
     }
 
     /**
@@ -81,7 +95,7 @@ class ClientRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $client_request_id)
+    public function update(ClientReqRequest $request, $client_request_id)
     {
         $client_request = Client_Request::find($client_request_id);
         $client_request->discount = $request->discount;
@@ -106,18 +120,30 @@ class ClientRequestController extends Controller
     }
 
     public function getRequestByNo(Request $request){
-        $client_request = Client_Request::where('id', $request->requestNo)->get();
+        $found_request = Client_Request::where('id', $request->requestNo)->get();
         $data = array();
-        if(count($client_request) > 0){
-            foreach($client_request as $client_req){
+        if(count($found_request) > 0){
+            foreach($found_request as $req){
                 $dataItem = new \stdClass();
-                $dataItem->requestNo = $client_req->id;
-                $dataItem->client = Client::find($client_req->client_id);
-                $dataItem->sub_service = Sub_service::find($client_req->sub_service_id);
+                $dataItem->requestNo = $req->id;
+                $dataItem->client = Client::find($req->client_id);
+                $dataItem->sub_service = Sub_service::find($req->sub_service_id);
+                $dataItem->service = Service::find($dataItem->sub_service->service);
                 array_push($data, $dataItem);
             }
+            // $data2 = [
+            //     'data' => $data,
+            //     // 'clientName' => Client::find($found_request[0]->client_id)->name
+            // ];
+        }
+        else{
+            // $data2 = [
+            //     'data' => $data,
+            //     'clientName' => null
+            // ];
         }
         return view('requests.index')->with('data', $data);
+        // return view('requests.index')->with($data2);
     }
 
     public function getDiscounRequests(){
@@ -129,6 +155,7 @@ class ClientRequestController extends Controller
                 $dataItem->requestNo = $request->id;
                 $dataItem->client = Client::find($request->client_id);
                 $dataItem->sub_service = Sub_service::find($request->sub_service_id);
+                $dataItem->service = Service::find($dataItem->sub_service->service);
                 $dataItem->requests_count = count(Client::find($request->client_id)->client_requests);
                 array_push($data, $dataItem);
             }

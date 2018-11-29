@@ -3,7 +3,7 @@
         <div class="service">
             <div class="container">
                 <h1 style="float:right;">العملاء</h1>
-                <form action="/clients/search" method="POST">
+                <form action="/public/clients/search" method="POST">
                     @csrf
                     <label>
                         <button type="submit" class="btn btn-primary">
@@ -39,7 +39,14 @@
                                     {{$client->phone}}
                                 </td>
                                 <td>
-                                    <a href="/clients/{{$client->id}}/requests" class="btn btn-info"><i class="fas fa-map-marker-exclamation"></i>عرض الطلبات</button>
+                                    <a href="/public/clients/{{$client->id}}/requests" class="btn btn-info"><i class="fas fa-map-marker-exclamation"></i>عرض الطلبات</a>
+                                    <form action="/public/clients/deleteClient/{{$client->id}}" 
+                                        method="POST" 
+                                        style="display:inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

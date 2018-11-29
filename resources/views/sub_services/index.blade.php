@@ -4,12 +4,13 @@
             <div class="service">
                 <div class="container">
                     <a 
-                        href="/sub_services/add" 
+                        href="/public/sub_services/add" 
                         class="btn btn-warning"
                         style="float:left;">اضافة قسم خدمه</a>
-                    @if(Route::getFacadeRoot()->current()->uri() !== 'sub_services')
+                    @if(Route::getFacadeRoot()->current()->uri() !== 'public/sub_services')
+                        <h1 style="float:right;">اقسام الخدمات</h1>
                         @if(count($sub_services) > 0)
-                            <h2 style="float:right;">عرض اقسام الخدمات لخدمة ( {{ $sub_services[0]->service->name }} )</h2>
+                            <h2 style="float:right;">عرض اقسام الخدمات لخدمة ( {{ $service->name }} )</h2>
                         @endif
                     @else
                         <h1 style="float:right;">اقسام الخدمات</h1>
@@ -45,7 +46,7 @@
                                         style="max-height:20%;">
                                 </td>
                                 <td>
-                                    <a  href="/sub_services/{{$sub_service->id}}/colors" class="btn btn-warning"><i class="fas fa-users"></i>عرض الوان الخدمه</a>
+                                    <a  href="/public/sub_services/{{$sub_service->id}}/colors" class="btn btn-warning"><i class="fas fa-users"></i>عرض الوان الخدمه</a>
                                     <a  href="{{route('sub_services.show', [$sub_service->service_id, $sub_service->id])}}" class="btn btn-info"><i class="fas fa-map-marker-exclamation"></i>معاينه</a>
                                     <a  href="{{route('colors.create', $sub_service->id)}}" class="btn btn-primary"><i class="fas fa-map-marker-exclamation"></i>اضافة لون</a>
                                     <a  href="{{route('sub_services.edit', [$sub_service->service_id, $sub_service->id])}}" class="btn btn-warning"><i class="fas fa-edit"></i>تعديل</a>

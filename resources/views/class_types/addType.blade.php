@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <form action="/classe_types/save" method="POST">
+        <form action="/public/classe_types/save" method="POST">
             @csrf
             <div class="row">
                 <div class="col-md-8 services">
@@ -21,7 +21,7 @@
                         </div>
                     @else
                         <h2>لا يوجد فئات مضافه</h2>
-                        <a href="/classes/add" class="btn btn-warning">اضف فئه</a>
+                        <a href="/public/classes/add" class="btn btn-warning">اضف فئه</a>
                     @endif
                 </div>
                 <div class="col-md-8 Services-text"> 

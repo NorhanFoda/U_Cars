@@ -48,7 +48,7 @@ class ColorController extends Controller
 
         $color->save();
 
-        return redirect('/colors')->with('success', 'تمت اضافة اللون بنجاح');
+        return redirect('/public/colors')->with('success', 'تمت اضافة اللون بنجاح');
     }
     /**
      * Store a newly created resource in storage.
@@ -66,7 +66,7 @@ class ColorController extends Controller
         $sub_service->colors()->attach($color->id);
         
 
-        return redirect('/sub_services')->with('success', 'تمت اضافة لون للخدمه بنجاح');
+        return redirect('/public/sub_services')->with('success', 'تمت اضافة لون للخدمه بنجاح');
     }
 
     /**
@@ -107,7 +107,17 @@ class ColorController extends Controller
     {
         $color->update($request->all());
 
-        return redirect()->route('colors.index')->with('success', 'تم تعديل اللون بنجاح');
+        return redirect('/public/colors')->with('success', 'تم تعديل اللون بنجاح');
+    }
+
+    public function editColors(Color $color){
+        return view('colors.editColor')->with('color', $color);
+    }
+
+    public function updateColors(ColorRequest $request, Color $color){
+        $color->update($request->all());
+        
+        return redirect('/public/colors')->with('success', 'تم تعديل اللون بنجاح');
     }
 
     /**
@@ -120,7 +130,13 @@ class ColorController extends Controller
     {
         $color->delete();
 
-        return redirect('/colors')->with('success', 'تم مسح اللون بنجاح');
+        return redirect('/public/colors')->with('success', 'تم مسح اللون بنجاح');
+    }
+
+    public function deleteColors(Color $color){
+        $color->delete();
+
+        return redirect('/public/colors')->with('success', 'تم مسح اللون بنجاح');
     }
 
     // public function getSubServiceColors($sub_service){

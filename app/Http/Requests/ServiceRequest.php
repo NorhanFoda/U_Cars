@@ -25,8 +25,8 @@ class ServiceRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:services',
-            // 'image' => 'required|image|max:1999'
-            'image' => 'required'
+            'image' => 'required|image|max:1999'
+            // 'image' => 'required'
         ];
     }
 }

@@ -25,7 +25,7 @@
                                         {{$color->name}}
                                     </td>
                                     <td>
-                                        <a  href="/colors/{{$color->id}}/images" class="btn btn-warning"><i class="fas fa-users"></i>عرض الصور</a>
+                                        <a  href="/public/colors/{{$color->id}}/images" class="btn btn-warning"><i class="fas fa-users"></i>عرض الصور</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -1,17 +1,17 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <form action="{{route('colors.update', [$sub_service->id,$color->id])}}" method="POST">
+        <form action="/public/colors/updateColor/{{$color->id}}" method="POST">
             @csrf
             @method('PUT')
             <div class="row">
                 <div class="col-md-8 services">
-                    <h1>اضافة لون</h1>
+                    <h1>تعديل لون</h1>
                 </div>
                 <div class="col-md-8 Services-text"> 
                     <input value="{{$color->name}}" type="text" name="name"  class="form-control">
                     <div class="save">
-                        <button type="submit" class="btn btn-info">حفظ التعديل</button>
+                        <button type="submit" class="btn btn-info">حفظ </button>
                     </div>
                 </div>
             </div>

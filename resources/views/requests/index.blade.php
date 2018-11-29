@@ -5,7 +5,7 @@
     <div class="service">
         <div class="container">
             <h1 style="float:right;">طلبات العملاء</h1>
-            <form action="/requests/search" method="POST">
+            <form action="/public/requests/search" method="POST">
                 @csrf
                 <label>
                     <button type="submit" class="btn btn-primary">
@@ -46,7 +46,7 @@
                                 </td>
                                 <td>
                                     <h4>
-                                        {{ $item->sub_service->service->name }}
+                                        {{ $item->service->name }}
                                     </h4>
                                 </td>
                                 <td>

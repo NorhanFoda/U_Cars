@@ -76,9 +76,15 @@
 				<div class="col-md-5">
 					<h2>الخدمه الاضافيه المجانيه :</h2>
 				</div>
-				<div class="col-md-3">
-					<h3>{{$data->free_service->name}}</h3>
-				</div>
+				@if($data->free_service !== null)
+					<div class="col-md-3">
+						<h3>{{$data->free_service->name}}</h3>
+					</div>
+				@else
+					<div class="col-md-3">
+						<h3>لا توجد خدمات اضافيه مجانيه</h3>
+					</div>
+				@endif
 			</div>
 			<div class="col-md-8">
 				<div class="col-md-3">

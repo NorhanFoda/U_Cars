@@ -7,31 +7,28 @@
                     <a href="{{route('services.index')}}">الخدمات</a>
                 </li>
                 <li>
-                    <a href="/sub_services" id="layout1">اقسام الخدمات</a>
+                    <a href="/public/sub_services" id="layout1">اقسام الخدمات</a>
                 </li>
                 <li>
-                    <a href="/colors">الألوان</a>
+                    <a href="/public/colors">الألوان</a>
                 </li>
                 <li>
-                    <a href="/images">الصور</a>
+                    <a href="/public/images">الصور</a>
                 </li>
                 <li>
-                    <a href="/free_services">الخدمات الأضافيه</a>
+                    <a href="/public/free_services">الخدمات الأضافيه</a>
                 </li>
                 <li>
-                    <a href="/classes">الفئات</a>
+                    <a href="/public/classes">الفئات</a>
                 </li>
                 <li>
-                    <a href="/clients">العملاء</a>
-                </li>
-                {{-- <li>
-                    <a href="/class_types">انواع الفئات</a>
-                </li> --}}
-                <li>
-                    <a href="/requests">طلبات العملاء</a>
+                    <a href="/public/clients">العملاء</a>
                 </li>
                 <li>
-                    <a href="/discount_requests">طلبات الخصم</a>
+                    <a href="/public/requests">طلبات العملاء</a>
+                </li>
+                <li>
+                    <a href="/public/discount_requests">طلبات الخصم</a>
                 </li>
                 <!-- /page kits -->
 

@@ -11,13 +11,13 @@
                     style="float:left;">اضافة صوره</a>
             @else
                 <a 
-                    href="/images/add" 
+                    href="/public/images/add" 
                     class="btn btn-warning"
                     style="float:left;">اضافة صوره</a>
             @endif
             <h1 style="float:right;">الصور</h1>
             {{-- @if(Route::getFacadeRoot()->current()->uri() === 'images')
-                <a href="/images/create" class="btn btn-warning" style="float:left;">اضافة صوره</a>
+                <a href="/public/images/create" class="btn btn-warning" style="float:left;">اضافة صوره</a>
             @endif --}}
         </div>
     </div>
@@ -59,7 +59,7 @@
                                     <h4>{{ $image->color->name }}</h4>
                                 </td>
                                 <td>
-                                    <h4>{{ $image->sub_service->name }}</h4>
+                                    <h4>{{ $image->subservice->name }}</h4>
                                 </td>
                                 <td>
                                     <h4>{{ $image->code }}</h4>

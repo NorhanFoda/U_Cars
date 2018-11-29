@@ -6,7 +6,7 @@
     <div class="row">
         <div class="servicesColors">
             <div class="add">
-                <form action="/sub_services/save" method="POST" enctype="multipart/form-data">
+                <form action="/public/sub_services/save" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-8 services">
@@ -71,7 +71,7 @@
                             </div>
                         @else
                             <h2>لا يوجد الوان مضافه لهذه الخدمه</h2>
-                            <a href="/colors/add" class="btn btn-warning">اضف الوان</a>
+                            <a href="/public/colors/add" class="btn btn-warning">اضف الوان</a>
                         @endif
                         @if(count($classes) > 0)
                             <div class="col-md-12 categorie">
@@ -82,7 +82,7 @@
                                             <input type="checkbox" name="classes[]" value="{{$class->id}}" > <label for="">{{$class->name}}</label>
                                         </div>
                                         <h4>لا توجد انواع مضافه لهذه الفئه</h4>
-                                        <a href="/classe_types/add" class="btn btn-warning">اضف نوع</a>
+                                        <a href="/public/classe_types/add" class="btn btn-warning">اضف نوع</a>
                                     @endforeach
                                 @endif
                                 @foreach($classes as $class)

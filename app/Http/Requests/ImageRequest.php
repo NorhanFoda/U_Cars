@@ -25,7 +25,8 @@ class ImageRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'code' => 'required|unique:images'
+            'code' => 'required|unique:images',
+            'price' => 'integer|nullable'
         ];
     }
 }

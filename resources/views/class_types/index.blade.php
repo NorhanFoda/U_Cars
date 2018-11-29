@@ -42,7 +42,7 @@
                 </table>
             @else
                 <h1>لا توجد انواع مضافه</h1>
-                <a href="{{ route('class_types.create',explode("/",URL::current())[4]) }}" class="btn btn-warning">اضافة نوع</a>
+                <a href="{{ route('class_types.create',explode("/",URL::current())[5]) }}" class="btn btn-warning">اضافة نوع</a>
             @endif
             </div>
             <div class="bg-light">

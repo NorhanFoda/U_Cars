@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <form action="/images/save" method="POST" enctype="multipart/form-data">
+        <form action="/public/images/save" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-md-8 services">
@@ -21,7 +21,7 @@
                         </div>
                     @else
                         <h2>لا يوجد الوان مضافة </h2>
-                        <a href="/colors/add" class="btn btn-warning">اضف لون</a>
+                        <a href="/public/colors/add" class="btn btn-warning">اضف لون</a>
                     @endif
                 </div>
                 <div class="col-md-8 services">
@@ -37,7 +37,7 @@
                     </div>
                 @else
                     <h2>لا يوجد اقسام خدمات مضافة </h2>
-                    <a href="/sub_services/add" class="btn btn-warning">اضف قسم خدمه</a>
+                    <a href="/public/sub_services/add" class="btn btn-warning">اضف قسم خدمه</a>
                 @endif
                 <div class="col-md-8 Services-text"> 
                     <div class="form-group">

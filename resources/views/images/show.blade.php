@@ -35,7 +35,7 @@
                             {{$image->color->name}}
                         </td>
                         <td>
-                            {{$image->sub_service->name}}
+                            {{$image->subservice->name}}
                         </td>
                         <td>
                             {{$image->code}}

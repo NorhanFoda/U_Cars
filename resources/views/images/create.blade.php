@@ -20,7 +20,7 @@
                     </div>
                 @else
                     <h2>لا يوجد اقسام خدمات مضافة </h2>
-                    <a href="/sub_services/add" class="btn btn-warning">اضف قسم خدمه</a>
+                    <a href="/public/sub_services/add" class="btn btn-warning">اضف قسم خدمه</a>
                 @endif
                 <div class="col-md-8 Services-text"> 
                     <div class="form-group">

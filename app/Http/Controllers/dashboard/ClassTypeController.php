@@ -46,7 +46,7 @@ class ClassTypeController extends Controller
         $class_type->class_cat_id = $request->selectedClass;
         $class_type->save();
 
-        return redirect('/classes')->with('success', 'تمت اضافة النوع بنجاح');
+        return redirect('/public/classes')->with('success', 'تمت اضافة النوع بنجاح');
     }
 
 
@@ -75,7 +75,7 @@ class ClassTypeController extends Controller
         $class_type->class_cat_id = $class_cat_id;
         $class_type->save();
 
-        return redirect('/classes')->with('success', 'تمت اضافة النوع بنجاح');
+        return redirect('/public/classes')->with('success', 'تمت اضافة النوع بنجاح');
     }
     /**
      * Display the specified resource.
@@ -123,7 +123,7 @@ class ClassTypeController extends Controller
         $class_type = Class_type::find($class_type_id);
         $class_type->update($request->all());
 
-        return redirect('/classes')->with('success', 'تم تعديل النوع بنجاح');
+        return redirect('/public/classes')->with('success', 'تم تعديل النوع بنجاح');
     }
 
     /**
@@ -135,7 +135,7 @@ class ClassTypeController extends Controller
     public function destroy($class_cat_id, $class_type_id)
     {
         Class_type::find($class_type_id)->delete();
-        return redirect('/classes')->with('success', 'تم مسح النوع بنجاح');
+        return redirect('/public/classes')->with('success', 'تم مسح النوع بنجاح');
     }
 
     public function deleteClassTypeForService($sub_service_id, $class_cat_id, $class_type_id){

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Client;
 use App\Model\Client_Request;
 use App\Model\Sub_service;
+use App\Model\Service;
 use App\Model\Color;
 use App\Model\Image;
 use App\Model\Class_cat;
@@ -30,6 +31,7 @@ class ClientController extends Controller
                 $dataItem->client = Client::find($request->client_id);
                 $dataItem->image = Image::find($request->image_id);
                 $dataItem->sub_service = Sub_service::find($request->sub_service_id);
+                $dataItem->service = Service::find($dataItem->sub_service->service);
                 $dataItem->color = Color::find($request->color_id);
                 $dataItem->class_type = Class_type::find($request->classtype_id);
                 $dataItem->class = Class_cat::where('id', $dataItem->class_type->class_cat_id)->get();
@@ -40,11 +42,17 @@ class ClientController extends Controller
                 array_push($data, $dataItem);
             }
         }
+        
         return view('clients.requests')->with('data', $data);
     }
 
     public function getClientByPhone(Request $request){
         return view('clients.index')->with('clients', Client::where('phone', $request->phone)->get());
+    }
+
+    public function deleteClients(Client $client){
+        $client->delete();
+        return redirect('/public/clients')->with('success', 'تم مسح العميل بنجاح');
     }
 
 }
