@@ -42,8 +42,15 @@ class ClassTypeController extends Controller
 
     public function SaveAddedType(Class_typeRequest $request){
         $class_type = new Class_type;
-        $class_type->name = $request->name;
-        $class_type->class_cat_id = $request->selectedClass;
+        
+        if($request->name !== null && $request->selectedClass !== null){
+            $class_type->name = $request->name;
+            $class_type->class_cat_id = $request->selectedClass;
+        }
+        else{
+            return redirect()->back()->with('error', 'برجاء اختيار الفئه و ادخال النوع');    
+        }
+        
         $class_type->save();
 
         return redirect('/public/classes')->with('success', 'تمت اضافة النوع بنجاح');

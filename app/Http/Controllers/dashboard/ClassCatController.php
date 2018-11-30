@@ -40,7 +40,13 @@ class ClassCatController extends Controller
     public function store(Class_catRequest $request)
     {
         $class = new Class_cat;
-        $class->name = $request->name;
+        if($request->name !== null){
+            $class->name = $request->name;
+        }
+        else{
+            return redirect()->back()->with('error', 'برجاء ادخال اسم الفئه');    
+        }
+        
         $class->save();
 
         return redirect()->route('classes.index')->with('success', 'تمت اضافة الفئه بنجاح');
@@ -79,7 +85,12 @@ class ClassCatController extends Controller
     {
         $class = Class_cat::find($class_cat_id);
 
-        $class->update($request->all());
+        if($request->name !== null){
+            $class->update($request->all());
+        }
+        else{
+            return redirect()->back()->with('error', 'برجاء ادخال اسم الفئه');    
+        }
 
         return redirect()->route('classes.index')->with('success', 'تم تعديل لافئه بنجاح');
     }

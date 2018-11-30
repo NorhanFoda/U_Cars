@@ -749,3 +749,396 @@ a:hover
     font-size: 24px;
     width: 222px;
 }
+
+
+.Services-text .save {
+    margin-top: 17px;
+    margin-right: 0;
+}
+.Services-text {
+    text-align: center;
+    margin-right: 0;
+    margin-top: 68px;
+}
+/* start media Query */
+
+
+@media (min-width:226px) and (max-width:499px)
+{
+    
+
+    .services h1 {
+        font-size: 52px;
+        margin-right: 24px;
+    }
+    .Services-text .save button
+    {
+        position: relative;
+        left: 267px;        
+    }
+
+    .Services-text {
+        margin-right: 0;
+        float: none;
+    }
+    
+    .service h1 {
+        overflow: initial;
+        float: left;
+        font-size: 54px;
+        margin-left: 0;
+    }
+    .Services-text .saves button {
+        padding: 5px 39px;
+        font-size: 27px;
+        margin-left: 112px;
+        margin-top: 13px;
+        margin-right: -99px;
+    }
+
+
+    .Services-text input {
+        margin-right: 0;
+    }
+    .previews .photo img {
+        margin-right: 0;
+    }
+    .previewservice .photo img {
+        margin-right: 0;
+    }
+    .group-buttons button
+    {
+        position: relative;
+        left: 349px;
+    }
+
+    .group-buttons .btn-danger
+    {
+        position: relative;
+        left: 200px;
+        bottom: 47px;
+    }
+    .Preview-requests button {
+        margin-right: 0;
+    }
+    .group-buttons button {
+        position: relative;
+        left: 0;
+    }
+}
+
+
+@media (min-width:500px) and (max-width:599px)
+{
+
+    .Services-text label
+    {
+        margin-left: 133px;
+    }
+    .services h1 {
+        font-size: 52px;
+        margin-right: 24px;
+    }
+
+    .Services-text {
+        margin-right: 0;
+        float: none;
+    }
+    
+    .service h1 {
+        overflow: initial;
+        float: left;
+        font-size: 54px;
+        margin-left: 0;
+    }
+    .Services-text .save button {
+        position: relative;
+        left: 188px;    
+    }
+
+
+    .Services-text input {
+        margin-right: 0;
+    }
+    .previews .photo img {
+        margin-right: 0;
+    }
+    .previewservice .photo img {
+        margin-right: 0;
+    }
+    .group-buttons button
+    {
+        position: relative;
+        left: 258px;
+    }
+
+    .group-buttons .btn-danger
+    {
+        position: relative;
+        left: 131px;
+        bottom: 44px;
+    }
+    .Preview-requests button {
+        margin-right: 0;
+    }
+    .group-buttons button {
+        position: relative;
+        left: 0;
+    }
+}
+
+
+@media (min-width:600px) and (max-width:760px)
+{
+    .Services-text label
+    {
+        margin-left: 133px;
+    }
+    .services h1 {
+        font-size: 52px;
+        margin-right: 24px;
+    }
+    .service h1 {
+        overflow: initial;
+        float: left;
+        font-size: 54px;
+        margin-left: 0;
+    }
+    .previews .photo img {
+        margin-right: 0;
+    }
+
+    .Services-text {
+        margin-right: 0;
+        float: none;
+        }
+    .Services-text .saves button {
+        padding: 5px 39px;
+        font-size: 27px;
+        margin-left: 112px;
+        margin-top: 13px;
+        margin-right: -229px;
+    }
+
+    .Services-text .save button {
+        position: relative;
+        left: 188px;    
+    }
+    .Services-text input {
+        margin-right: 0;
+    }
+    .previewservice .photo img {
+        margin-right: 0;
+    }
+    .group-buttons button
+    {
+        position: relative;
+        left: 238px;
+    }
+
+    .group-buttons .btn-danger
+    {
+        position: relative;
+        left: 82px;
+        bottom: 45px;;
+    }
+    .Preview-requests button {
+        margin-right: 0;
+    }
+    .group-buttons button {
+        position: relative;
+        left: 0;
+    }
+}
+@media (min-width:660px) and (max-width:729px)
+{
+    .group-buttons button
+    {
+        position: relative;
+        left: 238px;
+    }
+
+    .group-buttons .btn-danger
+    {
+        position: relative;
+        left: 82px;
+        bottom: 0;
+    } 
+}
+
+@media (min-width:730px) and (max-width:770px)
+{
+    .Services-text label
+    {
+        margin-left: 133px;
+    }
+    .services h1 {
+        font-size: 52px;
+        margin-right: 24px;
+    }
+    .Services-text {
+        margin-right: 0;
+        float: none;
+        }
+    .Services-text .saves button {
+        padding: 5px 39px;
+        font-size: 27px;
+        margin-left: 112px;
+        margin-top: 13px;
+        margin-right: -229px;
+    }
+
+    .previews .photo img {
+        margin-right: 0;
+    }
+
+    .service h1 {
+        overflow: initial;
+        float: left;
+        font-size: 54px;
+        margin-left: 0;
+    }
+    .Services-text .save button {
+        position: relative;
+        left: 188px;    
+    }
+    .Services-text input {
+        margin-right: 0;
+    }
+    .previewservice .photo img {
+        margin-right: 0;
+    }
+    .group-buttons button
+    {
+        position: relative;
+        left: 230px;
+    }
+
+    .group-buttons .btn-danger
+    {
+        position: relative;
+        left: 200px;
+        bottom: 0;
+    }
+    .Preview-requests button {
+        margin-right: 0;
+    }
+    .group-buttons button {
+        position: relative;
+        left: 0;
+    }
+}
+
+@media (min-width:770px) and (max-width:1200px)
+{
+
+    .services
+    {
+        display: block;
+    }
+    .Services-text label
+    {
+        margin-left: 133px;
+    }
+    .services h1 {
+        font-size: 52px;
+        margin-right: 24px;
+    }
+
+    .Services-text {
+        margin-right: 0;
+        float: none;
+        }
+    .Services-text .saves button {
+        padding: 5px 39px;
+        font-size: 27px;
+        margin-left: 112px;
+        margin-top: 13px;
+        margin-right: -229px;
+    }
+
+    .previews .photo img {
+        margin-right: 0;
+    }
+    .service h1 {
+        overflow: initial;
+        float: left;
+        font-size: 54px;
+        margin-left: 0;
+    }
+    .Services-text button {
+        margin-left: 0;
+    }
+    .Services-text .save button {
+        position: relative;
+        left: 188px;    
+    }
+    .Services-text input {
+        margin-right: 0;
+    }
+    .previewservice .photo img {
+        margin-right: 0;
+    }
+    .group-buttons button
+    {
+        position: relative;
+        left: 349px;
+    }
+
+    .group-buttons .btn-danger
+    {
+        position: relative;
+        left: 200px;
+        bottom: 47px;
+    }
+    .Preview-requests button {
+        margin-right: 0;
+    }
+    .group-buttons button {
+        position: relative;
+        left: 0;
+    }
+}
+
+
+@media (min-width: 769px)and (max-width:849px)
+{
+
+    .container {
+        width: 492px;
+    }
+    
+}
+
+
+@media (min-width: 849px)and (max-width:1200px)
+{
+
+    .container {
+        width: 594px;
+    }
+    
+}
+
+
+
+@media (min-width: 1200px)and (max-width:1300px)
+{
+
+    .container {
+        width: 864px;
+    }
+    
+}
+
+
+
+@media (min-width: 1300px)and (max-width:1500px)
+{
+
+    .container {
+        width: 1157px;
+    }
+    
+}
+/* end media Query */

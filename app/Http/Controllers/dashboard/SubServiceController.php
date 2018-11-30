@@ -100,7 +100,7 @@ class SubServiceController extends Controller
         //add class_types
         if($request->classes !== null){
             foreach($request->classes as $class){
-                $type_names = Class_type::where('class_cat_id', $class)->get(); 
+                $type_names = Class_type::where('class_cat_id', $class)->where('sub_service_id', null)->get(); 
                 foreach($type_names as $type_name){
                     $type = new Class_type;
                     $type->class_cat_id = $class;
@@ -167,7 +167,7 @@ class SubServiceController extends Controller
         //add class_types
         if($request->classes !== null){
             foreach($request->classes as $class){
-                $type_names = Class_type::where('class_cat_id', $class)->get(); 
+                $type_names = Class_type::where('class_cat_id', $class)->where('sub_service_id', null)->get(); 
                 foreach($type_names as $type_name){
                     $type = new Class_type;
                     $type->class_cat_id = $class;

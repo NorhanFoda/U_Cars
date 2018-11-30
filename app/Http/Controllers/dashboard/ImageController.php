@@ -60,7 +60,13 @@ class ImageController extends Controller
             $fileNameToStore = 'noimage.jpg';
         }
         $image->name = $fileNameToStore;
-        $image->sub_service_id = $request->selectedSubService;
+        
+        if($request->selectedSubService !== null){
+            $image->sub_service_id = $request->selectedSubService;
+        }
+        else{
+            return redirect()->back()->with('error', 'برجاء اختيار قسم الخدمه');    
+        }
 
         $image->save();
 
