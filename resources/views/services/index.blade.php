@@ -49,6 +49,8 @@
                                         method="POST" 
                                         enctype="multipart/form-data"
                                         style="display:inline-block;">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE')}} 
                                     @csrf
                                     @method('DELETE')
                                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>

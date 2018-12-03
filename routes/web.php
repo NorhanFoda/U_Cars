@@ -18,7 +18,7 @@ Route::group(['prefix' => 'public'], function(){
     });
     
     //services routes
-    Route::resource('/', 'dashboard\ServiceController');
+    Route::get('/', 'dashboard\ServiceController@index');
     Route::resource('/services', 'dashboard\ServiceController');
     
     //sub_services routes

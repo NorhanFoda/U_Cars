@@ -36,8 +36,8 @@
                                         <form action="{{route('colors.destroy', [$sub_service->id, $color->id]) }}" 
                                             method="POST" 
                                             style="display:inline-block;">
-                                        @csrf
-                                        @method('DELETE')
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE')}} 
                                             <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
                                         </form>
                                     @else
@@ -45,8 +45,8 @@
                                         <form action="/public/colors/deleteColor/{{$color->id}}" 
                                             method="POST" 
                                             style="display:inline-block;">
-                                        @csrf
-                                        @method('DELETE')
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE')}} 
                                             <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
                                         </form>
                                     @endif

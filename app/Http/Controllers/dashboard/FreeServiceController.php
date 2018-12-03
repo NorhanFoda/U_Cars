@@ -5,7 +5,7 @@ namespace App\Http\Controllers\dashboard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Model\Free_service;
+use App\Model\Free_Service;
 
 class FreeServiceController extends Controller
 {
@@ -16,7 +16,7 @@ class FreeServiceController extends Controller
      */
     public function index()
     {
-        return view('free_services.index')->with('free_services', Free_service::paginate(5));
+        return view('free_services.index')->with('free_services', Free_Service::paginate(5));
     }
 
     /**
@@ -37,11 +37,11 @@ class FreeServiceController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
+        $this->validate($request, [
             'name' => 'required|unique:free_services',
         ]);
 
-        $free_service = new Free_service;
+        $free_service = new Free_Service;
         $free_service->name = $request->name;
 
         $free_service->save();
@@ -55,7 +55,7 @@ class FreeServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Free_service $free_service)
+    public function edit(Free_Service $free_service)
     {
         return view('free_services.edit')->with('free_service', $free_service);
     }
@@ -67,10 +67,10 @@ class FreeServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Free_service $free_service)
+    public function update(Request $request, Free_Service $free_service)
     {
-        request()->validate([
-            'name' => 'required|unique:free_services',
+        $this->validate($request, [
+            'name' => 'required|unique:free_Services',
         ]);
         
         $free_service->update($request->all());
@@ -85,7 +85,7 @@ class FreeServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Free_service $free_service)
+    public function destroy(Free_Service $free_service)
     {
         $free_service->delete();
 

@@ -36,8 +36,8 @@
                                     <form action="{{route('free_services.destroy', $free_service->id) }}" 
                                         method="POST" 
                                         style="display:inline-block;">
-                                    @csrf
-                                    @method('DELETE')
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE')}} 
                                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
                                     </form>
                                 </td>

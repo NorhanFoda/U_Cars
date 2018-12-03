@@ -2,8 +2,8 @@
 @section('content')
 <div class="container">
     <form action="{{route('free_services.update', $free_service->id)}}" method="POST">
-        @csrf
-        @method('PUT')
+        {{ csrf_field() }}
+        {{ method_field('PUT')}} 
         <div class="row">
             <div class="col-md-8 services">
                 <h1>تعديل الخدمه الاضافيه ({{$free_service->name}})</h1>

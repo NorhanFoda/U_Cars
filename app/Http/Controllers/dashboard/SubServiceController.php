@@ -12,6 +12,8 @@ use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\SubServiceRequest;
 
+use Illuminate\Support\Facades\Storage;
+
 class SubServiceController extends Controller
 {
     /**
@@ -324,6 +326,9 @@ class SubServiceController extends Controller
      */
     public function destroy(Service $service, Sub_service $sub_service)
     {
+        if($sub_service->image !== 'noimage.jpg'){
+            Storage::delete('public/images/'.$sub_service->image);
+        }
         $sub_service->delete();
 
         return redirect('/public/services')->with('success', 'تم مسح قسم الخدمه بنجاح');

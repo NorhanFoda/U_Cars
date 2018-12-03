@@ -2,8 +2,8 @@
 @section('content')
     <div class="container">
         <form action="{{route('colors.update', [$sub_service->id,$color->id])}}" method="POST">
-            @csrf
-            @method('PUT')
+                {{ csrf_field() }}
+                {{ method_field('PUT')}} 
             <div class="row">
                 <div class="col-md-8 services">
                     <h1>اضافة لون</h1>

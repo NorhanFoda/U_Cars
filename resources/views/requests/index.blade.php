@@ -6,7 +6,7 @@
         <div class="container">
             <h1 style="float:right;">طلبات العملاء</h1>
             <form action="/public/requests/search" method="POST">
-                @csrf
+                {{ csrf_field() }}
                 <label>
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-search"></i>بحث برقم الطلب
@@ -56,8 +56,8 @@
                                     <form action="{{route('requests.destroy', $item->requestNo) }}" 
                                         method="POST" 
                                         style="display:inline-block;">
-                                    @csrf
-                                    @method('DELETE')
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE')}} 
                                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
                                     </form>
                                 </td>
@@ -77,18 +77,3 @@
     <!-- /marketing campaigns -->
                 
 @endsection
-
-
-
-
-
-
-
-
-{{-- @if(count($data)>0)
-    @foreach($data as $item)
-        {{ $item->client->name }}
-        {{ $item->client->phone }}
-        {{ $item->sub_service->name }}
-    @endforeach
-@endif --}}

@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ServiceRequest;
 use Symfony\Component\HttpFoundation\Response;
 
+use Illuminate\Support\Facades\Storage;
+
 class ServiceController extends Controller
 {
     /**
@@ -118,6 +120,9 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
+        if($service->image !== 'noimage.jpg'){
+            Storage::delete('public/images/'.$service->image);
+        }
         $service->delete();
 
         return redirect()->route('services.index')->with('success', 'تم مسح الخدمه بنجاح');

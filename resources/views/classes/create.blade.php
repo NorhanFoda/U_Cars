@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <form action="{{route('classes.store')}}" method="POST">
-            @csrf
+                {{ csrf_field() }}
             <div class="row">
                 <div class="col-md-8 services">
                     <h1>اضافة فئه</h1>

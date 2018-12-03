@@ -39,7 +39,7 @@ class Client_Request extends Model
             return $this->belongsTo(Free_service::class);
         }
 
-        public function class(){
+        public function classes(){
             return $this->belongsTo(Class_Cat::class);
         }
 
