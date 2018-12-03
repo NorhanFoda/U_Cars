@@ -85,7 +85,13 @@ class ClientRequestController extends Controller
      */
     public function edit(Client_Request $request)
     {
+      if (Gate::allows('admin-only', auth()->user())) {
+
         return view('requests.edit')->with('request', $request);
+
+      }
+        return redirect()->route('requests.index')->with('error', 'لا يمكنك تعديل الطلب');
+
     }
 
     /**
@@ -114,9 +120,15 @@ class ClientRequestController extends Controller
      */
     public function destroy(Client_Request $request)
     {
+      if (Gate::allows('admin-only', auth()->user())) {
+
         $request->delete();
 
         return redirect()->route('requests.index')->with('success', 'تم مسح الطلب بنجاح');
+      }
+        return redirect()->route('requests.index')->with('error', 'لا يمكنك مسح الطلب');
+
+
     }
 
     public function getRequestByNo(Request $request){

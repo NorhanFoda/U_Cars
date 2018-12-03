@@ -3,10 +3,13 @@
     <div class="service">
         <div class="container">
             <h1 style="float:right;">الالوان</h1>
+            @can('admin-only', auth()->user())
+
             <a style="float:left;"
-                href="/public/colors/add" 
+                href="/public/colors/add"
                 class="btn  btn-warning">اضافة لون
             </a>
+            @endcan
         </div>
     </div>
 
@@ -30,25 +33,29 @@
                                 </td>
                                 <td>
                                     <a  href="/public/colors/{{$color->id}}/images" class="btn btn-warning"><i class="fas fa-users"></i>عرض الصور</a>
+                                    @can('admin-only', auth()->user())
+
                                     <a  href="{{route('images.create', $color->id)}}" class="btn  btn-primary"><i class="fas fa-plus"></i>اضافة صوره</a>
                                     @if(Route::getFacadeRoot()->current()->uri() !== 'public/colors')
                                         <a  href="{{route('colors.edit', [$sub_service->id, $color->id])}}" class="btn btn-warning"><i class="fas fa-edit"></i>تعديل</a>
-                                        <form action="{{route('colors.destroy', [$sub_service->id, $color->id]) }}" 
-                                            method="POST" 
+                                        <form action="{{route('colors.destroy', [$sub_service->id, $color->id]) }}"
+                                            method="POST"
                                             style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')
                                             <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
                                         </form>
+
                                     @else
                                         <a  href="/public/colors/editColor/{{$color->id}}" class="btn btn-warning"><i class="fas fa-edit"></i>تعديل</a>
-                                        <form action="/public/colors/deleteColor/{{$color->id}}" 
-                                            method="POST" 
+                                        <form action="/public/colors/deleteColor/{{$color->id}}"
+                                            method="POST"
                                             style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')
                                             <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
                                         </form>
+                                        @endcan
                                     @endif
                                 </td>
                             </tr>
@@ -58,8 +65,8 @@
             @else
                 <h1>لا يوجد الوان مضافه</h1>
                 @if(Request()->sub_service)
-                    <a 
-                        href="{{route('colors.create', Request()->sub_service->id)}}" 
+                    <a
+                        href="{{route('colors.create', Request()->sub_service->id)}}"
                         class="btn  btn-warning">اضافة لون
                     </a>
                 @endif
@@ -70,5 +77,3 @@
         </div>
     </div>
 @endsection
-
-

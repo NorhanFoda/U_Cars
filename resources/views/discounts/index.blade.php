@@ -7,7 +7,7 @@
             <h1 style="float:right;">طلبات العملاء</h1>
         </div>
     </div>
-    
+
     <div class="table-responsive">
         <div class="container">
             @if(count($data) > 0)
@@ -46,15 +46,18 @@
                                 </td>
                                 <td>
                                     <a  href="{{route('requests.show', $item->requestNo)}}" class="btn btn-info"><i class="fas fa-map-marker-exclamation"></i>معاينه</a>
+                                    @can('admin-only', auth()->user())
+
                                     <a  href="{{route('requests.edit', $item->requestNo)}}" class="btn btn-warning"><i class="fas fa-edit"></i>تعديل</a>
 
-                                    <form action="{{route('requests.destroy', $item->requestNo) }}" 
-                                        method="POST" 
+                                    <form action="{{route('requests.destroy', $item->requestNo) }}"
+                                        method="POST"
                                         style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
                                     </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
@@ -70,5 +73,5 @@
         </div>
     </div>
     <!-- /marketing campaigns -->
-                
+
 @endsection

@@ -37,9 +37,9 @@
 	<script type="text/javascript" src="{{asset('assets/js/core/app.js')}}"></script>
 	<script type="text/javascript" src="{{asset('assets/js/pages/dashboard.js')}}"></script>
     <!-- /theme JS files -->
-    
 
-    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
+
+    <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
 
 </head>
 
@@ -48,7 +48,7 @@
 		<!-- Main navbar -->
 		@include('inc.navbar')
 		<!-- /main navbar -->
-		
+
 		<!-- Page container -->
 		<div class="page-container">
 			<!-- Page content -->
@@ -57,6 +57,7 @@
 				<!-- Main sidebar -->
 				<div class="sidebar sidebar-main">
 						@include('inc.usermenu')
+
 						<!-- /user menu -->
 
 
@@ -67,7 +68,7 @@
 					</div>
 				</div>
 				<!-- /main sidebar -->
-				
+
 				@include('inc.messages')
 				@yield('content')
 

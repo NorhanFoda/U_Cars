@@ -5,7 +5,7 @@
             <h1 style="float:right;">عرض انواع {{$class_cat->name}}</h1>
         </div>
     </div>
-    
+
     <div class="table-responsive">
         <div class="container">
             @if(count($class_types) > 0)
@@ -25,16 +25,19 @@
                                     <h4>{{ $type->name }}</h4>
                                 </td>
                                 <td>
+                                  @can('admin-only', auth()->user())
+
                                     <a  href="{{route('class_types.edit', [$class_cat->id, $type->id])}}" class="btn btn-warning"><i class="fas fa-edit"></i>تعديل</a>
 
-                                    <form action="{{route('class_types.destroy', [$class_cat->id, $type->id]) }}" 
-                                        method="POST" 
+                                    <form action="{{route('class_types.destroy', [$class_cat->id, $type->id]) }}"
+                                        method="POST"
                                         enctype="multipart/form-data"
                                         style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
                                     </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
@@ -51,5 +54,5 @@
         </div>
     </div>
     <!-- /marketing campaigns -->
-                
+
 @endsection

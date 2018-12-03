@@ -28,11 +28,16 @@ class ImageController extends Controller
      */
     public function create(Color $color)
     {
-        $data = [
-            'color' => $color,
-            'sub_services' => Sub_service::all()
-        ];
-        return view('images.create')->with($data);
+      if (Gate::allows('admin-only', auth()->user())) {
+
+            $data = [
+                'color' => $color,
+                'sub_services' => Sub_service::all()
+            ];
+            return view('images.create')->with($data);
+      }
+      return redirect('/public/images')->with('error', 'لا يمكنك اضافة صورة');
+
     }
 
     public function AddImages(){
@@ -60,12 +65,12 @@ class ImageController extends Controller
             $fileNameToStore = 'noimage.jpg';
         }
         $image->name = $fileNameToStore;
-        
+
         if($request->selectedSubService !== null){
             $image->sub_service_id = $request->selectedSubService;
         }
         else{
-            return redirect()->back()->with('error', 'برجاء اختيار قسم الخدمه');    
+            return redirect()->back()->with('error', 'برجاء اختيار قسم الخدمه');
         }
 
         $image->save();
@@ -123,11 +128,16 @@ class ImageController extends Controller
      */
     public function edit(Color $color, Image $image)
     {
+      if (Gate::allows('admin-only', auth()->user())) {
+
         $data = [
             'image' => $image,
             'color' => $color
         ];
         return view('images.edit')->with($data);
+      }
+      return redirect('/public/images')->with('error', 'لا يمكنك تعديل الصورة ');
+
     }
 
     /**
@@ -157,7 +167,7 @@ class ImageController extends Controller
         $image->name = $fileNameToStore;
 
         $image->save();
-        
+
         return redirect('/public/images')->with('success', 'تم تعديل الصوره بنجاح');
     }
 
@@ -169,9 +179,14 @@ class ImageController extends Controller
      */
     public function destroy(Color $color, Image $image)
     {
+      if (Gate::allows('admin-only', auth()->user())) {
+
         $image->delete();
 
         return redirect('/public/images')->with('success', 'تم مسح الصوره بنجاح');
+      }
+      return redirect('/public/images')->with('error', 'لا يمكنك مسح الصورة ');
+
     }
 
     public function getAllImages(){

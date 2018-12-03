@@ -26,7 +26,12 @@ class FreeServiceController extends Controller
      */
     public function create()
     {
+      if (Gate::allows('admin-only', auth()->user())) {
+
         return view('free_services.create');
+      }
+      return redirect()->route('free_services.index')->with('error', 'لا يمكنك اضافة هذه الخدمة');
+
     }
 
     /**
@@ -57,7 +62,12 @@ class FreeServiceController extends Controller
      */
     public function edit(Free_service $free_service)
     {
+      if (Gate::allows('admin-only', auth()->user())) {
+
         return view('free_services.edit')->with('free_service', $free_service);
+      }
+      return redirect()->route('free_services.index')->with('error', 'لا يمكنك التعديل');
+
     }
 
     /**
@@ -72,11 +82,11 @@ class FreeServiceController extends Controller
         request()->validate([
             'name' => 'required|unique:free_services',
         ]);
-        
+
         $free_service->update($request->all());
 
         return redirect()->route('free_services.index')->with('success', 'تم تعديل الخدمه الاضافيه بنجاح');
-        
+
     }
 
     /**
@@ -87,8 +97,13 @@ class FreeServiceController extends Controller
      */
     public function destroy(Free_service $free_service)
     {
+      if (Gate::allows('admin-only', auth()->user())) {
+
         $free_service->delete();
 
         return redirect()->route('free_services.index')->with('success', 'تم مسح الخدمه المجانيه بنجاح');
+      }
+      return redirect()->route('free_services.index')->with('error', 'لا يمكنك مسح هذه الخدمة');
+
     }
 }

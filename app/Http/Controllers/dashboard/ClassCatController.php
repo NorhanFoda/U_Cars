@@ -28,7 +28,13 @@ class ClassCatController extends Controller
      */
     public function create()
     {
+      if (Gate::allows('admin-only', auth()->user())) {
+
         return view('classes.create');
+      }
+      return redirect()->route('classes.index')->with('error', 'لا يمكنك اضافة الفئة');
+
+
     }
 
     /**
@@ -44,9 +50,9 @@ class ClassCatController extends Controller
             $class->name = $request->name;
         }
         else{
-            return redirect()->back()->with('error', 'برجاء ادخال اسم الفئه');    
+            return redirect()->back()->with('error', 'برجاء ادخال اسم الفئه');
         }
-        
+
         $class->save();
 
         return redirect()->route('classes.index')->with('success', 'تمت اضافة الفئه بنجاح');
@@ -71,7 +77,12 @@ class ClassCatController extends Controller
      */
     public function edit($class_cat_id)
     {
+      if (Gate::allows('admin-only', auth()->user())) {
+
         return view('classes.edit')->with('class', Class_cat::find($class_cat_id));
+    }
+    return redirect()->route('classes.index')->with('error', 'لا يمكنك  تعديل الفئه');
+
     }
 
     /**
@@ -89,7 +100,7 @@ class ClassCatController extends Controller
             $class->update($request->all());
         }
         else{
-            return redirect()->back()->with('error', 'برجاء ادخال اسم الفئه');    
+            return redirect()->back()->with('error', 'برجاء ادخال اسم الفئه');
         }
 
         return redirect()->route('classes.index')->with('success', 'تم تعديل لافئه بنجاح');
@@ -103,9 +114,14 @@ class ClassCatController extends Controller
      */
     public function destroy($class_cat_id)
     {
+      if (Gate::allows('admin-only', auth()->user())) {
+
         Class_cat::find($class_cat_id)->delete();
 
         return redirect()->route('classes.index')->with('ssuccess', 'تم مسح الفئه بنجاح');
+      }
+      return redirect()->route('classes.index')->with('error', 'لا يمكنك مسح الفئه');
+
     }
 
     public function getSubServiceClasses(Sub_service $sub_service){

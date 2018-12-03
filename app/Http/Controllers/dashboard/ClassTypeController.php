@@ -22,7 +22,7 @@ class ClassTypeController extends Controller
             'class_types' => Class_type::where('class_cat_id', $class_cat_id)->where('sub_service_id', null)->paginate(5),
             'class_cat' => Class_cat::find($class_cat_id)
         ];
-        
+
         return view('class_types.index')->with($data);
     }
 
@@ -33,24 +33,34 @@ class ClassTypeController extends Controller
      */
     public function create($class_cat_id)
     {
+      if (Gate::allows('admin-only', auth()->user())) {
+
         return view('class_types.create')->with('class', Class_cat::find($class_cat_id));
+      }
+        return redirect('/public/classes')->with('error', 'لا يمكنك اضافة الفئة');
+
+
     }
 
     public function AddType(){
+      if (Gate::allows('admin-only', auth()->user())) {
+
         return view('class_types.addType')->with('classes', Class_cat::all());
+      }
+        return redirect('/public/classes')->with('error', 'لا يمكنك الاضافة');
     }
 
     public function SaveAddedType(Class_typeRequest $request){
         $class_type = new Class_type;
-        
+
         if($request->name !== null && $request->selectedClass !== null){
             $class_type->name = $request->name;
             $class_type->class_cat_id = $request->selectedClass;
         }
         else{
-            return redirect()->back()->with('error', 'برجاء اختيار الفئه و ادخال النوع');    
+            return redirect()->back()->with('error', 'برجاء اختيار الفئه و ادخال النوع');
         }
-        
+
         $class_type->save();
 
         return redirect('/public/classes')->with('success', 'تمت اضافة النوع بنجاح');
@@ -103,11 +113,16 @@ class ClassTypeController extends Controller
      */
     public function edit($class_cat_id, $class_type_id)
     {
+      if (Gate::allows('admin-only', auth()->user())) {
+
         $data = [
             'class' => Class_cat::find($class_cat_id),
             'type' => Class_type::find($class_type_id)
         ];
         return view('class_types.edit')->with($data);
+
+      }
+        return redirect('/public/classes')->with('error', 'لا يمكنك اضافة الفئة');
     }
 
     /**
@@ -119,6 +134,7 @@ class ClassTypeController extends Controller
      */
     public function updateClassTypeForSubservice($sub_service_id, $class_cat_id, Class_typeRequest $request, $class_type_id)
     {
+
         $class_type = Class_type::find($class_type_id);
         $class_type->update($request->all());
 
@@ -126,7 +142,7 @@ class ClassTypeController extends Controller
     }
 
     public function update($class_cat_id, Class_typeRequest $request, $class_type_id){
-
+      if (Gate::allows('admin-only', auth()->user())) {
         $class_type = Class_type::find($class_type_id);
         $class_type->update($request->all());
 
@@ -141,11 +157,14 @@ class ClassTypeController extends Controller
      */
     public function destroy($class_cat_id, $class_type_id)
     {
+      if (Gate::allows('admin-only', auth()->user())) {
+
         Class_type::find($class_type_id)->delete();
         return redirect('/public/classes')->with('success', 'تم مسح النوع بنجاح');
     }
 
     public function deleteClassTypeForService($sub_service_id, $class_cat_id, $class_type_id){
+      if (Gate::allows('admin-only', auth()->user())) {
 
         Class_type::find($class_type_id)->delete();
 

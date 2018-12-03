@@ -34,11 +34,22 @@ class ColorController extends Controller
      */
     public function create(Sub_service $sub_service)
     {
+      if (Gate::allows('admin-only', auth()->user())) {
+
         return view('colors.create')->with('sub_service', $sub_service);
+     }
+        return redirect('/public/colors')->with('error', 'لا يمكنك اضافة اللون');
+
     }
 
     public function AddColors(){
-        return view('colors.addColors');
+      if (Gate::allows('admin-only', auth()->user())) {
+
+          return view('colors.addColors');
+      }
+          return redirect('/public/colors')->with('error', 'لا يمكنك اضافة اللون');
+
+
     }
 
     public function SaveAddedColors(ColorRequest $request){
@@ -64,7 +75,7 @@ class ColorController extends Controller
         $color->save();
 
         $sub_service->colors()->attach($color->id);
-        
+
 
         return redirect('/public/sub_services')->with('success', 'تمت اضافة لون للخدمه بنجاح');
     }
@@ -77,6 +88,7 @@ class ColorController extends Controller
      */
     public function show(Sub_service $sub_service, Color $color)
     {
+
         return view('colors.show')->with('color', $color);
     }
 
@@ -88,12 +100,18 @@ class ColorController extends Controller
      */
     public function edit(Sub_service $sub_service, Color $color)
     {
+      if (Gate::allows('admin-only', auth()->user())) {
+
         $data = [
             'sub_service' => $sub_service,
             'color' => $color
         ];
 
         return view('colors.edit')->with($data);
+      }
+        return redirect('/public/colors')->with('error', 'لا يمكنك تعديل اللون');
+
+
     }
 
     /**
@@ -116,7 +134,7 @@ class ColorController extends Controller
 
     public function updateColors(ColorRequest $request, Color $color){
         $color->update($request->all());
-        
+
         return redirect('/public/colors')->with('success', 'تم تعديل اللون بنجاح');
     }
 
@@ -128,15 +146,25 @@ class ColorController extends Controller
      */
     public function destroy(Sub_service $sub_service,Color $color)
     {
-        $color->delete();
+      if (Gate::allows('admin-only', auth()->user())) {
 
-        return redirect('/public/colors')->with('success', 'تم مسح اللون بنجاح');
+          $color->delete();
+
+          return redirect('/public/colors')->with('success', 'تم مسح اللون بنجاح');
+      }
+          return redirect('/public/colors')->with('error', 'لا يمكنك مسح اللون');
+
     }
 
     public function deleteColors(Color $color){
+      if (Gate::allows('admin-only', auth()->user())) {
+
         $color->delete();
 
         return redirect('/public/colors')->with('success', 'تم مسح اللون بنجاح');
+      }
+         return redirect('/public/colors')->with('error', 'لا يمكنك مسح اللون');
+
     }
 
     // public function getSubServiceColors($sub_service){

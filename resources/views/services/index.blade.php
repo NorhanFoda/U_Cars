@@ -2,16 +2,18 @@
 @section('content')
 			<!-- Main content -->
 
-    <div class="service">
-        <div class="container">
-            <a 
-                href="{{route('services.create')}}" 
-                class="btn  btn-warning"
-                style="float:left;">اضافة خدمة</a>
-            <h1 style="float:right;">الخدمات</h1>
-        </div>
-    </div>
-    
+      <div class="service">
+           <div class="container">
+             @can('admin-only', auth()->user())
+               <a
+                   href="{{route('services.create')}}"
+                   class="btn  btn-warning"
+                   style="float:left;">اضافة خدمة</a>
+              @endcan
+               <h1 style="float:right;">الخدمات</h1>
+           </div>
+   </div>
+
     <div class="table-responsive">
         <div class="container">
             @if(count($services) > 0)
@@ -34,25 +36,32 @@
                                     <h4>{{ $service->name }}</h4>
                                 </td>
                                 <td>
-                                    <img class="card-img-top" 
-                                        src="/storage/images/{{$service['image']}}" 
+                                    <img class="card-img-top"
+                                        src="/storage/images/{{$service['image']}}"
                                         alt="{{ $service->name }}"
                                         style="max-height:20%;">
                                 </td>
                                 <td>
-                                    {{-- <a  href="{{route('services.show', $service->id)}}" class="btn btn-info"><i class="fas fa-map-marker-exclamation"></i>معاينه</a> --}}
+                                  @if (Route::has('login'))
+                                  @auth
+                                    <!-- {{-- <a  href="{{route('services.show', $service->id)}}" class="btn btn-info"><i class="fas fa-map-marker-exclamation"></i>معاينه</a> --}} -->
                                     <a  href="/public/services/{{$service->id}}/sub_services" class="btn btn-warning"><i class="fas fa-users"></i>عرض اقسام الخدمه</a>
+                                       @can('admin-only', auth()->user())
                                     <a  href="{{route('sub_services.create', $service->id)}}" class="btn  btn-primary"><i class="fas fa-plus"></i>اضافة قسم</a>
+
                                     <a  href="{{route('services.edit', $service->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i>تعديل</a>
 
-                                    <form action="{{route('services.destroy', $service->id) }}" 
-                                        method="POST" 
+                                    <form action="{{route('services.destroy', $service->id) }}"
+                                        method="POST"
                                         enctype="multipart/form-data"
                                         style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
                                     </form>
+                                       @endcan
+                                    @endauth
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -68,5 +77,5 @@
         </div>
     </div>
     <!-- /marketing campaigns -->
-                
+
 @endsection

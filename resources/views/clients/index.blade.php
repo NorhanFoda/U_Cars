@@ -40,13 +40,16 @@
                                 </td>
                                 <td>
                                     <a href="/public/clients/{{$client->id}}/requests" class="btn btn-info"><i class="fas fa-map-marker-exclamation"></i>عرض الطلبات</a>
-                                    <form action="/public/clients/deleteClient/{{$client->id}}" 
-                                        method="POST" 
+                                    @can('admin-only', auth()->user())
+
+                                    <form action="/public/clients/deleteClient/{{$client->id}}"
+                                        method="POST"
                                         style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
                                     </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

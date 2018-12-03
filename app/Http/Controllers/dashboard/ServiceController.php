@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ServiceRequest;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Gate;
 
 class ServiceController extends Controller
 {
@@ -27,7 +28,10 @@ class ServiceController extends Controller
      */
     public function create()
     {
+        if (Gate::allows('admin-only', auth()->user())) {
         return view('services.create');
+      }
+      return redirect()->route('services.index')->with('error', 'لايمكنك أضافة خدمة');
     }
 
     /**
@@ -52,7 +56,7 @@ class ServiceController extends Controller
             $fileNameToStore = 'noimage.jpg';
         }
         $service->image = $fileNameToStore;
-        
+
         // $service->image = $request->image;
         $service->save();
 
@@ -78,7 +82,10 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
+        if (Gate::allows('admin-only', auth()->user())) {
         return view('services.edit')->with('service', $service);
+      }
+      return redirect()->route('services.index')->with('error', 'لايمكنك تعديل الخدمة');
     }
 
     /**
@@ -103,7 +110,7 @@ class ServiceController extends Controller
             $fileNameToStore = 'noimage.jpg';
         }
         $service->image = $fileNameToStore;
-        
+
         // $service->image = $request->image;
         $service->save();
 
@@ -118,8 +125,11 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
+      if (Gate::allows('admin-only', auth()->user())) {
         $service->delete();
 
         return redirect()->route('services.index')->with('success', 'تم مسح الخدمه بنجاح');
+      }
+      return redirect()->route('services.index')->with('error', 'لا يمكنك مسح الخدمة');
     }
 }

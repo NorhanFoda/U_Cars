@@ -4,14 +4,17 @@
 
     <div class="service">
         <div class="container">
+          @can('admin-only', auth()->user())
+
             @if(Request()->color)
-                <a 
-                    href="{{ route('images.create', Request()->color->id) }}" 
+
+                <a
+                    href="{{ route('images.create', Request()->color->id) }}"
                     class="btn btn-warning"
                     style="float:left;">اضافة صوره</a>
             @else
-                <a 
-                    href="/public/images/add" 
+                <a
+                    href="/public/images/add"
                     class="btn btn-warning"
                     style="float:left;">اضافة صوره</a>
             @endif
@@ -19,9 +22,10 @@
             {{-- @if(Route::getFacadeRoot()->current()->uri() === 'images')
                 <a href="/public/images/create" class="btn btn-warning" style="float:left;">اضافة صوره</a>
             @endif --}}
+            @endcan
         </div>
     </div>
-    
+
     <div class="table-responsive">
         <div class="container">
             @if(count($images) > 0)
@@ -50,8 +54,8 @@
                         @foreach($images as $image)
                             <tr>
                                 <td>
-                                    <img class="card-img-top" 
-                                    src="/storage/images/{{$image['name']}}" 
+                                    <img class="card-img-top"
+                                    src="/storage/images/{{$image['name']}}"
                                     alt="{{ $image->code }}"
                                     style="max-height:20%;">
                                 </td>
@@ -75,15 +79,19 @@
                                 </td>
                                 <td>
                                     <a  href="{{route('images.show', [$image->color->id, $image->id])}}" class="btn btn-info"><i class="fas fa-edit"></i>معاينه</a>
+
+                                    @can('admin-only', auth()->user())
+
                                     <a  href="{{route('images.edit', [$image->color->id, $image->id])}}" class="btn btn-warning"><i class="fas fa-edit"></i>تعديل</a>
 
-                                    <form action="{{route('images.destroy', [$image->color->id, $image->id]) }}" 
-                                        method="POST" 
+                                    <form action="{{route('images.destroy', [$image->color->id, $image->id]) }}"
+                                        method="POST"
                                         style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
                                     </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
@@ -99,5 +107,5 @@
         </div>
     </div>
     <!-- /marketing campaigns -->
-                
+
 @endsection

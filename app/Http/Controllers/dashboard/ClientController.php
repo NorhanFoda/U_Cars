@@ -42,7 +42,7 @@ class ClientController extends Controller
                 array_push($data, $dataItem);
             }
         }
-        
+
         return view('clients.requests')->with('data', $data);
     }
 
@@ -51,8 +51,15 @@ class ClientController extends Controller
     }
 
     public function deleteClients(Client $client){
+
+      if (Gate::allows('admin-only', auth()->user())) {
+
         $client->delete();
         return redirect('/public/clients')->with('success', 'تم مسح العميل بنجاح');
+      }
+        return redirect('/public/clients')->with('error', 'لا يمكنك مسح العميل');
+
+
     }
 
 }

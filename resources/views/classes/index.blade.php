@@ -4,14 +4,17 @@
 
     <div class="service">
         <div class="container">
-            <a 
-                href="{{route('classes.create')}}" 
+          @can('admin-only', auth()->user())
+
+            <a
+                href="{{route('classes.create')}}"
                 class="btn  btn-warning"
                 style="float:left;">اضافة فئه</a>
+            @endcan
             <h1 style="float:right;">الفئات</h1>
         </div>
     </div>
-    
+
     <div class="table-responsive">
         <div class="container">
             @if(count($classes) > 0)
@@ -32,8 +35,10 @@
                                 </td>
                                 <td>
                                     <a  href="/public/classes/{{$class->id}}/class_types" class="btn btn-warning"><i class="fas fa-users"></i>عرض انواع الفئه</a>
-                                    <form 
-                                        action="ClassTypeController@postClassTypeForClass" 
+                                    @can('admin-only', auth()->user())
+
+                                    <form
+                                        action="ClassTypeController@postClassTypeForClass"
                                         method="POST"
                                         style="display:inline-block;">
                                     @csrf
@@ -41,14 +46,15 @@
                                     </form>
                                     <a  href="{{route('classes.edit', $class->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i>تعديل</a>
 
-                                    <form action="{{route('classes.destroy', $class->id) }}" 
-                                        method="POST" 
+                                    <form action="{{route('classes.destroy', $class->id) }}"
+                                        method="POST"
                                         enctype="multipart/form-data"
                                         style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
                                     </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
@@ -64,5 +70,5 @@
         </div>
     </div>
     <!-- /marketing campaigns -->
-                
+
 @endsection

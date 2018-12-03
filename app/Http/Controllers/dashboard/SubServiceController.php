@@ -35,15 +35,20 @@ class SubServiceController extends Controller
      */
     public function create(Service $service)
     {
-        $data = [
-            'service' => $service,
-            'colors' => Color::all(),
-            'classes' => Class_cat::whereIn('id', Class_type::pluck('class_cat_id'))->get(),
-            'types' => Class_type::all(),
-            'noTypeClasses' => Class_cat::whereNotIn('id', Class_type::pluck('class_cat_id'))->get()
-        ];
+      if (Gate::allows('admin-only', auth()->user())) {
 
-        return view('sub_services.create')->with($data);
+            $data = [
+                'service' => $service,
+                'colors' => Color::all(),
+                'classes' => Class_cat::whereIn('id', Class_type::pluck('class_cat_id'))->get(),
+                'types' => Class_type::all(),
+                'noTypeClasses' => Class_cat::whereNotIn('id', Class_type::pluck('class_cat_id'))->get()
+            ];
+
+            return view('sub_services.create')->with($data);
+      }
+            return redirect('/public/sub_services')->with('error', 'لايمكنك الاضافة');
+
     }
 
     public function AddSubServices(){
@@ -100,7 +105,7 @@ class SubServiceController extends Controller
         //add class_types
         if($request->classes !== null){
             foreach($request->classes as $class){
-                $type_names = Class_type::where('class_cat_id', $class)->where('sub_service_id', null)->get(); 
+                $type_names = Class_type::where('class_cat_id', $class)->where('sub_service_id', null)->get();
                 foreach($type_names as $type_name){
                     $type = new Class_type;
                     $type->class_cat_id = $class;
@@ -167,7 +172,7 @@ class SubServiceController extends Controller
         //add class_types
         if($request->classes !== null){
             foreach($request->classes as $class){
-                $type_names = Class_type::where('class_cat_id', $class)->where('sub_service_id', null)->get(); 
+                $type_names = Class_type::where('class_cat_id', $class)->where('sub_service_id', null)->get();
                 foreach($type_names as $type_name){
                     $type = new Class_type;
                     $type->class_cat_id = $class;
@@ -193,6 +198,7 @@ class SubServiceController extends Controller
      */
     public function show(Service $service,Sub_service $sub_service)
     {
+
         $types = Class_type::where('sub_service_id', $sub_service->id)->get();
         // return $types;
         $classes = array();
@@ -220,17 +226,22 @@ class SubServiceController extends Controller
      */
     public function edit(Service $service, Sub_service $sub_service)
     {
-        $sub_services_classes = Class_type::where('sub_service_id', $sub_service->id)->get();
-        $data = [
-            'service' => $service,
-            'colors' => Color::all(),
-            'classes' => Class_cat::all(),
-            'types' => Class_type::all(),
-            'sub_service' => Sub_service::find($sub_service->id),
-            'sub_services_classes' => $sub_services_classes,
-            // 'sub_services_colors' => $sub_service->colors
-        ];
-        return view('sub_services.edit')->with($data);
+      if (Gate::allows('admin-only', auth()->user())) {
+
+            $sub_services_classes = Class_type::where('sub_service_id', $sub_service->id)->get();
+            $data = [
+                'service' => $service,
+                'colors' => Color::all(),
+                'classes' => Class_cat::all(),
+                'types' => Class_type::all(),
+                'sub_service' => Sub_service::find($sub_service->id),
+                'sub_services_classes' => $sub_services_classes,
+                // 'sub_services_colors' => $sub_service->colors
+            ];
+            return view('sub_services.edit')->with($data);
+
+      }
+            return redirect('/public/sub_services')->with('error', 'لايمكنك التعديل');
     }
 
     /**
@@ -279,7 +290,7 @@ class SubServiceController extends Controller
                 $sub_service->colors()->detach($color);
             }
         }
-        
+
         //delete old class_types
         $classes = Class_type::where('sub_service_id', $sub_service->id)->get();
         if(count($classes) > 0){
@@ -298,7 +309,7 @@ class SubServiceController extends Controller
         //add new class_types
         if($request->classes !== null){
             foreach($request->classes as $class){
-                $type_names = Class_type::where('class_cat_id', $class)->where('sub_service_id', null)->get(); 
+                $type_names = Class_type::where('class_cat_id', $class)->where('sub_service_id', null)->get();
                 foreach($type_names as $type_name){
                     $type = new Class_type;
                     $type->class_cat_id = $class;
@@ -324,11 +335,15 @@ class SubServiceController extends Controller
      */
     public function destroy(Service $service, Sub_service $sub_service)
     {
-        $sub_service->delete();
+      if (Gate::allows('admin-only', auth()->user())) {
 
-        return redirect('/public/services')->with('success', 'تم مسح قسم الخدمه بنجاح');
-    } 
-    
+          $sub_service->delete();
+
+          return redirect('/public/services')->with('success', 'تم مسح قسم الخدمه بنجاح');
+     }
+     return redirect('/public/services')->with('error', 'لا يمكنك مسح قسم الخدمة');
+    }
+
     public function getAllSubServices(){
         return view('sub_services.index')->with('sub_services', Sub_service::paginate(5));
     }
