@@ -4,7 +4,7 @@
             <div class="container">
                 <h1 style="float:right;">العملاء</h1>
                 <form action="/public/clients/search" method="POST">
-                    @csrf
+                    {{ csrf_field() }}
                     <label>
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-search"></i>بحث برقم الهاتف
@@ -45,8 +45,8 @@
                                     <form action="/public/clients/deleteClient/{{$client->id}}"
                                         method="POST"
                                         style="display:inline-block;">
-                                    @csrf
-                                    @method('DELETE')
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE')}} 
                                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
                                     </form>
                                     @endcan

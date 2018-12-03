@@ -766,7 +766,10 @@ a:hover
 @media (min-width:226px) and (max-width:499px)
 {
     
-
+    .Services-text2 input {
+        margin-right: 0;
+        width: 100%;
+    }
     .services h1 {
         font-size: 52px;
         margin-right: 24px;
@@ -824,6 +827,52 @@ a:hover
     .group-buttons button {
         position: relative;
         left: 0;
+    }
+
+    .service input {
+        width: 100%;
+        display: block;
+    }
+    .categorie {
+        padding-right: 0;
+    }
+    .categorie .service .second input {
+        margin-right: 0;
+    }
+    .categorie .part .second input {
+        margin-right: 0;
+    }
+
+    .categorie .part  input
+    {
+        width: 100%
+    }
+    .categorie .part .seconds input {
+        margin-right: 0;
+    }
+    .categorie button {
+        margin-right: 83px;
+    }
+    .Services-text3 textarea {
+        margin-right: 0;
+    }   
+    .Services-text input
+    {
+        width: 100%;
+    }
+    .Services-checkbox input {
+        margin-right: 0;
+    }
+    .categorie .service {
+        margin-top: 51px;
+    }
+    .Services-text2 input {
+        margin-right: 0;
+    }
+
+    .Services-text3 label {
+        
+        margin-left: 0;
     }
 }
 
@@ -884,6 +933,51 @@ a:hover
     .group-buttons button {
         position: relative;
         left: 0;
+    }
+    .service input {
+        width: 100%;
+        display: block;
+    }
+    .categorie {
+        padding-right: 0;
+    }
+    .categorie .service .second input {
+        margin-right: 0;
+    }
+    .categorie .part .second input {
+        margin-right: 0;
+    }
+    
+    
+    .categorie .part  input
+    {
+        width: 100%
+    }
+    .categorie .part .seconds input {
+        margin-right: 0;
+    }
+    .categorie button {
+        margin-right: 83px;
+    }
+    .Services-text3 textarea {
+        margin-right: 0;
+    }   
+    .Services-text input
+    {
+        width: 100%;
+    }
+    .Services-checkbox input {
+        margin-right: 0;
+    }
+    .categorie .service {
+        margin-top: 51px;
+    }
+    .Services-text2 input {
+        margin-right: 0;
+    }
+    .Services-text3 label {
+        
+        margin-left: 0;
     }
 }
 
@@ -949,6 +1043,50 @@ a:hover
         position: relative;
         left: 0;
     }
+    .service input {
+        width: 100%;
+        display: block;
+    }
+    .categorie {
+        padding-right: 0;
+    }
+    .categorie .service .second input {
+        margin-right: 0;
+    }
+    .categorie .part .second input {
+        margin-right: 0;
+    }
+    .categorie .part  input
+    {
+        width: 100%
+    }
+    .categorie .part .seconds input {
+        margin-right: 0;
+    }
+    
+    .categorie button {
+        margin-right: 83px;
+    }
+    .Services-text3 textarea {
+        margin-right: 0;
+    }   
+    .Services-text input
+    {
+        width: 100%;
+    }
+    .Services-checkbox input {
+        margin-right: 0;
+    }
+    .categorie .service {
+        margin-top: 51px;
+    }
+    .Services-text2 input {
+        margin-right: 0;
+    }
+    .Services-text3 label {
+        
+        margin-left: 0;
+    }
 }
 @media (min-width:660px) and (max-width:729px)
 {
@@ -964,10 +1102,20 @@ a:hover
         left: 82px;
         bottom: 0;
     } 
+    .categorie .part .seconds input {
+        margin-right: 0;
+    }
+    .Services-text2 input {
+        margin-right: 0;
+    }
 }
 
 @media (min-width:730px) and (max-width:770px)
 {
+    .Services-text3 label {
+      
+        left: 323px;
+    }
     .Services-text label
     {
         margin-left: 133px;
@@ -1027,11 +1175,58 @@ a:hover
         position: relative;
         left: 0;
     }
+    .service input {
+        width: 100%;
+        display: block;
+    }
+    .categorie {
+        padding-right: 0;
+    }
+    .categorie .service .second input {
+        margin-right: 0;
+    }
+    .categorie .part .second input {
+        margin-right: 0;
+    }
+    .categorie .part  input
+    {
+        width: 100%
+    }
+    .Services-text3 label {
+        
+        margin-left: 0;
+    }
+    .categorie .part .seconds input {
+        margin-right: 0;
+    }
+    
+    .categorie button {
+        margin-right: 83px;
+    }
+    .Services-text3 textarea {
+        margin-right: 0;
+    }   
+    .Services-text input
+    {
+        width: 100%;
+    }
+    .Services-checkbox input {
+        margin-right: 0;
+    }
+    .categorie .service {
+        margin-top: 51px;
+    }
+    .Services-text2 input {
+        margin-right: 0;
+    }
 }
 
 @media (min-width:770px) and (max-width:1200px)
 {
-
+    .Services-text3 label {
+      
+        left: 323px;
+    }
     .services
     {
         display: block;
@@ -1044,7 +1239,10 @@ a:hover
         font-size: 52px;
         margin-right: 24px;
     }
-
+    .Services-text3 label {
+        
+        margin-left: 0;
+    }
     .Services-text {
         margin-right: 0;
         float: none;
@@ -1098,10 +1296,50 @@ a:hover
         position: relative;
         left: 0;
     }
+    .service input {
+        width: 100%;
+        display: block;
+    }
+    .categorie {
+        padding-right: 0;
+    }
+    .categorie .service .second input {
+        margin-right: 0;
+    }
+    .categorie .part .second input {
+        margin-right: 0;
+    }
+    .categorie .part  input
+    {
+        width: 100%
+    }
+    .categorie .part .seconds input {
+        margin-right: 0;
+    }
+    
+    .categorie button {
+        margin-right: 83px;
+    }
+    .Services-text3 textarea {
+        margin-right: 0;
+    }   
+    .Services-text input
+    {
+        width: 100%;
+    }
+    .Services-checkbox input {
+        margin-right: 0;
+    }
+    .categorie .service {
+        margin-top: 51px;
+    }
+    .Services-text2 input {
+        margin-right: 0;
+    }
 }
 
 
-@media (min-width: 769px)and (max-width:849px)
+@media (min-width: 769px)and (max-width:849px)  
 {
 
     .container {

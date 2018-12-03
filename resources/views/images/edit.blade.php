@@ -2,8 +2,8 @@
 @section('content')
     <div class="container">
         <form action="{{ route('images.update', [$color->id, $image->id]) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
+            {{ csrf_field() }}
+            {{ method_field('PUT')}} 
             <div class="row">
                 <div class="col-md-8 services">
                     <h1>تعديل صوره</h1>

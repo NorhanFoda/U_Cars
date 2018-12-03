@@ -8,8 +8,8 @@
         <div class="servicesColors">
             <div class="add">
                 <form action="{{ route('sub_services.update', [$service->id, $sub_service->id]) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+                    {{ csrf_field() }}
+                    {{ method_field('PUT')}} 
                     <div class="row">
                         <div class="col-md-8 services">
                             <h1>تعديل قسم {{$sub_service->name}} فى خدمة ({{$service->name}})</h1>

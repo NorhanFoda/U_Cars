@@ -9,6 +9,8 @@ use App\Http\Requests\ServiceRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Gate;
 
+use Illuminate\Support\Facades\Storage;
+
 class ServiceController extends Controller
 {
     /**
@@ -123,9 +125,13 @@ class ServiceController extends Controller
      * @param  \App\Model\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
-    {
+    public function destroy(Service $service){
+      
       if (Gate::allows('admin-only', auth()->user())) {
+
+        if($service->image !== 'noimage.jpg'){
+            Storage::delete('public/images/'.$service->image);
+        }
         $service->delete();
 
         return redirect()->route('services.index')->with('success', 'تم مسح الخدمه بنجاح');

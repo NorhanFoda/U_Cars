@@ -7,7 +7,7 @@
         <div class="servicesColors">
             <div class="add">
                 <form action="/public/sub_services/save" method="POST" enctype="multipart/form-data">
-                    @csrf
+                    {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-8 services">
                             <h1>اضافة قسم الخدمه</h1>

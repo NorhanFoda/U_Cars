@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageRequest;
 
+use Illuminate\Support\Facades\Storage;
+
 class ImageController extends Controller
 {
     /**
@@ -180,7 +182,9 @@ class ImageController extends Controller
     public function destroy(Color $color, Image $image)
     {
       if (Gate::allows('admin-only', auth()->user())) {
-
+        if($image->name !== 'noimage.jpg'){
+            Storage::delete('public/images/'.$image->name);
+        }
         $image->delete();
 
         return redirect('/public/images')->with('success', 'تم مسح الصوره بنجاح');

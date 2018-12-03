@@ -3,8 +3,8 @@
     <div>
         <div class="container">
             <form action="{{ route('services.update', $service->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
+                {{ csrf_field() }}
+                {{ method_field('PUT')}} 
                 <div class="row">
                     <div class="col-md-8 services">
                         <h1>اضافة خدمه</h1>

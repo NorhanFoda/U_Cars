@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <form action="{{ route('images.store', $color->id) }}" method="POST" enctype="multipart/form-data">
-            @csrf
+            {{ csrf_field() }}
             <div class="row">
                 <div class="col-md-8 services">
                     <h1>اضافة صور</h1>

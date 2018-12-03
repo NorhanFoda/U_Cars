@@ -7,7 +7,7 @@
         <div class="servicesColors">
             <div class="add">
                 <form action="{{ route('sub_services.store', $service->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
+                    {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-8 services">
                             <h1>اضافة قسم الخدمه</h1>

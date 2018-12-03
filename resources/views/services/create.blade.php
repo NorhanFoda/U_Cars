@@ -3,7 +3,7 @@
     <div>
         <div class="container">
             <form action="{{ route('services.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
+                {{ csrf_field() }}
                 <div class="col-md-12 col-sm-4 col-xs-10 services">
                     <h1>اضافة خدمه</h1>
                 </div>

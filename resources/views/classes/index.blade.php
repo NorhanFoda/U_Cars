@@ -41,7 +41,7 @@
                                         action="ClassTypeController@postClassTypeForClass"
                                         method="POST"
                                         style="display:inline-block;">
-                                    @csrf
+                                        {{ csrf_field() }}
                                         <a  href="/public/classes/{{$class->id}}/class_types/create" class="btn  btn-primary"><i class="fas fa-plus"></i>اضافة نوع للفئه</a>
                                     </form>
                                     <a  href="{{route('classes.edit', $class->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i>تعديل</a>
@@ -50,8 +50,8 @@
                                         method="POST"
                                         enctype="multipart/form-data"
                                         style="display:inline-block;">
-                                    @csrf
-                                    @method('DELETE')
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE')}} 
                                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
                                     </form>
                                     @endcan

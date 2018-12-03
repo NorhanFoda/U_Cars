@@ -20,7 +20,7 @@ Route::group(['prefix' => 'public'], function(){
     Route::post('login', 'Auth\LoginController@login');
 
     //services routes
-    Route::resource('/', 'dashboard\ServiceController');
+    Route::get('/', 'dashboard\ServiceController@index');
     Route::resource('/services', 'dashboard\ServiceController');
 
     //sub_services routes
