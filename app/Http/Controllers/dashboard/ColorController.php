@@ -9,6 +9,7 @@ use App\Model\Sub_service;
 use App\Model\Color_SubService;
 use App\Model\Image;
 use App\Http\Requests\ColorRequest;
+use Illuminate\Support\Facades\Gate;
 
 class ColorController extends Controller
 {
@@ -34,11 +35,12 @@ class ColorController extends Controller
      */
     public function create(Sub_service $sub_service)
     {
-      if (Gate::allows('admin-only', auth()->user())) {
+        return $sub_service;
+    //   if (Gate::allows('admin-only', auth()->user())) {
 
-        return view('colors.create')->with('sub_service', $sub_service);
-     }
-        return redirect('/public/colors')->with('error', 'لا يمكنك اضافة اللون');
+    //     return view('colors.create')->with('sub_service', $sub_service);
+    //  }
+    //     return redirect('/public/colors')->with('error', 'لا يمكنك اضافة اللون');
 
     }
 
@@ -53,9 +55,9 @@ class ColorController extends Controller
     }
 
     public function SaveAddedColors(ColorRequest $request){
-
         $color = new Color;
         $color->name = $request->name;
+
 
         $color->save();
 
@@ -100,15 +102,15 @@ class ColorController extends Controller
      */
     public function edit(Sub_service $sub_service, Color $color)
     {
-      if (Gate::allows('admin-only', auth()->user())) {
+    //   if (Gate::allows('admin-only', auth()->user())) {
 
         $data = [
             'sub_service' => $sub_service,
             'color' => $color
         ];
-
+        return $data;
         return view('colors.edit')->with($data);
-      }
+    //   }
         return redirect('/public/colors')->with('error', 'لا يمكنك تعديل اللون');
 
 
@@ -129,6 +131,7 @@ class ColorController extends Controller
     }
 
     public function editColors(Color $color){
+        return $color;
         return view('colors.editColor')->with('color', $color);
     }
 
@@ -172,6 +175,12 @@ class ColorController extends Controller
     // }
 
     public function getAllColors(){
-        return view('colors.index')->with('colors', Color::paginate(5));
+        $sub_service = new \stdClass();
+        $sub_service->id = null;
+        $data = [
+            'colors' => Color::paginate(5),
+            'sub_service' => $sub_service
+        ];
+        return view('colors.allColors')->with($data);
     }
 }

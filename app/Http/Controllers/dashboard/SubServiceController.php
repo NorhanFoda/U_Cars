@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\SubServiceRequest;
+use Illuminate\Support\Facades\Gate;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -37,7 +38,7 @@ class SubServiceController extends Controller
      */
     public function create(Service $service)
     {
-      if (Gate::allows('admin-only', auth()->user())) {
+    //   if (Gate::allows('admin-only', auth()->user())) {
 
             $data = [
                 'service' => $service,
@@ -48,8 +49,8 @@ class SubServiceController extends Controller
             ];
 
             return view('sub_services.create')->with($data);
-      }
-            return redirect('/public/sub_services')->with('error', 'لايمكنك الاضافة');
+    //   }
+          //  return redirect('/public/sub_services')->with('error', 'لايمكنك الاضافة');
 
     }
 
@@ -228,7 +229,7 @@ class SubServiceController extends Controller
      */
     public function edit(Service $service, Sub_service $sub_service)
     {
-      if (Gate::allows('admin-only', auth()->user())) {
+    //   if (Gate::allows('admin-only', auth()->user())) {
 
             $sub_services_classes = Class_type::where('sub_service_id', $sub_service->id)->get();
             $data = [
@@ -242,7 +243,7 @@ class SubServiceController extends Controller
             ];
             return view('sub_services.edit')->with($data);
 
-      }
+    //   }
             return redirect('/public/sub_services')->with('error', 'لايمكنك التعديل');
     }
 

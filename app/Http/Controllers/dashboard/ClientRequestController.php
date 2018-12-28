@@ -26,7 +26,7 @@ class ClientRequestController extends Controller
      */
     public function index()
     {
-        $requests = Client_Request::paginate(5);
+        $requests = Client_Request::all();
         $data = array();
         if(count($requests) > 0){
             foreach($requests as $request){

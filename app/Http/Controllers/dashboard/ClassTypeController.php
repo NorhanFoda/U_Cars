@@ -147,6 +147,7 @@ class ClassTypeController extends Controller
         $class_type->update($request->all());
 
         return redirect('/public/classes')->with('success', 'تم تعديل النوع بنجاح');
+      }
     }
 
     /**
@@ -155,12 +156,14 @@ class ClassTypeController extends Controller
      * @param  \App\Model\Class_type  $class_type
      * @return \Illuminate\Http\Response
      */
+
+     
     public function destroy($class_cat_id, $class_type_id)
     {
       if (Gate::allows('admin-only', auth()->user())) {
-
         Class_type::find($class_type_id)->delete();
         return redirect('/public/classes')->with('success', 'تم مسح النوع بنجاح');
+      }
     }
 
     public function deleteClassTypeForService($sub_service_id, $class_cat_id, $class_type_id){
@@ -169,5 +172,6 @@ class ClassTypeController extends Controller
         Class_type::find($class_type_id)->delete();
 
         return redirect('class_types.index')->with('success', 'Type Deleted');
+      }
     }
 }

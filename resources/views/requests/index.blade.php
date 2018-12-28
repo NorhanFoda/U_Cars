@@ -42,7 +42,7 @@
                                     <h4>{{ $item->requestNo }}</h4>
                                 </td>
                                 <td>
-                                    <h4>{{ $item->client->name }}</h4>
+                                    <h4>{{ $item->client['name'] }}</h4>
                                 </td>
                                 <td>
                                     <h4>

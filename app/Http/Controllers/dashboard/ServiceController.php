@@ -31,7 +31,7 @@ class ServiceController extends Controller
     public function create()
     {
         if (Gate::allows('admin-only', auth()->user())) {
-        return view('services.create');
+            //return view('services.create');
       }
       return redirect()->route('services.index')->with('error', 'لايمكنك أضافة خدمة');
     }
@@ -82,10 +82,12 @@ class ServiceController extends Controller
      * @param  \App\Model\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function edit(Service $service)
+    public function edit($service)
     {
+        return Service::find($service);
         if (Gate::allows('admin-only', auth()->user())) {
-        return view('services.edit')->with('service', $service);
+        //return view('services.index')->with('serviceToEdit', $service);
+        return Service::find($service);
       }
       return redirect()->route('services.index')->with('error', 'لايمكنك تعديل الخدمة');
     }
@@ -99,7 +101,8 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        $service->name = $request->name;
+        $newService = Service::find($request->id);
+        $newService->name = $request->name;
 
         //Handle image uploading
         if($request->hasFile('image')){
@@ -111,10 +114,10 @@ class ServiceController extends Controller
         }else{
             $fileNameToStore = 'noimage.jpg';
         }
-        $service->image = $fileNameToStore;
+        $newService->image = $fileNameToStore;
 
-        // $service->image = $request->image;
-        $service->save();
+        // $newService->image = $request->image;
+        $newService->save();
 
         return redirect()->route('services.index')->with('success', 'تم تعديل الخدمه بنجاح');
     }

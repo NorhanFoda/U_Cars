@@ -1,28 +1,46 @@
-
+@font-face {
+    font-family: cairo;
+    src: url(../fonts/Cairo-Regular.ttf);
+  }
 
 .page-content
 {
     height: 100%;
 }
-
+.body,p ,h1,h2,h3,h4,h5,h6,p, a ,span,div{
+    font-family: cairo;
+}
 .navigation > li > a
 {
-    font-size: 18px;
-    padding-left: 96px;
+    font-size: 16px;
 }
-
+.modal-dialog.width-modal{
+    width: 45%;
+}
+.modal-dialog.width-modal .modal-body{
+    text-align: right;
+}
+.modal-dialog.width-modal .modal-body span{
+    line-height: 40px;
+}
 table   thead  th
 {
     color: black;
     font-size: 20px;
     font-weight: bold;
+    text-align: center;
+}
+a.navbar-brand{
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center
 }
 i
 {
     
     padding-left: 11px;
 }
-
+  tbody  tr td  {text-align: center; font-size: 18px;}  
   tbody  tr td .btn
 {
     font-size: 14px;
@@ -223,18 +241,55 @@ input
     font-size: 18px;
     
 }
-.form-control
-{
-    width: 349px;
-    font-size: 24px;
+#mycheckboxdiv1 ,#mycheckboxdiv{
+    display: none;
 }
-
-
+.mr-10{
+    margin-top: 5px;
+}
+.form-control.chk{
+    display: inline-block;
+    height: 20px!important;
+    margin-top: 10px;
+}
+.ms-drop ul>li.selected {
+    background-color: #1e90ff;
+    color: #fff;
+}
+.car-item{
+    margin-bottom: 20px;
+}
+.panelsave{
+    padding: 20px;
+}
+.panelsave .group-buttons{
+    margin:0 auto !important;
+    width: 163px; 
+}
+.save-btn{
+    margin: 20px auto 15px;
+    width: 150px;
+}
+.save-btn button{
+    width: 100%;
+}
 .Services-text input
 {
     margin-right: 298px;
 }
-
+.chk-lab{
+    position: relative;
+    top:-6px;
+}
+.font-size{
+    font-size: 16px;
+}
+.sec-lab{
+    padding-left: 15px;
+}
+.sec-color{
+    margin-top: 15px;
+}
 .Services-text button
 {
     padding: 4px 13px;
@@ -248,7 +303,12 @@ input
     margin-right: 360px;
 }
 
-
+.modal-footer{
+    text-align: center!important;
+}
+.modal-title{
+    font-size: 23px;
+}
 .Services-text .save button
 {
     font-size: 27px;
@@ -259,7 +319,35 @@ input
 {
     margin-top: 19px;
 }
+.pagnation{
+    margin: auto;
+    width: 235px;
+}
+.add-serv{
+    margin-top:20px;
+}
+.services-form , .search-form{
+    width: 350px;
+    margin: auto;
+}
+.services-form select{
+    height: 45px;
+}
+.services-form input::placeholder{
+    text-align: center;
+}
+.services-form label{
+    width: 100%;
+    font-size: 20px;
+}
+.services-form .saves{
+    width: 100px;
+    margin:20px  auto;
+}
+.services-form .saves .btn{
+    width: 100px;
 
+}
 .servicesColors
 {
     margin-top: 74px;
@@ -623,13 +711,19 @@ a:hover
 }
 
 
-
-.previews .photo
-{
-    margin-left: 8px;
-    margin-bottom: 105px;
+.btn-same {
+    width: 100px;
+    margin-top: 10px;
 }
-
+.previews_photo
+{
+    margin:auto;
+    width: 300px;
+}
+.priv_group-buttons{
+    margin: 20px auto;
+    width: 200px;
+}
 .previews .photo img
 {
     margin-right: 398px;

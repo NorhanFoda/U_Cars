@@ -14,16 +14,18 @@
 	<link href="{{asset('assets/css/core.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/css/components.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/css/colors.css')}}" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="{{asset('assets/bootstrap-select.css')}}">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 
 	<!-- /global stylesheets -->
 
 	<!-- Core JS files -->
-	<script type="text/javascript" src="{{asset('assets/js/plugins/loaders/pace.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('assets/js/core/libraries/jquery.min.js')}}"></script>
+	<script type="text/javascript" src="{{asset('assets/js/plugins/loaders/pace.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('assets/js/core/libraries/bootstrap.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('assets/js/plugins/loaders/blockui.min.js')}}"></script>
+	<script type="text/javascript" src="{{asset('assets/bootstrap-select.min.js')}}"></script>
 	<!-- /core JS files -->
 
 	<!-- Theme JS files -->
@@ -37,10 +39,8 @@
 
 	<script type="text/javascript" src="{{asset('assets/js/core/app.js')}}"></script>
 	<script type="text/javascript" src="{{asset('assets/js/pages/dashboard.js')}}"></script>
+	
     <!-- /theme JS files -->
-
-
-    <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
 
 </head>
 
@@ -54,21 +54,10 @@
 		<div class="page-container">
 			<!-- Page content -->
 			<div class="page-content">
-
-				<!-- Main sidebar -->
-				<div class="sidebar sidebar-main">
-						@include('inc.usermenu')
-
-						<!-- /user menu -->
-
-
-						<!-- Main navigation -->
-						@include('inc.navigation')
-						<!-- /main navigation -->
-
-					</div>
-				</div>
-				<!-- /main sidebar -->
+				
+				<!-- Main navigation -->
+				@include('inc.navigation')
+				<!-- /main navigation -->
 
 				@include('inc.messages')
 				@yield('content')

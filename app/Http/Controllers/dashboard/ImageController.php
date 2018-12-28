@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ImageRequest;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 
 class ImageController extends Controller
 {
@@ -20,7 +21,12 @@ class ImageController extends Controller
      */
     public function index(Color $color)
     {
-        return view('images.index')->with('images', $color->images()->paginate(5));
+        $data = [
+            'images' => $color->images()->paginate(5),
+            'sub_services' => Sub_service::all(),
+            'color' => $color
+        ];
+        return view('images.index')->with($data );
     }
 
     /**
@@ -47,6 +53,7 @@ class ImageController extends Controller
             'colors' => Color::all(),
             'sub_services' => Sub_service::all()
         ];
+        //return $data;
         return view('images.addImages')->with($data);
     }
 
@@ -119,7 +126,11 @@ class ImageController extends Controller
      */
     public function show(Color $color, Image $image)
     {
-        return view('images.show')->with('image', $image);
+        $data = [
+            'image' => $image,
+            'sub_services' => Sub_service::all()
+        ];
+        return view('images.show')->with($data);
     }
 
     /**
@@ -132,13 +143,14 @@ class ImageController extends Controller
     {
       if (Gate::allows('admin-only', auth()->user())) {
 
-        $data = [
-            'image' => $image,
-            'color' => $color
-        ];
-        return view('images.edit')->with($data);
+        // $data = [
+        //     'image' => $image,
+        //     'color' => $color
+        // ];
+        return $image;
+        //return view('images.edit')->with($data);
       }
-      return redirect('/public/images')->with('error', 'لا يمكنك تعديل الصورة ');
+      //return redirect('/public/images')->with('error', 'لا يمكنك تعديل الصورة ');
 
     }
 
@@ -151,10 +163,10 @@ class ImageController extends Controller
      */
     public function update(Color $color, Request $request, Image $image)
     {
-        $image = Image::find($image->id);
-        $image->price = $request->price;
-        $image->code = $request->code;
-        $image->color_id = $color->id;
+        $newImage = Image::find($request->id);
+        $newImage->price = $request->price;
+        $newImage->code = $request->code;
+        $newImage->color_id = $color->id;
 
         //Handle image uploading
         if($request->hasFile('name')){
@@ -166,9 +178,9 @@ class ImageController extends Controller
         }else{
             $fileNameToStore = 'noimage.jpg';
         }
-        $image->name = $fileNameToStore;
+        $newImage->name = $fileNameToStore;
 
-        $image->save();
+        $newImage->save();
 
         return redirect('/public/images')->with('success', 'تم تعديل الصوره بنجاح');
     }
@@ -194,6 +206,11 @@ class ImageController extends Controller
     }
 
     public function getAllImages(){
-        return view('images.index')->with('images', Image::paginate(5));
+        $data = [
+            'colors' => Color::all(),
+            'sub_services' => Sub_service::all(),
+            'images' => Image::paginate(5)
+        ];
+        return view('images.allImages')->with($data);
     }
 }

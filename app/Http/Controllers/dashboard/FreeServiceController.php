@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Model\Free_Service;
+use Illuminate\Support\Facades\Gate;
 
 class FreeServiceController extends Controller
 {
@@ -62,6 +63,7 @@ class FreeServiceController extends Controller
      */
     public function edit(Free_Service $free_service)
     {
+      return $free_service;
       if (Gate::allows('admin-only', auth()->user())) {
 
         return view('free_services.edit')->with('free_service', $free_service);
