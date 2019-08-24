@@ -8,6 +8,12 @@
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <h1 class="panel-title">الصور</h1>
+                  	<form class="search-form" action="/images/search" method="POST">
+								{{ csrf_field() }}
+								<input type="text" class="form-control " id="code" name="code" placeholder="بحث بكود الصورة">
+
+
+					</form>
                 <button type="button" class="add-serv btn btn-primary add-item"  data-toggle="modal" data-target="#add-modal">أضافة صورة</button>
                 <!-- Modal -->
                 <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -20,15 +26,17 @@
                         </button>
                         </div>
                         <div class="modal-body">
-                            <form class="services-form" action="/public/images/save" method="POST" enctype="multipart/form-data">
+                            <form class="services-form" action="/images/save" method="POST" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <div class="row">
                                     <div class="col-xs-6">
                                         @if(count($sub_services) > 0)
                                         <label for="" class="sec-lab">اختر قسم الخدمه</label>
                                         <select class="form-control" name="selectedSubService">
-                                            @foreach($sub_services as $sub_service)
-                                                <option value="{{$sub_service->id}}">{{$sub_service->name}}</option>
+                                            @foreach($services as $service)
+                                                @foreach($service->sub_services as $sub_service)
+                                                    <option value="{{$sub_service->id}}">{{$service->name}} - {{$sub_service->name}}</option>
+                                                @endforeach
                                             @endforeach
                                         </select>
                                         @else
@@ -48,7 +56,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <input type="text" name="code" class="form-control" placeholder="الكود " id="serviceName">
+                                <!--<input type="text" name="code" class="form-control" placeholder="الكود " id="serviceName">-->
                                 <input type="text" name="price" class="form-control" placeholder=" السعر" id="serviceName">
                                 <input type="file" class="form-control-file" name="name">
                                 <div class="modal-footer">
@@ -84,7 +92,7 @@
                                                     height="100px">
                                             </td>
                                             <td>
-                                                <button type="button" class="btn btn-primary edit-item" value="{{$image->id}}" data-toggle="modal" data-target="#edit-modal" ><i class="fas fa-edit"></i>تعديل</button>
+                                                <button type="button" class="btn btn-primary edit-item" value="[{{$color->id}},{{$image->id}}]" data-toggle="modal" data-target="#edit-modal" ><i class="fas fa-edit"></i>تعديل</button>
                                                 <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -103,8 +111,10 @@
                                                                         @if(count($sub_services) > 0)
                                                                         <label for="" class="sec-lab">اختر قسم الخدمه</label>
                                                                         <select class="form-control" name="selectedSubService">
-                                                                            @foreach($sub_services as $sub_service)
-                                                                                <option value="{{$sub_service->id}}">{{$sub_service->name}}</option>
+                                                                            @foreach($services as $service)
+                                                                                @foreach($service->sub_services as $sub_service)
+                                                                                    <option value="{{$sub_service->id}}">{{$service->name}} - {{$sub_service->name}}</option>
+                                                                                @endforeach
                                                                             @endforeach
                                                                         </select>
                                                                         @else
@@ -125,7 +135,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <input type="hidden" value="{{$image->id}}" name="id" id="input-id">
-                                                                <input type="text" name="code" class="form-control" placeholder="الكود " id="input-code">
+                                                                <!--<input type="text" name="code" class="form-control" placeholder="الكود " id="input-code">-->
                                                                 <input type="text" name="price" class="form-control" placeholder=" السعر" id="input-price">
                                                                 <input type="file" class="form-control-file" name="name">
                                                                 <div class="modal-footer">
@@ -166,13 +176,14 @@
 <script type="text/javascript" src="{{asset('assets/js/core/libraries/jquery.min.js')}}"></script>
 <script type="text/javascript">
     $(document).on('click','.edit-item',function(){
-        var url = "http://127.0.0.1:8000/public/colors";
-        var color_id = 1;
-        var image_id= $(this).val();
+        var url = "http://corefix.dealsa.net/colors";
+        var ids= $(this).val();
+        ids = ids.split(',');
+        var color_id = ids[0].split('[').pop();
+        var image_id = ids[1].slice(0,-1);
 
         $.get(url + '/' + color_id + '/images/' + image_id + '/edit', function (data) {
             //success data
-            console.log(data);
             $('#input-id').val(data.id);
             $('#input-code').val(data.code);
             $('#input-price').val(data.price);

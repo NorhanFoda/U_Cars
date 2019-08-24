@@ -85,6 +85,7 @@ class ClientRequestController extends Controller
      */
     public function edit(Client_Request $request)
     {
+        return $request;
       if (Gate::allows('admin-only', auth()->user())) {
 
         return view('requests.edit')->with('request', $request);
@@ -104,12 +105,17 @@ class ClientRequestController extends Controller
     public function update(ClientReqRequest $request, $client_request_id)
     {
         $client_request = Client_Request::find($client_request_id);
-        $client_request->discount = $request->discount;
-        $client_request->price = $request->price;
-
-        $client_request->save();
-
-        return redirect()->route('requests.index')->with('success', 'تمت تعديل الطلب بنجاح');
+        if($request->price){
+            $client_request->discount = $request->discount;
+            $client_request->price = $request->price;
+            $client_request->save();
+            return redirect()->route('requests.index')->with('success', '  تم تعديل الطلب بنجاح ');
+        }
+        else{
+            $client_request->discount = $request->discount;
+            $client_request->save();
+            return redirect()->route('discounts.index')->with('success', 'تم قبول الطلب   ');
+        }
     }
 
     /**
@@ -165,6 +171,8 @@ class ClientRequestController extends Controller
             foreach($discount_requests as $request){
                 $dataItem = new \stdClass();
                 $dataItem->requestNo = $request->id;
+                $dataItem->discount = $request->discount;
+                $dataItem->discount_request = $request->discount_request;
                 $dataItem->client = Client::find($request->client_id);
                 $dataItem->sub_service = Sub_service::find($request->sub_service_id);
                 $dataItem->service = Service::find($dataItem->sub_service->service);

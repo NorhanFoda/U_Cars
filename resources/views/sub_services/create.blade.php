@@ -49,6 +49,21 @@
                             <h2>لا يوجد الوان مضافه لهذه الخدمه</h2>
                             <a href="/colors/add" class="btn btn-primary">اضف الالوان</a>
                         @endif
+                        
+                        @if(count($free_services) > 0)
+                            <div class="col-xs-4">
+                                <div class="sec-color">
+                                    <label for="" class="sec-lab">اختر الخدمه الاضافيه المجانيه</label>
+                                    <select class="form-control" name="freeService">
+                                        @foreach($free_services as $free)
+                                            <option value="{{$free->id}}">{{$free->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        @else
+                        لا يوجد خدمات اضافيه مجانيه
+                        @endif
 
                         @if(count($classes) > 0)
                             <div class="col-xs-12">
@@ -66,7 +81,7 @@
                                         <div id="type-{{$class->id}}" style="display:none;">
                                             @if(count($types) > 0)
                                                 @foreach($types as $type)
-                                                    @if($type->class_cat_id === $class->id && $type->sub_service_id === null)
+                                                    @if($type->class_cat_id === $class->id && $type->sub_service_id == null)
                                                         <div class="car-item clearfix">
                                                             <h3>{{ $type->name }}</h3>
                                                             <div class="col-md-6  col-xs-12" >

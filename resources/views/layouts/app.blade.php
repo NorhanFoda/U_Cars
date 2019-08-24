@@ -59,7 +59,7 @@
 				@include('inc.navigation')
 				<!-- /main navigation -->
 
-				@include('inc.messages')
+				{{-- @include('inc.messages') --}}
 				@yield('content')
 
 		<!-- Footer -->

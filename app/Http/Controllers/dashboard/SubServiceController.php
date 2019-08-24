@@ -7,6 +7,7 @@ use App\Model\Service;
 use App\Model\Color;
 use App\Model\Class_cat;
 use App\Model\Class_type;
+use App\Model\Free_Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,19 +39,20 @@ class SubServiceController extends Controller
      */
     public function create(Service $service)
     {
-    //   if (Gate::allows('admin-only', auth()->user())) {
+    //    if (Gate::allows('admin-only', auth()->user())) {
 
             $data = [
                 'service' => $service,
                 'colors' => Color::all(),
                 'classes' => Class_cat::whereIn('id', Class_type::pluck('class_cat_id'))->get(),
                 'types' => Class_type::all(),
-                'noTypeClasses' => Class_cat::whereNotIn('id', Class_type::pluck('class_cat_id'))->get()
+                'noTypeClasses' => Class_cat::whereNotIn('id', Class_type::pluck('class_cat_id'))->get(),
+                'free_services' => Free_Service::all()
             ];
 
             return view('sub_services.create')->with($data);
-    //   }
-          //  return redirect('/public/sub_services')->with('error', 'لايمكنك الاضافة');
+    //    }
+            return redirect('/sub_services')->with('error', 'لايمكنك الاضافة');
 
     }
 
@@ -60,7 +62,8 @@ class SubServiceController extends Controller
             'colors' => Color::all(),
             'classes' => Class_cat::whereIn('id', Class_type::pluck('class_cat_id'))->get(),
             'types' => Class_type::all(),
-            'noTypeClasses' => Class_cat::whereNotIn('id', Class_type::pluck('class_cat_id'))->get()
+            'noTypeClasses' => Class_cat::whereNotIn('id', Class_type::pluck('class_cat_id'))->get(),
+            'free_services' => Free_Service::all()
         ];
 
         return view('sub_services.addSubService')->with($data);
@@ -97,6 +100,8 @@ class SubServiceController extends Controller
         }
 
         $sub_service->save();
+        
+        $sub_service->free_services()->attach(Free_Service::find($request->freeService));    
 
         //add colors
         if($request->colors !== null){
@@ -105,7 +110,7 @@ class SubServiceController extends Controller
             }
         }
 
-        //add class_types
+        //addؤ class_types
         if($request->classes !== null){
             foreach($request->classes as $class){
                 $type_names = Class_type::where('class_cat_id', $class)->where('sub_service_id', null)->get();
@@ -123,7 +128,7 @@ class SubServiceController extends Controller
             }
         }
 
-        return redirect('/public/sub_services')->with('success', 'تمت اضافة قسم الخدمه بنجاح');
+        return redirect('/sub_services')->with('success', 'تمت اضافة قسم الخدمه بنجاح');
     }
 
     /**
@@ -164,6 +169,8 @@ class SubServiceController extends Controller
         }
 
         $sub_service->save();
+        
+        $sub_service->free_services()->attach(Free_Service::find($request->freeService));    
 
         //add colors
         if($request->colors !== null){
@@ -229,7 +236,7 @@ class SubServiceController extends Controller
      */
     public function edit(Service $service, Sub_service $sub_service)
     {
-    //   if (Gate::allows('admin-only', auth()->user())) {
+    //    if (Gate::allows('admin-only', auth()->user())) {
 
             $sub_services_classes = Class_type::where('sub_service_id', $sub_service->id)->get();
             $data = [
@@ -243,8 +250,8 @@ class SubServiceController extends Controller
             ];
             return view('sub_services.edit')->with($data);
 
-    //   }
-            return redirect('/public/sub_services')->with('error', 'لايمكنك التعديل');
+    //    }
+            return redirect('/sub_services')->with('error', 'لايمكنك التعديل');
     }
 
     /**
@@ -327,7 +334,7 @@ class SubServiceController extends Controller
             }
         }
 
-        return redirect('/public/sub_services')->with('success', 'تم تعديل قسم الخدمه بنجاح');
+        return redirect('/sub_services')->with('success', 'تم تعديل قسم الخدمه بنجاح');
     }
 
     /**
@@ -338,16 +345,16 @@ class SubServiceController extends Controller
      */
     public function destroy(Service $service, Sub_service $sub_service)
     {
-      if (Gate::allows('admin-only', auth()->user())) {
+    //   if (Gate::allows('admin-only', auth()->user())) {
 
         if($sub_service->image !== 'noimage.jpg'){
             Storage::delete('public/images/'.$sub_service->image);
-        }
+        // }
         $sub_service->delete();
 
-       return redirect('/public/services')->with('success', 'تم مسح قسم الخدمه بنجاح');
+       return redirect('/services')->with('success', 'تم مسح قسم الخدمه بنجاح');
      }
-     return redirect('/public/services')->with('error', 'لا يمكنك مسح قسم الخدمة');
+     return redirect('/services')->with('error', 'لا يمكنك مسح قسم الخدمة');
     }
 
     public function getAllSubServices(){

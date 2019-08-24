@@ -7,6 +7,7 @@
     <div class="content">
 
         <!-- Main charts -->
+        @include('inc.messages')
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <h1 class="panel-title"> الخدمات </h1>
@@ -14,6 +15,7 @@
                     <button type="button" class="add-serv btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">اضافة الخدمه</button>
                 {{-- @endcan --}}
                 <!-- Modal -->
+                
                 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -65,11 +67,11 @@
                                             <td>
                                                 <img src="/storage/images/{{$service['image']}}"
                                                     alt="{{ $service->name }}"
-                                                    style="max-height:100px;">
+                                                    width="100px" height="100px">
                                             </td>
-                                            <td>
+                                            <td style="text-align:right;">
                                                 {{-- @can('admin-only', auth()->user()) --}}
-                                                <button type="button" class="btn btn-primary edit-item" value="{{$service->id}}" data-toggle="modal" data-target="#edit-modal" ><i class="fas fa-edit"></i>تعديل</button>
+                                                <button style="display:inline-block;" type="button" class="btn btn-primary edit-item" value="{{$service->id}}" data-toggle="modal" data-target="#edit-modal" ><i class="fas fa-edit"></i>تعديل</button>
                                                     <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
@@ -95,14 +97,14 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <form class="services-form" action="{{route('services.destroy', $service->id) }}" method="POST">
+                                                    <form style="display:inline;" class="services-form" action="{{route('services.destroy', $service->id) }}" method="POST">
                                                         {{ csrf_field() }}
                                                         {{ method_field('DELETE')}}
-                                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
+                                                        <button style="display:inline-block;" type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>مسح</button>
                                                     </form>
-                                                    <a href="{{route('sub_services.create', $service->id)}}" class="btn  btn-default"><i class="fas fa-plus"></i>اضافة قسم</a>
+                                                    <a style="display:inline;" href="{{route('sub_services.create', $service->id)}}" class="btn  btn-default"><i class="fas fa-plus"></i>اضافة قسم</a>
                                                 {{-- @endcan --}}
-                                                <a href="/public/services/{{$service->id}}/sub_services" type="button" class="btn btn-warning"><i class="fas fa-users"></i>عرض اقسام الخدمه</a>
+                                                <a style="display:inline-block;" href="/services/{{$service->id}}/sub_services" type="button" class="btn btn-warning"><i class="fas fa-users"></i>عرض اقسام الخدمه</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -127,7 +129,7 @@
 <script type="text/javascript">
 
     $(document).on('click','.edit-item',function(){
-        var url = "http://127.0.0.1:8000/public/services";
+        var url = "http://corefix.dealsa.net/services";
         var service_id= $(this).val();
 
         $.get(url + '/' + service_id + '/edit', function (data) {
